@@ -1,0 +1,379 @@
+📄 inicio.php
+├── 🏗️ HEADER (cabecalho.php)
+│   ├── 🏪 LOGO "PGS STORE"
+│   ├── 🔍 [BUSCAR JOGOS...]
+│   ├── 🎮 PLATAFORMAS: PC | PS4 | PS5 | XBOX | SWITCH
+│   ├── 🛒 CARRINHO (0)
+│   └── 👤 ENTRAR/MEU PERFIL
+│
+├── 🎯 BANNER PRINCIPAL
+│   ├── 🖼️ BANNER "LANÇAMENTOS E PROMOÇÕES"
+│   ├── 🎮 "OS MELHORES JOGOS DIGITAIS"
+│   └── 🎯 BOTÃO "VER TODOS OS JOGOS"
+│
+├── 🎮 JOGOS EM DESTAQUE
+│   ├── 🎯 CARDS JOGOS (4-6 jogos)
+│   │   ├── 🖼️ CAPA DO JOGO
+│   │   ├── 🎮 PLATAFORMAS: 🖥️🎮📱
+│   │   ├── 📝 NOME DO JOGO
+│   │   ├── ⭐⭐⭐⭐⭐ (4.8)
+│   │   ├── 💰 R$ 199,90
+│   │   └── 🛒 BOTÃO "COMPRAR AGORA"
+│   └── 🔄 SETAS NAVEGAÇÃO
+│
+├── 🔥 JOGOS EM PROMOÇÃO
+│   ├── 🎯 CARDS COM BADGE "🔥 -25%"
+│   ├── 💰 PREÇO RISCADO + PREÇO PROMOCIONAL
+│   └── ⏰ TIMER "PROMOÇÃO RELÂMPAGO"
+│
+├── 📂 CATEGORIAS
+│   ├── ⚔️ AÇÃO (15 jogos)
+│   ├── 🗺️ AVENTURA (12 jogos)
+│   ├── 🐉 RPG (18 jogos)
+│   ├── ♟️ ESTRATÉGIA (8 jogos)
+│   └── ⚽ ESPORTES (10 jogos)
+│
+└── 🏗️ FOOTER (rodape.php)
+    ├── 📞 CONTATO E SUPORTE
+    ├── 🔗 LINKS ÚTEIS
+    ├── 💳 FORMAS DE PAGAMENTO
+    └── © COPYRIGHT 2024
+
+📄 jogo.php
+├── 🏗️ HEADER (cabecalho.php)
+│
+├── 🧭 MIGALHAS DE PÃO
+│   └── 🏠 Início > ⚔️ Ação > Cyberpunk 2077
+│
+├── 🎮 ÁREA DO JOGO
+│   ├── 🖼️ GALERIA DO JOGO
+│   │   ├── 🖼️ CAPA PRINCIPAL
+│   │   ├── 🖼️🖼️🖼️ SCREENSHOTS (4 imagens)
+│   │   └── ▶️ BOTÃO "VER TRAILER"
+│   │
+│   ├── 📋 INFORMAÇÕES DO JOGO
+│   │   ├── 🏢 DESENVOLVEDORA: CD Projekt Red
+│   │   ├── 🎮 NOME: Cyberpunk 2077
+│   │   ├── ⭐⭐⭐⭐⭐ (4.7 - 2.4k avaliações)
+│   │   ├── 📅 LANÇAMENTO: 10/12/2020
+│   │   ├── 🔞 CLASSIFICAÇÃO: 18+
+│   │   ├️ 🏷️ TAGS: RPG, Ação, Mundo Aberto
+│   │   └️ 🌎 REGIÕES: 🌍 Global | 🇧🇷 Brasil
+│   │
+│   ├️ 🎮 PLATAFORMAS DISPONÍVEIS
+│   │   ├️ 🖥️ PC: R$ 199,90 | 🔥 R$ 149,90
+│   │   ├️ 🎮 PS5: R$ 299,90 | 🔥 R$ 249,90
+│   │   └️ 🎮 XBOX: R$ 279,90 | 🔥 R$ 229,90
+│   │
+│   ├️ 🛒 BOTÃO "ADICIONAR AO CARRINHO"
+│   │
+│   ├️ 📝 DESCRIÇÃO COMPLETA
+│   │   └️ Texto descritivo longo sobre o jogo
+│   │
+│   ├️ ⚙️ REQUISITOS DO SISTEMA
+│   │   ├️ 💻 MÍNIMOS: Windows 7, i5, 8GB RAM, GTX 780
+│   │   └️ 💻 RECOMENDADOS: Windows 10, i7, 16GB RAM, RTX 2060
+│   │
+│   └️ ⭐ AVALIAÇÕES
+│       ├️ 📊 NOTA GERAL: 4.7/5
+│       ├️ 📈 BARRAS DE AVALIAÇÃO
+│       ├️ 👤 COMENTÁRIOS DOS JOGADORES
+│       └️ ✏️ BOTÃO "DEIXAR AVALIAÇÃO"
+│
+└── 🏗️ FOOTER (rodape.php)
+
+📄 carrinho.php
+├── 🏗️ HEADER (cabecalho.php)
+│
+├── 🎯 TÍTULO "MEU CARRINHO"
+│
+├── 📦 LISTA DE JOGOS
+│   ├── 🎮 JOGO 1 - Cyberpunk 2077
+│   │   ├── 🖼️ CAPA PEQUENA
+│   │   ├── 📝 NOME: Cyberpunk 2077
+│   │   ├️ 🎮 PLATAFORMA: 🖥️ PC
+│   │   ├️ 🌎 REGIÃO: 🌍 Global
+│   │   ├️ 💰 R$ 149,90
+│   │   └️ 🗑️ BOTÃO "REMOVER"
+│   │
+│   ├── 🎮 JOGO 2 - The Witcher 3
+│   │   └── ... mesma estrutura
+│   │
+│   └️ 🔄 BOTÃO "CONTINUAR COMPRANDO"
+│
+├── 💰 RESUMO DO PEDIDO
+│   ├️ 📦 SUBTOTAL: R$ 189,80
+│   ├️ 🎟️ CUPOM: [INSERIR CUPOM] APLICAR
+│   ├️ 💰 DESCONTO: -R$ 28,47
+│   ├️ 🎯 TOTAL: R$ 161,33
+│   └️ ✅ BOTÃO "FINALIZAR COMPRA"
+│
+└── 🏗️ FOOTER (rodape.php)
+
+📄 finalizar_compra.php
+├── 🏗️ HEADER (cabecalho.php)
+│
+├── 🎯 ETAPAS DO CHECKOUT
+│   ├️ 1️⃣ 👤 LOGIN/CADASTRO [ATIVO]
+│   ├️ 2️⃣ 💳 PAGAMENTO
+│   └️ 3️⃣ ✅ CONFIRMAÇÃO
+│
+├── 👤 ETAPA 1 - LOGIN/CADASTRO
+│   ├️ ➡️ LOGIN RÁPIDO
+│   │   ├️ 📧 EMAIL: [_________]
+│   │   ├️ 🔒 SENHA: [_________]
+│   │   ├️ ✅ BOTÃO "ENTRAR"
+│   │   └️ 🔓 "ESQUECI MINHA SENHA"
+│   │
+│   ├️ ➡️ CADASTRO RÁPIDO
+│   │   ├️ 👤 NOME: [_________]
+│   │   ├️ 📧 EMAIL: [_________]
+│   │   ├️ 🔒 SENHA: [_________]
+│   │   └️ ✅ BOTÃO "CRIAR CONTA E CONTINUAR"
+│   │
+│   └️ ➡️ RESUMO DO PEDIDO
+│       ├️ 📦 2 JOGOS NO CARRINHO
+│       ├️ 💰 SUBTOTAL: R$ 189,80
+│       ├️ 💰 DESCONTO: -R$ 28,47
+│       └️ 🎯 TOTAL: R$ 161,33
+│
+├── 💳 ETAPA 2 - PAGAMENTO
+│   ├️ ➡️ MÉTODOS DE PAGAMENTO
+│   │   ├️ 💳 CARTÃO DE CRÉDITO
+│   │   │   ├️ 🏦 NÚMERO: [____ ____ ____ ____]
+│   │   │   ├️ 👤 NOME: [_____________]
+│   │   │   ├️ 📅 VALIDADE: [__/__] CVV: [___]
+│   │   │   └️ 🔄 PARCELAS: [SELECT 1x a 12x]
+│   │   │
+│   │   ├️ 💰 PIX
+│   │   │   ├️ 🖼️ QR CODE
+│   │   │   ├️ 🔤 CÓDIGO PIX
+│   │   │   └️ ⏰ "PAGUE EM ATÉ 30 MINUTOS"
+│   │   │
+│   │   └️ 📄 BOLETO
+│   │       ├️ 🖼️ CÓDIGO DE BARRAS
+│   │       └️ ⏰ "VENCE EM 3 DIAS"
+│   │
+│   └️ ➡️ RESUMO FINAL
+│       ├️ 📦 JOGOS: Cyberpunk 2077, The Witcher 3
+│       ├️ 💰 SUBTOTAL: R$ 189,80
+│       ├️ 💰 DESCONTO: -R$ 28,47
+│       └️ 🎯 TOTAL: R$ 161,33
+│
+├── ✅ ETAPA 3 - CONFIRMAÇÃO
+│   ├️ 🎉 "COMPRA REALIZADA COM SUCESSO!"
+│   ├️ 🎫 NÚMERO DO PEDIDO: #123456
+│   ├️ 📧 "CHAVES ENVIADAS PARA: email@cliente.com"
+│   ├️ 🔑 CHAVES DIGITAIS:
+│   │   ├️ 🎮 Cyberpunk 2077: CP77-GLOBAL-12345-67890
+│   │   ├️ 🎮 The Witcher 3: WITCHER3-GLOBAL-55555-66666
+│   │   └️ 📋 BOTÃO "COPIAR TODAS"
+│   │
+│   ├️ 📥 BOTÃO "BAIXAR CHAVES EM PDF"
+│   └️ 🏠 BOTÃO "VOLTAR À LOJA"
+│
+└── 🏗️ FOOTER (rodape.php)
+
+📄 login.php
+├── 🏗️ HEADER (cabecalho.php)
+│
+├── 🎯 ÁREA DE ACESSO
+│   ├️ ➡️ LOGIN
+│   │   ├️ 📧 EMAIL: [_________]
+│   │   ├️ 🔒 SENHA: [_________]
+│   │   ├️ ✅ BOTÃO "ENTRAR"
+│   │   └️ 🔓 "ESQUECI MINHA SENHA"
+│   │
+│   ├️ ➡️ CADASTRO
+│   │   ├️ 👤 NOME COMPLETO: [_________]
+│   │   ├️ 📧 EMAIL: [_________]
+│   │   ├️ 🔒 SENHA: [_________]
+│   │   ├️ 🔒 CONFIRMAR SENHA: [_________]
+│   │   └️ ✅ BOTÃO "CRIAR CONTA"
+│   │
+│   └️ 🔗 "PROBLEMAS PARA ENTRAR? CONTATO SUPORTE"
+│
+└── 🏗️ FOOTER (rodape.php)
+
+📄 minha_conta.php
+├── 🏗️ HEADER (cabecalho.php)
+│
+├── 👤 PERFIL DO USUÁRIO
+│   ├️ 🎯 "OLÁ, [NOME DO USUÁRIO]!"
+│   ├️ 📊 DADOS PESSOAIS
+│   │   ├️ 👤 NOME: [_________] ✏️ EDITAR
+│   │   ├️ 📧 EMAIL: [_________] ✏️ EDITAR
+│   │   └️ 🔒 SENHA: ******* ✏️ ALTERAR
+│   │
+│   ├️ 📋 HISTÓRICO DE COMPRAS
+│   │   ├️ 🎫 PEDIDO #123456 - 15/01/2024 - R$ 161,33 - ✅ CONCLUÍDO
+│   │   ├️ 🎫 PEDIDO #123457 - 10/01/2024 - R$ 79,90 - ✅ CONCLUÍDO
+│   │   └️ 👁️ BOTÃO "VER TODOS OS PEDIDOS"
+│   │
+│   ├️ 🎮 BIBLIOTECA DE JOGOS
+│   │   ├️ 🎮 5 JOGOS COMPRADOS
+│   │   ├️ 📅 ÚLTIMA COMPRA: 15/01/2024
+│   │   └️ 📚 BOTÃO "VER BIBLIOTECA COMPLETA"
+│   │
+│   ├️ 🔑 CHAVES DIGITAIS
+│   │   ├️ 🔑 7 CHAVES DISPONÍVEIS
+│   │   ├️ ✅ 5 CHAVES UTILIZADAS
+│   │   └️ 📋 BOTÃO "GERENCIAR CHAVES"
+│   │
+│   ├️ ⭐ AVALIAÇÕES FEITAS
+│   │   ├️ ⭐ 3 AVALIAÇÕES REALIZADAS
+│   │   └️ ✏️ BOTÃO "VER MINHAS AVALIAÇÕES"
+│   │
+│   └️ 🎫 MEUS TICKETS DE SUPORTE
+│       ├️ 🎫 2 TICKETS ABERTOS
+│       └️ ➕ BOTÃO "ABRIR NOVO TICKET"
+│
+└── 🏗️ FOOTER (rodape.php)
+
+📄 biblioteca.php
+├── 🏗️ HEADER (cabecalho.php)
+│
+├── 🎯 "MINHA BIBLIOTECA DE JOGOS"
+│
+├── 📋 LISTA DE JOGOS COMPRADOS
+│   ├️ 🎮 Cyberpunk 2077
+│   │   ├️ 🖼️ CAPA DO JOGO
+│   │   ├️ 🎮 PLATAFORMA: 🖥️ PC
+│   │   ├️ 🌎 REGIÃO: 🌍 Global
+│   │   ├️ 📅 COMPRA: 15/01/2024
+│   │   ├️ 🔑 CHAVE: CP77-GLOBAL-12345-67890
+│   │   ├️ ✅ STATUS: 🟢 NÃO UTILIZADA
+│   │   ├️ 📋 BOTÃO "COPIAR CHAVE"
+│   │   └️ ❓ LINK "CHAVE NÃO FUNCIONA?"
+│   │
+│   ├️ 🎮 The Witcher 3: Wild Hunt
+│   │   ├️ 🖼️ CAPA DO JOGO
+│   │   ├️ 🎮 PLATAFORMA: 🖥️ PC
+│   │   ├️ 🌎 REGIÃO: 🌍 Global
+│   │   ├️ 📅 COMPRA: 10/01/2024
+│   │   ├️ 🔑 CHAVE: WITCHER3-GLOBAL-55555-66666
+│   │   ├️ ✅ STATUS: 🔴 UTILIZADA
+│   │   ├️ 📅 DATA UTILIZAÇÃO: 12/01/2024
+│   │   └️ ⭐ BOTÃO "AVALIAR JOGO"
+│   │
+│   └️ 🔍 FILTROS: Todos | Não Utilizados | Utilizados | Por Plataforma
+│
+└── 🏗️ FOOTER (rodape.php)
+
+📄 suporte.php
+├── 🏗️ HEADER (cabecalho.php)
+│
+├── 🎯 "PRECISA DE AJUDA?"
+│
+├── 📋 ABRIR TICKET DE SUPORTE
+│   ├️ 🏷️ ASSUNTO: [___________________]
+│   ├️ 📂 CATEGORIA: [SELECT: Compra | Jogos | Login | Chaves | Sugestão]
+│   ├️ 📝 DESCRIÇÃO: [Área de texto grande para detalhar o problema]
+│   ├️ 📎 ANEXOS: BOTÃO "ADICIONAR ARQUIVO" (opcional)
+│   └️ ✅ BOTÃO "ENVIAR TICKET"
+│
+├── 🔗 "ANTES DE ABRIR TICKET, VERIFIQUE NOSSO FAQ"
+│
+└── 🏗️ FOOTER (rodape.php)
+
+📄 meus_tickets.php
+├── 🏗️ HEADER (cabecalho.php)
+│
+├── 🎯 "MEUS TICKETS DE SUPORTE"
+│
+├── 📋 LISTA DE TICKETS
+│   ├️ 🎫 #TKT001 - Problema com chave do jogo
+│   │   ├️ ⚠️ PRIORIDADE: Alta
+│   │   ├️ 🏷️ STATUS: Em andamento
+│   │   ├️ 📅 ABERTO: 15/01/2024
+│   │   ├️ 👁️ BOTÃO "VER DETALHES"
+│   │   └️ 💬 BOTÃO "RESPONDER"
+│   │
+│   ├️ 🎫 #TKT002 - Dúvida sobre reembolso
+│   │   ├️ ⚠️ PRIORIDADE: Média
+│   │   ├️ 🏷️ STATUS: Respondido
+│   │   ├️ 📅 ABERTO: 10/01/2024
+│   │   └️ 👁️ BOTÃO "VER DETALHES"
+│   │
+│   └️ ➕ BOTÃO "ABRIR NOVO TICKET"
+│
+└── 🏗️ FOOTER (rodape.php)
+
+📄 faq.php
+├── 🏗️ HEADER (cabecalho.php)
+│
+├── 🎯 "PERGUNTAS FREQUENTES"
+│
+├── 🔍 BUSCA: [Pesquisar no FAQ...]
+│
+├── 📂 CATEGORIAS
+│   ├️ 🛒 COMPRA
+│   ├️ 🎮 JOGOS
+│   ├️ 👤 CONTA
+│   ├️ 🔑 CHAVES
+│   └️ 💳 PAGAMENTO
+│
+├── 🎪 PERGUNTAS E RESPOSTAS
+│   ├️ ❓ "Como recebo minhas chaves de jogos?"
+│   │   └️ 📝 "As chaves são entregues instantaneamente após a confirmação do pagamento..."
+│   │
+│   ├️ ❓ "Quanto tempo leva para a chave ficar disponível?"
+│   │   └️ 📝 "Para pagamentos via PIX e cartão, a chave é liberada em até 5 minutos..."
+│   │
+│   ├️ ❓ "Quais formas de pagamento são aceitas?"
+│   │   └️ 📝 "Aceitamos cartão de crédito, PIX, boleto bancário e PayPal..."
+│   │
+│   ├️ ❓ "As chaves funcionam em qualquer região?"
+│   │   └️ 📝 "Cada chave possui uma região específica. Verifique a compatibilidade..."
+│   │
+│   └️ ❓ "Posso reembolsar um jogo?"
+│       └️ 📝 "Sim, oferecemos reembolso em até 7 dias após a compra..."
+│
+├── ❓ "NÃO ENCONTROU O QUE PROCURAVA? ABRA UM TICKET"
+│
+└── 🏗️ FOOTER (rodape.php)
+
+📄 promocoes.php
+├── 🏗️ HEADER (cabecalho.php)
+│
+├── 🎯 "PROMOÇÕES EM DESTAQUE"
+│
+├── 🔧 FILTROS E ORDENAÇÃO
+│   ├️ 📊 FILTRO POR DESCONTO: Todos | -10% | -20% | -30% | +50%
+│   ├️ 🎮 FILTRO POR PLATAFORMA: Todas | PC | PS4 | PS5 | XBOX | Switch
+│   ├️ 📂 FILTRO POR CATEGORIA: Todas | Ação | RPG | Esportes | Estratégia
+│   └️ 🔄 ORDENAR: Maior desconto | Menor preço | Mais vendidos | Lançamentos
+│
+├── ⏰ TIMERS DE PROMOÇÃO
+│   └️ ⏰ "ESTA PROMOÇÃO TERMINA EM: 2d 05h 30m"
+│
+├── 🎮 LISTA DE JOGOS EM PROMOÇÃO
+│   ├️ 🔥 Cyberpunk 2077
+│   │   ├️ 🖼️ CAPA DO JOGO
+│   │   ├️ 🔥 BADGE "-25%"
+│   │   ├️ 🎮 PLATAFORMAS: 🖥️🎮
+│   │   ├️ 💰 R$ 199,90 → R$ 149,90
+│   │   ├️ ⏰ "TERMINA EM 3 DIAS"
+│   │   └️ 🛒 BOTÃO "COMPRAR"
+│   │
+│   ├️ 🔥 The Witcher 3: Wild Hunt
+│   │   ├️ 🖼️ CAPA DO JOGO
+│   │   ├️ 🔥 BADGE "-50%"
+│   │   ├️ 🎮 PLATAFORMAS: 🖥️🎮📱
+│   │   ├️ 💰 R$ 79,90 → R$ 39,90
+│   │   ├️ ⏰ "TERMINA EM 1 DIA"
+│   │   └️ 🛒 BOTÃO "COMPRAR"
+│   │
+│   └️ 🔥 FIFA 23
+│       ├️ 🖼️ CAPA DO JOGO
+│       ├️ 🔥 BADGE "-30%"
+│       ├️ 🎮 PLATAFORMAS: 🖥️🎮
+│       ├️ 💰 R$ 249,90 → R$ 174,90
+│       ├️ ⏰ "TERMINA EM 5 DIAS"
+│       └️ 🛒 BOTÃO "COMPRAR"
+│
+├── 🔢 PAGINAÇÃO
+│   └️ 1 2 3 ... 10 >
+│
+└── 🏗️ FOOTER (rodape.php)
+
