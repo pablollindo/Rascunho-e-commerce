@@ -1,119 +1,90 @@
 pgs_store/
 │
-├── 🎨 DESIGN SYSTEM PGS STORE
-│   │
-│   ├── 🎯 TEMA VISUAL
-│   │   ├── PALETA DE CORES: {
-│   │   │   primary: "#7C3AED",
-│   │   │   secondary: "#0891B2", 
-│   │   │   success: "#059669",
-│   │   │   warning: "#EA580C",
-│   │   │   danger: "#DC2626",
-│   │   │   dark: "#111827",
-│   │   │   card-dark: "#1F2937",
-│   │   │   light: "#374151",
-│   │   │   text-primary: "#F9FAFB",
-│   │   │   text-secondary: "#D1D5DB"
-│   │   │ }
-│   │   │
-│   │   ├── TIPOGRAFIA: {
-│   │   │   logo: "Orbitron, sans-serif",
-│   │   │   headings: "Rajdhani, sans-serif",
-│   │   │   body: "Inter, sans-serif", 
-│   │   │   code: "JetBrains Mono, monospace"
-│   │   │ }
-│   │   │
-│   │   └── COMPONENTES: {
-│   │   │   glow: "0 0 15px rgba(124, 58, 237, 0.4)",
-│   │   │   shadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-│   │   │   hover: "transform: translateY(-3px) scale(1.02)",
-│   │   │   gradient: "linear-gradient(135deg, #111827 0%, #312E81 100%)"
-│   │   │ }
-│   │
-│   ├── 🧭 HEADER
-│   │   ├── LOGO: "PGS STORE" + 🎮
-│   │   ├── MENU: ["Início", "Promoções", "Lançamentos", "Categorias", "Suporte"]
-│   │   ├── PLATAFORMAS: ["PC 🖥️", "PlayStation 🎯", "Xbox 🔥", "Nintendo 🍄"]
-│   │   ├── BUSCA: "Buscar jogos, categorias..."
-│   │   ├── CARRINHO: Ícone + badge
-│   │   └── USUÁRIO: ["Minha Conta", "Biblioteca", "Pedidos", "Sair"]
-│   │
-│   ├── 🏠 HOMEPAGE (inicio.php)
-│   │   ├── HERO: Carousel + CTA "Ver Oferta"
-│   │   ├── PROMOÇÕES: Cards com timer
-│   │   ├── LANÇAMENTOS: Badge "NOVO"
-│   │   ├── CATEGORIAS: Grid com ícones
-│   │   └── FILTROS: Plataforma, Preço, Categoria, Avaliação
-│   │
-│   ├── 🎮 PÁGINA DO JOGO (jogo.php)
-│   │   ├── GALERIA: Imagens + trailer
-│   │   ├── INFOS: Título, dev, avaliação
-│   │   ├── PLATAFORMAS: Cards com preços
-│   │   ├── REQUISITOS: Mínimos/Recomendados
-│   │   ├── AVALIAÇÕES: Estrelas + comentários
-│   │   └── COMPRA: "COMPRAR AGORA" + "Carrinho"
-│   │
-│   ├── 🛒 CARRINHO (carrinho.php)
-│   │   ├── ITENS: Lista com controles
-│   │   ├── CUPOM: Input + aplicar
-│   │   ├── RESUMO: Subtotal, desconto, total
-│   │   └── AÇÃO: "FINALIZAR COMPRA"
-│   │
-│   ├── 💳 CHECKOUT (finalizar_compra.php)
-│   │   ├── ETAPA 1: Login/Cadastro
-│   │   ├── ETAPA 2: Pagamento (Cartão/PIX/Boleto)
-│   │   ├── ETAPA 3: Confirmação
-│   │   └── ETAPA 4: Sucesso + Chaves
-│   │
-│   ├── 📞 SUPORTE (suporte.php + meus_tickets.php)
-│   │   ├── FORMULÁRIO: Categoria, assunto, descrição
-│   │   ├── TICKETS: Lista com status/prioridade
-│   │   ├── MENSAGENS: Histórico de conversa
-│   │   └── FAQ: Accordion + busca
-│   │
-│   ├── 👤 ÁREA DO CLIENTE
-│   │   ├── CONTA: Dados pessoais
-│   │   ├── BIBLIOTECA: Jogos + chaves
-│   │   ├── PEDIDOS: Histórico
-│   │   └── AVALIAÇÕES: Comentários feitos
-│   │
-│   └── ⚙️ PAINEL ADMIN
-│       ├── DASHBOARD: Vendas, estoque, tickets
-│       ├── CRUD: Usuários, Jogos, Chaves, Cupons
-│       ├── SUPORTE: Tickets, FAQ
-│       └── RELATÓRIOS: Vendas, usuários, métricas
+├── 📄 index.php                    (PÁGINA INICIAL - redireciona para inicio.php)
+├── 📄 .htaccess                    (Configurações Apache - URLs amigáveis)
 │
-├── 🔗 CONEXÕES DO SISTEMA
+├── 🌐 PÁGINAS DO CLIENTE
 │   │
-│   ├── SUPORTE → TODAS AS PÁGINAS: {
-│   │   "Problemas com...?" → suporte.php
-│   │   }
-│   │
-│   ├── FAQ → SUPORTE: {
-│   │   "Não encontrou resposta?" → abrir ticket
-│   │   }
-│   │
-│   ├── ADMIN → CRUD COMPLETO: {
-│   │   admin_usuarios.php → CRUD usuários
-│   │   admin_plataformas.php → CRUD plataformas  
-│   │   admin_regioes.php → CRUD regiões
-│   │   admin_categorias.php → CRUD categorias
-│   │   admin_jogos.php → CRUD jogos
-│   │   admin_chaves.php → CRUD chaves
-│   │   admin_cupons.php → CRUD cupons
-│   │   admin_suporte.php → CRUD tickets
-│   │   admin_faq.php → CRUD FAQ
-│   │   }
-│   │
-│   └── BANCO → SISTEMA: {
-│   │   Todas as tabelas conectadas
-│   │   Índices para performance
-│   │   Dados iniciais incluídos
-│   │   }
+│   ├── 📄 inicio.php               (HOME - Principal com catálogo)
+│   ├── 📄 jogo.php                 (DETALHES DO JOGO)
+│   ├── 📄 carrinho.php             (CARRINHO DE COMPRAS)
+│   ├── 📄 finalizar_compra.php     (CHECKOUT COMPLETO)
+│   ├── 📄 login.php                (LOGIN/REGISTRO)
+│   ├── 📄 minha_conta.php          (PERFIL DO USUÁRIO)
+│   ├── 📄 biblioteca.php           (BIBLIOTECA DE JOGOS)
+│   ├── 📄 suporte.php              (ABRIR TICKET)
+│   ├── 📄 meus_tickets.php         (MEUS TICKETS)
+│   ├── 📄 faq.php                  (PERGUNTAS FREQUENTES)
+│   └── 📄 promocoes.php            (PROMOÇÕES)
 │
-└── ✅ STATUS DO PROJETO
+├── ⚙️ PAINEL ADMINISTRATIVO
+│   │
+│   ├── 📄 admin.php                (DASHBOARD PRINCIPAL)
+│   ├── 📄 admin_usuarios.php       (GERENCIAR USUÁRIOS)
+│   ├── 📄 admin_plataformas.php    (GERENCIAR PLATAFORMAS)
+│   ├── 📄 admin_regioes.php        (GERENCIAR REGIÕES)
+│   ├── 📄 admin_categorias.php     (GERENCIAR CATEGORIAS)
+│   ├── 📄 admin_jogos.php          (GERENCIAR JOGOS)
+│   ├── 📄 admin_chaves.php         (GERENCIAR CHAVES)
+│   ├── 📄 admin_pedidos.php        (GERENCIAR PEDIDOS)
+│   ├── 📄 admin_cupons.php         (GERENCIAR CUPONS)
+│   ├── 📄 admin_suporte.php        (ATENDIMENTO AO CLIENTE)
+│   ├── 📄 admin_faq.php            (GERENCIAR FAQ)
+│   └── 📄 admin_relatorios.php     (RELATÓRIOS)
+│
+├── 🔧 ARQUIVOS DE SISTEMA
+│   │
+│   ├── 📄 config.php               (CONFIGURAÇÕES GERAIS)
+│   ├── 📄 cabecalho.php            (HEADER - menu superior)
+│   ├── 📄 rodape.php               (FOOTER - rodapé)
+│   ├── 📄 funcoes.php              (FUNÇÕES GLOBAIS)
+│   ├── 📄 email.php                (SISTEMA DE EMAIL)
+│   ├── 📄 processa_login.php       (PROCESSAR LOGIN)
+│   ├── 📄 processa_cadastro.php    (PROCESSAR CADASTRO)
+│   ├── 📄 processa_pedido.php      (PROCESSAR PEDIDO)
+│   ├── 📄 processa_suporte.php     (PROCESSAR TICKETS)
+│   └── 📄 logout.php               (SAIR DO SISTEMA)
+│
+├── 🎨 ARQUIVOS DE ESTILO
+│   │
+│   ├── 📁 assets/
+│   │   ├── 📁 css/
+│   │   │   ├── 📄 estilo.css       (ESTILOS PRINCIPAIS)
+│   │   │   ├── 📄 responsivo.css   (LAYOUT MOBILE)
+│   │   │   ├── 📄 admin.css        (ESTILOS DO PAINEL)
+│   │   │   └── 📄 suporte.css      (ESTILOS DO SUPORTE)
+│   │   │
+│   │   ├── 📁 js/
+│   │   │   ├── 📄 main.js          (FUNÇÕES GERAIS)
+│   │   │   ├── 📄 carrinho.js      (CONTROLE DO CARRINHO)
+│   │   │   ├── 📄 chaves.js        (GERENCIAR CHAVES)
+│   │   │   ├── 📄 pagamento.js     (PROCESSAR PAGAMENTO)
+│   │   │   ├── 📄 suporte.js       (SISTEMA DE SUPORTE)
+│   │   │   ├── 📄 faq.js           (INTERAÇÃO FAQ)
+│   │   │   ├── 📄 admin_usuarios.js (CRUD USUÁRIOS)
+│   │   │   ├── 📄 admin_plataformas.js (CRUD PLATAFORMAS)
+│   │   │   └── 📄 admin_cupons.js  (CRUD CUPONS)
+│   │   │
+│   │   └── 📁 imagens/
+│   │       ├── 📁 jogos/           (CAPAS DOS JOGOS)
+│   │       ├── 📁 plataformas/     (ÍCONES DAS PLATAFORMAS)
+│   │       ├── 📁 banners/         (BANNERS PROMOCIONAIS)
+│   │       ├── 📁 bandeiras/       (BANDEIRAS DAS REGIÕES)
+│   │       ├── 📁 icones/          (ÍCONES GERAIS)
+│   │       └── 📄 logo.png         (LOGO DA LOJA)
+│   │
+│   └── 📁 uploads/
+│       ├── 📁 capas_jogos/         (UPLOAD DE CAPAS)
+│       ├── 📁 tickets/             (ARQUIVOS DE TICKETS)
+│       └── 📁 anexos/              (ANEXOS DE SUPORTE)
+│
+├── 🗃️ BANCO DE DADOS
+│   │
+│   ├── 📄 banco_dados.sql          (ESTRUTURA COMPLETA)
+│   └── 📄 dados_iniciais.sql       (DADOS PARA TESTE - opcional)
+│
+└── 📋 DOCUMENTAÇÃO
     │
-    ├── ARQUIVOS: 100% DEFINIDOS
-    ├── BANCO: 100% COMPLETO
-    ├── DESIGN: 100% ESPECIFICADO
-    └── FUNCIONALIDADES: 100% MAPEADAS
+    ├── 📄 README.txt               (INSTRUÇÕES DE INSTALAÇÃO)
+    ├── 📄 credenciais.txt          (USUÁRIOS E SENHAS)
+    └── 📄 requisitos.txt           (REQUISITOS DO SISTEMA)
