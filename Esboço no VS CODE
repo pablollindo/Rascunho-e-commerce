@@ -27,7 +27,9 @@ pgs_perifericos/
 │   ├── 📄 admin_cupons.php
 │   ├── 📄 admin_suporte.php
 │   ├── 📄 admin_faq.php
-│   └── 📄 admin_relatorios.php
+│   ├── 📄 admin_relatorios.php
+│   ├── 📄 admin_marcas.php              # NOVO: Gerenciar marcas
+│   └── 📄 admin_avaliacoes.php          # NOVO: Gerenciar avaliações
 │
 ├── 📁 includes/
 │   ├── 📄 config.php
@@ -39,7 +41,11 @@ pgs_perifericos/
 │   ├── 📄 processa_pedido.php
 │   ├── 📄 processa_suporte.php
 │   ├── 📄 processa_funcionario.php
-│   └── 📄 logout.php
+│   ├── 📄 logout.php
+│   ├── 📄 processa_marca.php            # NOVO: Processar marcas
+│   ├── 📄 processa_carrinho.php         # NOVO: Processar carrinho
+│   ├── 📄 processa_avaliacao.php        # NOVO: Processar avaliações
+│   └── 📄 processa_pagamento.php        # NOVO: Processar pagamento
 │
 ├── 📁 assets/
 │   ├── 📁 css/
@@ -47,7 +53,9 @@ pgs_perifericos/
 │   │   ├── 📄 responsivo.css
 │   │   ├── 📄 admin.css
 │   │   ├── 📄 suporte.css
-│   │   └── 📄 formularios.css
+│   │   ├── 📄 formularios.css
+│   │   ├── 📄 produtos.css              # NOVO: Estilos específicos produtos
+│   │   └── 📄 carrinho.css              # NOVO: Estilos carrinho
 │   │
 │   ├── 📁 js/
 │   │   ├── 📄 principal.js
@@ -57,7 +65,9 @@ pgs_perifericos/
 │   │   ├── 📄 suporte.js
 │   │   ├── 📄 faq.js
 │   │   ├── 📄 cadastro.js
-│   │   └── 📄 validacao.js
+│   │   ├── 📄 validacao.js
+│   │   ├── 📄 mascaras.js               # NOVO: Máscaras para formulários
+│   │   └── 📄 avaliacoes.js             # NOVO: Sistema de avaliações
 │   │
 │   └── 📁 imagens/
 │       ├── 📁 produtos/
@@ -87,13 +97,31 @@ pgs_perifericos/
 │       │   ├── 📄 headphone.png
 │       │   └── 📄 monitor-icone.png
 │       │
+│       ├── 📁 marcas/                    # NOVO: Logos das marcas
+│       │   ├── 📄 redragon-logo.png
+│       │   ├── 📄 logitech-logo.png
+│       │   ├── 📄 hyperx-logo.png
+│       │   ├── 📄 dell-logo.png
+│       │   ├── 📄 razer-logo.png
+│       │   ├── 📄 corsair-logo.png
+│       │   ├── 📄 steelseries-logo.png
+│       │   └── 📄 asus-logo.png
+│       │
 │       └── 📄 logo.png
 │
 ├── 📁 uploads/
 │   ├── 📁 imagens_produtos/
 │   ├── 📁 avatares_usuarios/
 │   ├── 📁 documentos_funcionarios/
-│   └── 📁 anexos_suporte/
+│   ├── 📁 anexos_suporte/
+│   ├── 📁 logos_marcas/                  # NOVO: Logos das marcas
+│   └── 📁 comprovantes/                  # NOVO: Comprovantes de pagamento
 │
-└── 📁 banco_dados/
-    └── 📄 banco_dados.sql
+├── 📁 banco_dados/
+│   └── 📄 banco_dados.sql
+│
+└── 📁 api/                               # NOVO: Endpoints para AJAX
+    ├── 📄 carrinho.php
+    ├── 📄 produtos.php
+    ├── 📄 avaliacoes.php
+    └── 📄 cep.php
