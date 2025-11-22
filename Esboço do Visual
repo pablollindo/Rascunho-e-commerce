@@ -83,8 +83,4 @@ pgs_store/
 │   ├── 📄 banco_dados.sql          (ESTRUTURA COMPLETA)
 │   └── 📄 dados_iniciais.sql       (DADOS PARA TESTE - opcional)
 │
-└── 📋 DOCUMENTAÇÃO
-    │
-    ├── 📄 README.txt               (INSTRUÇÕES DE INSTALAÇÃO)
-    ├── 📄 credenciais.txt          (USUÁRIOS E SENHAS)
-    └── 📄 requisitos.txt           (REQUISITOS DO SISTEMA)
+└── 
