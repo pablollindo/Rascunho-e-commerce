@@ -1,68 +1,175 @@
--- Criar banco
-CREATE DATABASE perifericos_store;
-USE perifericos_store;
+-- Criar banco de dados
+CREATE DATABASE loja_jogos_digitais;
+USE loja_jogos_digitais;
 
--- Tabela usuários
-CREATE TABLE users (
+-- Tabela de usuários
+CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL,
     tipo ENUM('cliente','admin') DEFAULT 'cliente',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela categorias
-CREATE TABLE categories (
+-- Tabela de plataformas
+CREATE TABLE plataformas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    icone VARCHAR(100)
+);
+
+-- Tabela de regiões
+CREATE TABLE regioes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    codigo VARCHAR(10)
+);
+
+-- Tabela de categorias de jogos
+CREATE TABLE categorias (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL
 );
 
--- Tabela produtos
-CREATE TABLE products (
+-- Tabela de jogos
+CREATE TABLE jogos (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    categoria_id INT,
     nome VARCHAR(100) NOT NULL,
-    preco DECIMAL(10,2) NOT NULL,
-    estoque INT NOT NULL,
-    imagem VARCHAR(255),
     descricao TEXT,
-    destaque BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (categoria_id) REFERENCES categories(id)
+    desenvolvedora VARCHAR(100),
+    distribuidora VARCHAR(100),
+    data_lancamento DATE,
+    classificacao_indicativa VARCHAR(10),
+    capa_imagem VARCHAR(255),
+    trailer_url VARCHAR(255),
+    requisitos_minimos TEXT,
+    requisitos_recomendados TEXT,
+    ativo BOOLEAN DEFAULT TRUE,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela pedidos
-CREATE TABLE orders (
+-- Tabela de jogos_plataformas (relação muitos-para-muitos)
+CREATE TABLE jogos_plataformas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    jogo_id INT,
+    plataforma_id INT,
+    preco_base DECIMAL(10,2) NOT NULL,
+    preco_promocional DECIMAL(10,2),
+    em_promocao BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (jogo_id) REFERENCES jogos(id),
+    FOREIGN KEY (plataforma_id) REFERENCES plataformas(id)
+);
+
+-- Tabela de chaves digitais
+CREATE TABLE chaves_digitais (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    jogo_id INT,
+    plataforma_id INT,
+    regiao_id INT,
+    chave VARCHAR(255) UNIQUE NOT NULL,
+    utilizada BOOLEAN DEFAULT FALSE,
+    data_compra TIMESTAMP NULL,
+    pedido_id INT NULL,
+    data_ativacao TIMESTAMP NULL,
+    data_adicao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (jogo_id) REFERENCES jogos(id),
+    FOREIGN KEY (plataforma_id) REFERENCES plataformas(id),
+    FOREIGN KEY (regiao_id) REFERENCES regioes(id)
+);
+
+-- Tabela de pedidos
+CREATE TABLE pedidos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cliente_id INT,
     total DECIMAL(10,2) NOT NULL,
-    status ENUM('pendente','pago','enviado','entregue') DEFAULT 'pendente',
-    metodo_pagamento ENUM('cartao','pix','boleto'),
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    endereco TEXT,
-    FOREIGN KEY (cliente_id) REFERENCES users(id)
+    status ENUM('pendente','pago','processando','concluido','cancelado') DEFAULT 'pendente',
+    metodo_pagamento ENUM('cartao','pix','boleto','paypal'),
+    data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_pagamento TIMESTAMP NULL,
+    data_conclusao TIMESTAMP NULL,
+    codigo_transacao VARCHAR(100),
+    FOREIGN KEY (cliente_id) REFERENCES usuarios(id)
 );
 
--- Tabela itens do pedido
-CREATE TABLE order_items (
+-- Tabela de itens do pedido
+CREATE TABLE itens_pedido (
     id INT AUTO_INCREMENT PRIMARY KEY,
     pedido_id INT,
-    produto_id INT,
-    quantidade INT NOT NULL,
-    valor_unitario DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (pedido_id) REFERENCES orders(id),
-    FOREIGN KEY (produto_id) REFERENCES products(id)
+    jogo_id INT,
+    plataforma_id INT,
+    regiao_id INT,
+    chave_digital_id INT,
+    quantidade INT DEFAULT 1,
+    preco_unitario DECIMAL(10,2) NOT NULL,
+    chave_utilizada BOOLEAN DEFAULT FALSE,
+    data_utilizacao TIMESTAMP NULL,
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
+    FOREIGN KEY (jogo_id) REFERENCES jogos(id),
+    FOREIGN KEY (plataforma_id) REFERENCES plataformas(id),
+    FOREIGN KEY (regiao_id) REFERENCES regioes(id),
+    FOREIGN KEY (chave_digital_id) REFERENCES chaves_digitais(id)
+);
+
+-- Tabela de cupons de desconto
+CREATE TABLE cupons_desconto (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(50) UNIQUE NOT NULL,
+    desconto_percentual DECIMAL(5,2),
+    desconto_valor DECIMAL(10,2),
+    data_validade DATE,
+    usos_maximos INT,
+    usos_atuais INT DEFAULT 0,
+    ativo BOOLEAN DEFAULT TRUE
+);
+
+-- Tabela de avaliações
+CREATE TABLE avaliacoes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    jogo_id INT,
+    usuario_id INT,
+    nota INT CHECK (nota >= 1 AND nota <= 5),
+    comentario TEXT,
+    data_avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (jogo_id) REFERENCES jogos(id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
 -- Dados iniciais
-INSERT INTO categories (nome) VALUES 
-('Teclados'), ('Mouses'), ('Headsets'), ('Monitores'), ('Webcams');
+INSERT INTO plataformas (nome, icone) VALUES 
+('PC', 'pc.png'),
+('PlayStation 4', 'ps4.png'),
+('PlayStation 5', 'ps5.png'),
+('Xbox One', 'xbox-one.png'),
+('Xbox Series X/S', 'xbox-series.png'),
+('Nintendo Switch', 'switch.png');
 
-INSERT INTO users (nome, email, senha, tipo) VALUES 
-('Admin', 'admin@loja.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+INSERT INTO regioes (nome, codigo) VALUES 
+('Global', 'GLOBAL'),
+('América Latina', 'LATAM'),
+('Europa', 'EU'),
+('Estados Unidos', 'US'),
+('Brasil', 'BR'),
+('Asia', 'ASIA');
 
-INSERT INTO products (categoria_id, nome, preco, estoque, descricao, destaque) VALUES
-(1, 'Teclado Mecânico RGB', 299.90, 25, 'Teclado mecânico com switches blue e iluminação RGB', 1),
-(2, 'Mouse Gamer 7200DPI', 159.90, 30, 'Mouse gamer com sensor óptico 7200DPI', 1),
-(3, 'Headset Gamer 7.1', 199.90, 20, 'Headset surround 7.1 com microfone retrátil', 1);
+INSERT INTO categorias (nome) VALUES 
+('Ação'), ('Aventura'), ('RPG'), ('Estratégia'), ('Esportes'), 
+('Corrida'), ('Tiro'), ('Indie'), ('Simulação'), ('Luta');
+
+INSERT INTO usuarios (nome, email, senha, tipo) VALUES 
+('Administrador', 'admin@loja.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+
+-- Exemplo de jogo
+INSERT INTO jogos (nome, descricao, desenvolvedora, distribuidora, data_lancamento, classificacao_indicativa) VALUES
+('Cyberpunk 2077', 'Um RPG de ação e aventura em mundo aberto...', 'CD Projekt Red', 'CD Projekt', '2020-12-10', '18+');
+
+-- Exemplo de preços por plataforma
+INSERT INTO jogos_plataformas (jogo_id, plataforma_id, preco_base, preco_promocional, em_promocao) VALUES
+(1, 1, 199.90, 149.90, TRUE),  -- PC com promoção
+(1, 2, 249.90, NULL, FALSE),   -- PS4 sem promoção
+(1, 4, 229.90, 179.90, TRUE);  -- Xbox One com promoção
+
+-- Exemplo de chaves digitais
+INSERT INTO chaves_digitais (jogo_id, plataforma_id, regiao_id, chave) VALUES
+(1, 1, 1, 'ABCDE-12345-FGHIJ-67890'),
+(1, 1, 2, 'KLMNO-54321-PQRST-09876');
