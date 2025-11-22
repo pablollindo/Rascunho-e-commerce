@@ -1,368 +1,116 @@
-pgs_store/
-│
-├── 📄 index.php
-│   └── 🔀 REDIRECIONAMENTO PARA inicio.php
-│
-├── 📄 .htaccess
-│   ├── 🔧 REWRITE URLS AMIGÁVEIS
-│   ├── 🔒 PROTEÇÃO BÁSICA
-│   └── 📱 CONFIGURAÇÕES APACHE
-│
-├── 🌐 ÁREA DO CLIENTE
-│   │
-│   ├── 📄 inicio.php
-│   │   ├── 🎯 BANNER PRINCIPAL
-│   │   ├── 🎮 JOGOS EM DESTAQUE (em_destaque = TRUE)
-│   │   ├── 🔥 JOGOS EM PROMOÇÃO (em_promocao = TRUE)
-│   │   ├── 📂 LISTA DE CATEGORIAS
-│   │   ├── 🔍 BARRA DE PESQUISA (por nome/descrição)
-│   │   ├── 🎯 FILTRO POR PLATAFORMA
-│   │   └── 📊 JOGOS MAIS VENDIDOS (por pedidos)
-│   │
-│   ├── 📄 jogo.php
-│   │   ├── 🖼️ CAPA DO JOGO + GALERIA
-│   │   ├── 📝 DESCRIÇÃO COMPLETA
-│   │   ├── 🏢 DESENVOLVEDORA/DISTRIBUIDORA
-│   │   ├── 🎮 PLATAFORMAS DISPONÍVEIS (com preços)
-│   │   ├── 🌎 REGIÕES DISPONÍVEIS (Global, LATAM, etc)
-│   │   ├── ⚙️ REQUISITOS DO SISTEMA
-│   │   ├── ⭐ AVALIAÇÕES E COMENTÁRIOS
-│   │   ├── 💰 PREÇO BASE E PROMOCIONAL
-│   │   ├── 🛒 BOTÃO "ADICIONAR AO CARRINHO"
-│   │   └── ❓ LINK "PROBLEMAS?" → SUPORTE
-│   │
-│   ├── 📄 carrinho.php
-│   │   ├── 📋 LISTA DE JOGOS NO CARRINHO
-│   │   ├── 🎮 PLATAFORMA SELECIONADA POR JOGO
-│   │   ├── 🌎 REGIÃO SELECIONADA POR JOGO
-│   │   ├── 🧮 CÁLCULO DE SUBTOTAL + TOTAL
-│   │   ├── ✏️ ALTERAR QUANTIDADE/REMOVER
-│   │   ├── 🔄 BOTÃO "CONTINUAR COMPRANDO"
-│   │   └── ✅ BOTÃO "FINALIZAR COMPRA"
-│   │
-│   ├── 📄 finalizar_compra.php
-│   │   ├── 👤 ETAPA 1: LOGIN/CADASTRO RÁPIDO
-│   │   ├── 💳 ETAPA 2: FORMA DE PAGAMENTO (cartão, pix, boleto)
-│   │   ├── ✅ ETAPA 3: CONFIRMAÇÃO DA COMPRA
-│   │   ├── 📦 RESUMO DOS JOGOS COMPRADOS
-│   │   ├── 🔑 CHAVES DIGITAIS GERADAS
-│   │   ├── 📧 ENVIO DE CONFIRMAÇÃO POR EMAIL
-│   │   └── 📥 DOWNLOAD DAS CHAVES
-│   │
-│   ├── 📄 login.php
-│   │   ├── 👤 FORMULÁRIO DE LOGIN (email/senha)
-│   │   ├── 📝 FORMULÁRIO DE CADASTRO (nome, email, senha)
-│   │   ├── 🔐 RECUPERAÇÃO DE SENHA
-│   │   ├── ✅ VALIDAÇÃO EM TEMPO REAL
-│   │   └── ❓ LINK "PROBLEMAS?" → SUPORTE
-│   │
-│   ├── 📄 minha_conta.php
-│   │   ├── 👤 DADOS PESSOAIS (editar nome, email)
-│   │   ├── 📋 HISTÓRICO DE COMPRAS (todos os pedidos)
-│   │   ├── 🎮 BIBLIOTECA DE JOGOS (com chaves)
-│   │   ├── 🔑 CHAVES DIGITAIS ADQUIRIDAS
-│   │   ├── ⭐ AVALIAÇÕES FEITAS PELO USUÁRIO
-│   │   └── 🎫 MEUS TICKETS DE SUPORTE
-│   │
-│   ├── 📄 biblioteca.php
-│   │   ├── 📚 LISTA DE JOGOS COMPRADOS
-│   │   ├── 🔑 CHAVE DIGITAL DE CADA JOGO
-│   │   ├── 📅 DATA DA COMPRA
-│   │   ├── 🎮 PLATAFORMA COMPRADA
-│   │   ├── 🌎 REGIÃO DA CHAVE
-│   │   ├── ✅ STATUS (UTILIZADA/NÃO UTILIZADA)
-│   │   ├── 📋 BOTÃO "COPIAR CHAVE"
-│   │   └️ ❓ LINK "CHAVE NÃO FUNCIONA?" → SUPORTE
-│   │
-│   ├── 📄 suporte.php
-│   │   ├── 🎫 FORMULÁRIO DE ABERTURA DE TICKET
-│   │   ├── 📂 CATEGORIAS: COMPRA, JOGOS, LOGIN, CHAVES, SUGESTÃO
-│   │   ├── 👤 VINCULAÇÃO AUTOMÁTICA AO USUÁRIO LOGADO
-│   │   ├── 📎 UPLOAD DE ANEXOS (OPCIONAL)
-│   │   ├── 🔀 REDIRECIONAMENTO PARA meus_tickets.php
-│   │   └️ ❓ LINK "VER FAQ ANTES DE ABRIR TICKET"
-│   │
-│   ├── 📄 meus_tickets.php
-│   │   ├── 📋 LISTA DE TICKETS DO USUÁRIO
-│   │   ├── 🏷️ STATUS: ABERTO, EM ANDAMENTO, RESPONDIDO, FECHADO
-│   │   ├️ ⚠️ PRIORIDADE: BAIXA, MÉDIA, ALTA, URGENTE
-│   │   ├️ 👁️ VISUALIZAR DETALHES DO TICKET
-│   │   ├️ 💬 RESPONDER AO TICKET (SE ABERTO)
-│   │   ├️ 📜 HISTÓRICO DE MENSAGENS
-│   │   └️ ➕ BOTÃO "ABRIR NOVO TICKET"
-│   │
-│   ├── 📄 faq.php
-│   │   ├️ 📂 CATEGORIAS: COMPRA, JOGOS, CONTA, CHAVES, PAGAMENTO
-│   │   ├️ 🎪 SISTEMA DE ACCORDION (PERGUNTAS/RESPOSTAS)
-│   │   ├️ 🔍 BARRA DE BUSCA NO FAQ
-│   │   ├️ ⭐ PERGUNTAS MAIS FREQUENTES EM DESTAQUE
-│   │   └️ ❓ LINK "NÃO ENCONTROU RESPOSTA?" → SUPORTE
-│   │
-│   └── 📄 promocoes.php
-│       ├️ 🔥 LISTA DE TODOS OS JOGOS EM PROMOÇÃO
-│       ├️ 📊 FILTRO POR % DE DESCONTO
-│       ├️ ⏰ TIMER PARA PROMOÇÕES RELÂMPAGO
-│       ├️ 📈 ORDENAÇÃO POR MAIOR DESCONTO
-│       ├️ 🎮 FILTRO POR PLATAFORMA
-│       └️ 🔗 LINK DIRETO PARA PÁGINA DO JOGO
-│
-├── ⚙️ PAINEL ADMINISTRATIVO
-│   │
-│   ├── 📄 admin.php
-│   │   ├️ 📊 DASHBOARD COM ESTATÍSTICAS
-│   │   ├️ 💰 VENDAS (ÚLTIMOS 7 DIAS)
-│   │   ├️ 🎮 VENDAS POR PLATAFORMA
-│   │   ├️ 📦 CONTROLE DE ESTOQUE DE CHAVES
-│   │   ├️ 👥 USUÁRIOS NOVOS (ÚLTIMO MÊS)
-│   │   ├️ 🎫 TICKETS PENDENTES
-│   │   ├️ 📈 GRÁFICOS DE VENDAS
-│   │   └️ 🔗 ACESSO RÁPIDO A SEÇÕES
-│   │
-│   ├── 📄 admin_usuarios.php
-│   │   ├️ 👥 LISTA DE TODOS OS USUÁRIOS
-│   │   ├️ 🔍 FILTRO POR TIPO (cliente/admin)
-│   │   ├️ ✏️ EDITAR DADOS DO USUÁRIO
-│   │   ├️ 🚫 BLOQUEAR/DESBLOQUEAR USUÁRIO
-│   │   ├️ 📊 ESTATÍSTICAS DE COMPRAS
-│   │   └️ 👀 VISUALIZAR PEDIDOS DO USUÁRIO
-│   │
-│   ├── 📄 admin_plataformas.php
-│   │   ├️ 🎮 LISTA DE PLATAFORMAS (PC, PS4, PS5, XBOX, SWITCH)
-│   │   ├️ ➕ ADICIONAR NOVA PLATAFORMA
-│   │   ├️ ✏️ EDITAR PLATAFORMA EXISTENTE
-│   │   ├️ 🚫 ATIVAR/DESATIVAR PLATAFORMA
-│   │   ├️ 🖼️ UPLOAD DE ÍCONE
-│   │   └️ 📊 ESTATÍSTICAS DE VENDAS POR PLATAFORMA
-│   │
-│   ├── 📄 admin_regioes.php
-│   │   ├️ 🌎 LISTA DE REGIÕES (Global, LATAM, EU, US, BR)
-│   │   ├️ ➕ ADICIONAR NOVA REGIÃO
-│   │   ├️ ✏️ EDITAR REGIÃO EXISTENTE
-│   │   ├️ 🏴 UPLOAD DE BANDEIRA
-│   │   ├️ 🔤 DEFINIR CÓDIGO DA REGIÃO
-│   │   └️ 📊 ESTOQUE POR REGIÃO
-│   │
-│   ├── 📄 admin_categorias.php
-│   │   ├️ 📂 LISTA DE CATEGORIAS (Ação, RPG, Esportes, etc)
-│   │   ├️ ➕ ADICIONAR NOVA CATEGORIA
-│   │   ├️ ✏️ EDITAR CATEGORIA EXISTENTE
-│   │   ├️ 🚫 ATIVAR/DESATIVAR CATEGORIA
-│   │   ├️ 🎨 DEFINIR COR DA CATEGORIA
-│   │   └️ 📊 QUANTIDADE DE JOGOS POR CATEGORIA
-│   │
-│   ├── 📄 admin_jogos.php
-│   │   ├️ 🎮 LISTA DE TODOS OS JOGOS
-│   │   ├️ ➕ CADASTRAR NOVO JOGO
-│   │   ├️ ✏️ EDITAR JOGO EXISTENTE
-│   │   ├️ 🚫 ATIVAR/DESATIVAR JOGO
-│   │   ├️ ⭐ DEFINIR COMO DESTAQUE
-│   │   ├️ 🖼️ UPLOAD DE CAPA E IMAGENS
-│   │   ├️ 💰 GERENCIAR PREÇOS POR PLATAFORMA
-│   │   ├️ 🔥 DEFINIR PROMOÇÕES
-│   │   ├️ ⚙️ ADICIONAR REQUISITOS DO SISTEMA
-│   │   └️ 📊 ESTATÍSTICAS DE VENDAS POR JOGO
-│   │
-│   ├── 📄 admin_chaves.php
-│   │   ├️ 🔑 LISTA DE CHAVES DIGITAIS
-│   │   ├️ ➕ ADICIONAR LOTE DE CHAVES
-│   │   ├️ 📤 IMPORTAR CHAVES VIA CSV
-│   │   ├️ 🎮 FILTRO POR JOGO/PLATAFORMA/REGIÃO
-│   │   ├️ ✅ STATUS DE UTILIZAÇÃO
-│   │   ├️ 📊 CONTROLE DE ESTOQUE
-│   │   ├️ 📈 RELATÓRIO DE CHAVES VENDIDAS
-│   │   └️ 🗑️ REMOVER CHAVES UTILIZADAS
-│   │
-│   ├── 📄 admin_pedidos.php
-│   │   ├️ 📋 LISTA DE TODOS OS PEDIDOS
-│   │   ├️ 🔍 FILTRO POR STATUS (pendente, pago, concluído, cancelado)
-│   │   ├️ 👁️ VISUALIZAR DETALHES DO PEDIDO
-│   │   ├️ ✏️ ALTERAR STATUS DO PEDIDO
-│   │   ├️ 👤 VISUALIZAR DADOS DO CLIENTE
-│   │   ├️ 🔑 VER CHAVES VENDIDAS
-│   │   ├️ 📊 RELATÓRIO DE VENDAS
-│   │   └️ 📤 EXPORTAR DADOS EM CSV
-│   │
-│   ├── 📄 admin_suporte.php
-│   │   ├️ 🎫 LISTA DE TICKETS PENDENTES
-│   │   ├️ 🔍 FILTRO POR CATEGORIA/STATUS/PRIORIDADE
-│   │   ├️ 👤 ATRIBUIR TICKET PARA ADMIN
-│   │   ├️ 💬 RESPONDER TICKETS
-│   │   ├️ ✏️ ALTERAR STATUS DO TICKET
-│   │   ├️ 📜 HISTÓRICO COMPLETO DE ATENDIMENTO
-│   │   ├️ ⏱️ MÉTRICAS DE TEMPO DE RESPOSTA
-│   │   └️ 📊 RELATÓRIO DE ATENDIMENTO
-│   │
-│   ├── 📄 admin_faq.php
-│   │   ├️ ❓ LISTA DE PERGUNTAS FAQ
-│   │   ├️ ➕ ADICIONAR NOVA PERGUNTA/RESPOSTA
-│   │   ├️ ✏️ EDITAR CONTEÚDO EXISTENTE
-│   │   ├️ 📊 REORDENAR ORDEM DE EXIBIÇÃO
-│   │   ├️ 🚫 ATIVAR/DESATIVAR PERGUNTAS
-│   │   ├️ 📂 GERENCIAR CATEGORIAS DO FAQ
-│   │   └️ 📈 ESTATÍSTICAS DE ACESSO
-│   │
-│   └── 📄 admin_relatorios.php
-│       ├️ 📊 RELATÓRIO DE VENDAS DETALHADO
-│       ├️ 👥 ESTATÍSTICAS DE USUÁRIOS
-│       ├️ 🎮 VENDAS POR PLATAFORMA/CATEGORIA
-│       ├️ 🎫 TICKETS POR CATEGORIA
-│       ├️ 🔑 ESTOQUE DE CHAVES
-│       ├️ 💰 FATURAMENTO POR PERÍODO
-│       ├️ 📤 EXPORTAR DADOS (CSV/PDF)
-│       └️ 📈 GRÁFICOS E MÉTRICAS
-│
-├── 🔧 ARQUIVOS DE SISTEMA
-│   │
-│   ├── 📄 config.php
-│   │   ├️ 🗄️ CONEXÃO COM BANCO DE DADOS
-│   │   ├️ 🔐 CONFIGURAÇÕES DE SESSÃO
-│   │   ├️ 👤 FUNÇÕES DE AUTENTICAÇÃO
-│   │   ├️ 🛒 FUNÇÕES DO CARRINHO
-│   │   ├️ 🔑 FUNÇÕES DE CHAVES DIGITAIS
-│   │   ├️ 💰 FUNÇÕES DE PAGAMENTO
-│   │   ├️ 🎫 CONFIGURAÇÕES DE SUPORTE
-│   │   └️ 📧 CONFIGURAÇÕES DE EMAIL
-│   │
-│   ├── 📄 cabecalho.php
-│   │   ├️ 🏪 LOGO E MENU PRINCIPAL
-│   │   ├️ 🔍 BARRA DE PESQUISA
-│   │   ├️ 🎮 MENU DE PLATAFORMAS
-│   │   ├️ 🛒 ÍCONE DO CARRINHO (com contador)
-│   │   ├️ 👤 MENU DO USUÁRIO (login/logout)
-│   │   └️ ❓ LINK "SUPORTE" NO MENU
-│   │
-│   ├── 📄 rodape.php
-│   │   ├️ ℹ️ INFORMAÇÕES DA LOJA
-│   │   ├️ 🔗 LINKS ÚTEIS (Suporte, FAQ, Sobre)
-│   │   ├️ 📱 REDES SOCIAIS
-│   │   ├️ ⚖️ TERMOS E CONDIÇÕES
-│   │   ├️ 💳 FORMAS DE PAGAMENTO
-│   │   └️ 📞 CONTATOS
-│   │
-│   ├── 📄 funcoes.php
-│   │   ├️ 🔑 GERADOR DE CHAVES DIGITAIS
-│   │   ├️ ✅ VALIDADOR DE CHAVES
-│   │   ├️ 📦 FUNÇÕES DE ESTOQUE
-│   │   ├️ 💰 FUNÇÕES DE PAGAMENTO
-│   │   ├️ 📊 FUNÇÕES DE RELATÓRIOS
-│   │   ├️ 🎫 FUNÇÕES DE SUPORTE
-│   │   ├️ ❓ FUNÇÕES DE FAQ
-│   │   ├️ 📧 FUNÇÕES DE EMAIL
-│   │   └️ 📈 FUNÇÕES DE ESTATÍSTICAS
-│   │
-│   ├── 📄 processa_login.php
-│   │   ├️ 🔐 VALIDAÇÃO DE LOGIN
-│   │   ├️ 📝 PROCESSAMENTO DE CADASTRO
-│   │   ├️ 🔒 CRIPTOGRAFIA DE SENHAS
-│   │   ├️ 📧 RECUPERAÇÃO DE SENHA
-│   │   └️ 🔀 REDIRECIONAMENTOS
-│   │
-│   ├── 📄 processa_pedido.php
-│   │   ├️ 🛒 PROCESSAMENTO DO CARRINHO
-│   │   ├️ 💳 SIMULAÇÃO DE PAGAMENTO
-│   │   ├️ 🔑 ATRIBUIÇÃO DE CHAVES
-│   │   ├️ 📧 ENVIO DE CONFIRMAÇÃO
-│   │   ├️ 📦 ATUALIZAÇÃO DE ESTOQUE
-│   │   └️ 💾 REGISTRO NO BANCO
-│   │
-│   ├── 📄 processa_suporte.php
-│   │   ├️ 🎫 CRIAÇÃO DE NOVOS TICKETS
-│   │   ├️ 💬 PROCESSAMENTO DE RESPOSTAS
-│   │   ├️ 📎 UPLOAD DE ANEXOS
-│   │   ├️ ✏️ ALTERAÇÃO DE STATUS
-│   │   ├️ 📧 NOTIFICAÇÕES POR EMAIL
-│   │   └️ 📊 ATUALIZAÇÃO DE MÉTRICAS
-│   │
-│   └── 📄 logout.php
-│       └️ 🚪 DESTRUIÇÃO DE SESSÃO E REDIRECIONAMENTO
-│
-├── 🎨 ARQUIVOS DE ESTILO
-│   │
-│   ├── 📁 assets/css/
-│   │   ├️ 📄 estilo.css
-│   │   │   ├️ 🎨 PALETA DE CORES (Tema Gamer)
-│   │   │   ├️ 📐 LAYOUT PRINCIPAL
-│   │   │   ├️ 🎮 CARDS DE JOGOS
-│   │   │   ├️ 🛒 ESTILOS DO CARRINHO
-│   │   │   ├️ 💳 ESTILOS DE PAGAMENTO
-│   │   │   └️ 📱 DESIGN RESPONSIVO
-│   │   │
-│   │   ├️ 📄 responsivo.css
-│   │   │   ├️ 📱 MOBILE FIRST
-│   │   │   ├️ 📲 TABLETS
-│   │   │   ├️ 🖥️ DESKTOP
-│   │   │   └️ 📐 GRIDS ADAPTÁVEIS
-│   │   │
-│   │   ├️ 📄 admin.css
-│   │   │   ├️ ⚙️ LAYOUT SIMPLES DO PAINEL
-│   │   │   ├️ 📊 ESTILOS DE DASHBOARD
-│   │   │   ├️ 📋 TABELAS ADMIN
-│   │   │   └️ 📱 PAINEL RESPONSIVO
-│   │   │
-│   │   └️ 📄 suporte.css
-│   │       ├️ 🎫 ESTILOS DE TICKETS
-│   │       ├️ 💬 CHAT DE SUPORTE
-│   │       ├️ 📎 UPLOAD DE ARQUIVOS
-│   │       └️ 📊 STATUS E PRIORIDADES
-│   │
-│   ├── 📁 assets/js/
-│   │   ├️ 📄 main.js
-│   │   │   ├️ 🎯 FUNÇÕES GERAIS DA LOJA
-│   │   │   ├️ 📱 MENU MOBILE
-│   │   │   ├️ 🔍 BUSCA EM TEMPO REAL
-│   │   │   ├️ 🎨 ANIMAÇÕES E EFEITOS
-│   │   │   └️ 📐 MANIPULAÇÃO DE UI
-│   │   │
-│   │   ├️ 📄 carrinho.js
-│   │   │   ├️ 🛒 ADICIONAR/REMOVER ITENS
-│   │   │   ├️ 🧮 CÁLCULO DE TOTAIS
-│   │   │   ├️ 💾 SALVAR NO LOCALSTORAGE
-│   │   │   ├️ 🎮 SELEÇÃO DE PLATAFORMA
-│   │   │   └️ 🌎 SELEÇÃO DE REGIÃO
-│   │   │
-│   │   ├️ 📄 pagamento.js
-│   │   │   ├️ 💳 VALIDAÇÃO DE FORMULÁRIOS
-│   │   │   ├️ 🔄 ETAPAS DO CHECKOUT
-│   │   │   ├️ ⏱️ SIMULAÇÃO DE PAGAMENTO
-│   │   │   └️ 📧 CONFIRMAÇÃO AUTOMÁTICA
-│   │   │
-│   │   ├️ 📄 chaves.js
-│   │   │   ├️ 📋 COPIAR CHAVE PARA CLIPBOARD
-│   │   │   ├️ ✅ VALIDAÇÃO DE CHAVE
-│   │   │   ├️ 📥 DOWNLOAD DE CHAVES
-│   │   │   └️ 🔒 MARCAR COMO UTILIZADA
-│   │   │
-│   │   ├️ 📄 suporte.js
-│   │   │   ├️ 🎫 ABERTURA DE TICKETS
-│   │   │   ├️ 💬 SISTEMA DE MENSAGENS
-│   │   │   ├️ 📎 UPLOAD DE ANEXOS
-│   │   │   ├️ 🔄 ATUALIZAÇÃO EM TEMPO REAL
-│   │   │   └️ 📊 ALTERAÇÃO DE STATUS
-│   │   │
-│   │   └️ 📄 faq.js
-│   │       ├️ 🎪 ACCORDION DE PERGUNTAS
-│   │       ├️ 🔍 BUSCA NO FAQ
-│   │       ├️ 📂 FILTRO POR CATEGORIA
-│   │       └️ ⭐ MARCAR COMO ÚTIL
-│   │
-│   └── 📁 assets/imagens/
-│       ├️ 📁 jogos/ (CAPAS: cyberpunk.jpg, witcher3.jpg, etc)
-│       ├️ 📁 plataformas/ (ÍCONES: pc.png, ps4.png, ps5.png, etc)
-│       ├️ 📁 banners/ (BANNERS PROMOCIONAIS)
-│       ├️ 📁 bandeiras/ (BANDEIRAS: global.png, latam.png, etc)
-│       ├️ 📁 icones/ (ÍCONES GERAIS)
-│       └️ 📄 logo.png (LOGO PGS STORE)
-│
-├── 📁 uploads/
-│   ├️ 📁 capas_jogos/ (UPLOAD VIA PAINEL ADMIN)
-│   └️ 📁 anexos_suporte/ (ANEXOS DE TICKETS)
-│
-├── 🗃️ BANCO DE DADOS
-│   ├️ 📄 banco_dados.sql (ESTRUTURA COMPLETA)
-│   └️ 📄 dados_iniciais.sql (DADOS INICIAIS PARA TESTE)
-│
-└── 📄 README.txt
-    ├️ 👤 CREDENCIAIS: admin@pgsstore.com / password
-    ├️ 🗄️ CONFIGURAÇÃO DO BANCO
-    ├️ 🚀 INSTRUÇÕES DE INSTALAÇÃO
-    └️ 📞 SUPORTE TÉCNICO
+📄 index.php
+└── 🔀 REDIRECIONA para inicio.php (página inicial)
+
+📄 inicio.php
+└── 🏠 PÁGINA INICIAL com: Banner, Produtos em Destaque, Categorias, Busca
+
+📄 produto.php  
+└── 🖥️ DETALHES DO PRODUTO: Imagens, Descrição, Preço, Estoque, Botão Comprar
+
+📄 carrinho.php
+└── 🛒 CARRINHO DE COMPRAS: Lista produtos, Quantidades, Cupom, Total
+
+📄 finalizar_compra.php
+└── 💳 CHECKOUT COMPLETO: 4 etapas (Login → Endereço → Pagamento → Confirmação)
+
+📄 login.php
+└── 👤 LOGIN/CADASTRO: Dois formulários, Validação, Recuperação senha
+
+📄 minha_conta.php
+└── 📱 PERFIL DO USUÁRIO: Dados pessoais, Histórico, Avaliações
+
+📄 meus_pedidos.php
+└── 📦 HISTÓRICO: Lista todos pedidos com status e detalhes
+
+📄 suporte.php
+└── 🎫 ABRIR TICKET: Formulário com categorias e upload de anexos
+
+📄 meus_tickets.php
+└── 📋 MEUS TICKETS: Ver e responder tickets abertos
+
+📄 faq.php
+└── ❓ PERGUNTAS FREQUENTES: Sistema de accordion com busca
+
+📄 promocoes.php
+└── 🔥 PROMOÇÕES: Filtros por desconto, marca, timer
+📄 admin.php
+└── 📊 DASHBOARD: Estatísticas, Gráficos, Acesso rápido
+
+📄 admin_usuarios.php
+└── 👥 GERENCIAR USUÁRIOS: Listar, Editar, Bloquear
+
+📄 admin_marcas.php  
+└── 🏢 GERENCIAR MARCAS: Logitech, Razer, Corsair, etc
+
+📄 admin_categorias.php
+└── 📂 GERENCIAR CATEGORIAS: Teclados, Mouses, Headsets
+
+📄 admin_produtos.php
+└── 🎮 GERENCIAR PRODUTOS: CRUD completo com imagens
+
+📄 admin_estoque.php
+└── 📦 CONTROLE DE ESTOQUE: Alertas, Reposição
+
+📄 admin_pedidos.php
+└── 📋 GERENCIAR PEDIDOS: Ver detalhes, Alterar status
+
+📄 admin_cupons.php
+└── 🎟️ GERENCIAR CUPONS: Criar, Editar, Validar
+
+📄 admin_suporte.php
+└── 🎫 ATENDIMENTO: Responder tickets, Métricas
+
+📄 admin_faq.php
+└── ❓ GERENCIAR FAQ: Perguntas e respostas
+
+📄 admin_relatorios.php
+└── 📈 RELATÓRIOS: Vendas, Estoque, Exportar
+
+📄 config.php
+└── ⚙️ CONFIGURAÇÕES: Conexão BD, Sessões, Constantes
+
+📄 cabecalho.php
+└── 🏗️ HEADER: Logo, Menu, Busca, Carrinho, Usuário
+
+📄 rodape.php  
+└── 🏗️ FOOTER: Links, Contatos, Pagamentos
+
+📄 funcoes.php
+└── 🛠️ FUNÇÕES GLOBAIS: Autenticação, Carrinho, Email
+
+📄 processa_login.php
+└── 🔐 PROCESSAR LOGIN: Validar, Cadastrar, Criptografar
+
+📄 processa_pedido.php
+└── 💳 PROCESSAR PEDIDO: Pagamento, Estoque, Confirmação
+
+📄 processa_suporte.php
+└── 🎫 PROCESSAR SUPORTE: Tickets, Mensagens, Anexos
+
+📄 logout.php
+└── 🚪 SAIR: Destruir sessão, Redirecionar
+
+📁 css/
+├── 📄 estilo.css (ESTILOS PRINCIPAIS)
+├── 📄 responsivo.css (LAYOUT MOBILE)  
+├── 📄 admin.css (PAINEL ADMIN)
+└── 📄 suporte.css (SISTEMA SUPORTE)
+
+📁 js/
+├── 📄 main.js (FUNÇÕES GERAIS)
+├── 📄 carrinho.js (CONTROLE CARRINHO)
+├── 📄 pagamento.js (PROCESSAR PAGAMENTO)
+├── 📄 produtos.js (GALERIA IMAGENS)
+├── 📄 suporte.js (TICKETS E MENSAGENS)
+└── 📄 faq.js (ACCORDION E BUSCA)
+
+📁 imagens/
+├── 📁 produtos/ (FOTOS DOS PRODUTOS)
+├── 📁 marcas/ (LOGOS DAS MARCAS)
+├── 📁 banners/ (BANNERS PROMOCIONAIS)
+├── 📁 icones/ (ÍCONES DO SITE)
+└── 📄 logo.png (LOGO DA LOJA)
+
+📁 uploads/
+├── 📁 imagens_produtos/ (FOTOS ENVIADAS PELO ADMIN)
+└── 📁 anexos_suporte/ (ARQUIVOS DOS TICKETS)
