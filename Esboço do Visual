@@ -17,7 +17,7 @@ pgs_store/
 │   ├── 📄 faq.php                  (PERGUNTAS FREQUENTES)
 │   └── 📄 promocoes.php            (PROMOÇÕES)
 │
-├── ⚙️ PAINEL ADMINISTRATIVO
+├── ⚙️ PAINEL ADMINISTRATIVO (NÃO PRECISA SER TÃO BONITO OU MUITO ELABORADO, PRECISA SER RESPONSIVO, PORÉM, SIMPLES E EFICIENTE).
 │   │
 │   ├── 📄 admin.php                (DASHBOARD PRINCIPAL)
 │   ├── 📄 admin_usuarios.php       (GERENCIAR USUÁRIOS)
