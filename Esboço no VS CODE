@@ -27,6 +27,7 @@ pgs_perifericos/
 │   ├── 📄 admin_cupons.php
 │   ├── 📄 admin_suporte.php
 │   ├── 📄 admin_faq.php
+    ├── 📄 admin_relatorios.php
 │   └── 📄 admin_avaliacoes.php        # NOVO: Moderar avaliações
 │
 ├── 📁 includes/
