@@ -1,7 +1,8 @@
+-- Criar banco
 CREATE DATABASE perifericos_store;
 USE perifericos_store;
 
--- Tabela de usuários
+-- Tabela usuários
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -11,13 +12,13 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de categorias
+-- Tabela categorias
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL
 );
 
--- Tabela de produtos
+-- Tabela produtos
 CREATE TABLE products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     categoria_id INT,
@@ -31,7 +32,7 @@ CREATE TABLE products (
     FOREIGN KEY (categoria_id) REFERENCES categories(id)
 );
 
--- Tabela de pedidos
+-- Tabela pedidos
 CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cliente_id INT,
@@ -43,7 +44,7 @@ CREATE TABLE orders (
     FOREIGN KEY (cliente_id) REFERENCES users(id)
 );
 
--- Tabela de itens do pedido
+-- Tabela itens do pedido
 CREATE TABLE order_items (
     id INT AUTO_INCREMENT PRIMARY KEY,
     pedido_id INT,
@@ -59,16 +60,9 @@ INSERT INTO categories (nome) VALUES
 ('Teclados'), ('Mouses'), ('Headsets'), ('Monitores'), ('Webcams');
 
 INSERT INTO users (nome, email, senha, tipo) VALUES 
-('Admin', 'admin@loja.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin'),
-('Cliente Teste', 'cliente@teste.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cliente');
+('Admin', 'admin@loja.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
 
 INSERT INTO products (categoria_id, nome, preco, estoque, descricao, destaque) VALUES
 (1, 'Teclado Mecânico RGB', 299.90, 25, 'Teclado mecânico com switches blue e iluminação RGB', 1),
-(1, 'Teclado Slim USB', 129.90, 40, 'Teclado slim silencioso com design moderno', 0),
 (2, 'Mouse Gamer 7200DPI', 159.90, 30, 'Mouse gamer com sensor óptico 7200DPI', 1),
-(2, 'Mouse Sem Fio', 79.90, 50, 'Mouse óptico sem fio com 2.4GHz', 1),
-(3, 'Headset Gamer 7.1', 199.90, 20, 'Headset surround 7.1 com microfone retrátil', 1),
-(3, 'Headset Bluetooth', 149.90, 35, 'Headset wireless com cancelamento de ruído', 0),
-(4, 'Monitor 24" Full HD', 699.90, 15, 'Monitor LED 24 polegadas 144Hz', 1),
-(4, 'Monitor 27" 4K', 1299.90, 10, 'Monitor 4K UHD com HDR', 1),
-(5, 'Webcam Full HD 1080p', 189.90, 25, 'Webcam com microfone integrado e autofoco', 1);
+(3, 'Headset Gamer 7.1', 199.90, 20, 'Headset surround 7.1 com microfone retrátil', 1);
