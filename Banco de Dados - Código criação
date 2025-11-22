@@ -153,7 +153,7 @@ CREATE TABLE avaliacoes (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
--- NOVA TABELA: Suporte/Tickets
+-- Tabela de tickets de suporte
 CREATE TABLE tickets_suporte (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT,
@@ -193,14 +193,22 @@ CREATE TABLE faq (
     ativo BOOLEAN DEFAULT TRUE
 );
 
+-- Índices para melhor performance
+CREATE INDEX idx_jogos_destaque ON jogos(em_destaque, ativo);
+CREATE INDEX idx_jogos_plataformas_promocao ON jogos_plataformas(em_promocao, data_fim_promocao);
+CREATE INDEX idx_chaves_utilizadas ON chaves_digitais(utilizada, jogo_id, plataforma_id);
+CREATE INDEX idx_pedidos_status ON pedidos(status, data_pedido);
+CREATE INDEX idx_tickets_status ON tickets_suporte(status, prioridade, data_abertura);
+CREATE INDEX idx_faq_categoria ON faq(categoria, ordem, ativo);
+
 -- Dados iniciais
-INSERT INTO plataformas (nome, icone) VALUES 
-('PC', 'pc.png'),
-('PlayStation 4', 'ps4.png'),
-('PlayStation 5', 'ps5.png'),
-('Xbox One', 'xbox-one.png'),
-('Xbox Series X/S', 'xbox-series.png'),
-('Nintendo Switch', 'switch.png');
+INSERT INTO plataformas (nome, icone, ativa) VALUES 
+('PC', 'pc.png', TRUE),
+('PlayStation 4', 'ps4.png', TRUE),
+('PlayStation 5', 'ps5.png', TRUE),
+('Xbox One', 'xbox-one.png', TRUE),
+('Xbox Series X/S', 'xbox-series.png', TRUE),
+('Nintendo Switch', 'switch.png', TRUE);
 
 INSERT INTO regioes (nome, codigo, bandeira) VALUES 
 ('Global', 'GLOBAL', 'global.png'),
@@ -222,26 +230,71 @@ INSERT INTO categorias (nome, icone, cor) VALUES
 ('Simulação', 'simulation.png', '#059669'),
 ('Luta', 'boxing.png', '#EA580C');
 
-INSERT INTO usuarios (nome, email, senha, tipo) VALUES 
-('Administrador PGS', 'admin@pgsstore.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+INSERT INTO usuarios (nome, email, senha, tipo, ativo) VALUES 
+('Administrador PGS', 'admin@pgsstore.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', TRUE);
 
--- FAQ inicial
-INSERT INTO faq (pergunta, resposta, categoria, ordem) VALUES 
-('Como recebo minhas chaves de jogos?', 'As chaves são entregues instantaneamente após a confirmação do pagamento. Você pode acessá-las em "Minha Biblioteca".', 'compra', 1),
-('Quais formas de pagamento são aceitas?', 'Aceitamos cartão de crédito, PIX, boleto bancário e PayPal.', 'pagamento', 2),
-('As chaves funcionam em qualquer região?', 'Cada chave possui uma região específica. Verifique a compatibilidade antes da compra.', 'chaves', 3);
+-- Inserir FAQ inicial
+INSERT INTO faq (pergunta, resposta, categoria, ordem, ativo) VALUES 
+('Como recebo minhas chaves de jogos?', 'As chaves são entregues instantaneamente após a confirmação do pagamento. Você pode acessá-las em "Minha Biblioteca" na sua conta.', 'compra', 1, TRUE),
+('Quanto tempo leva para a chave ficar disponível?', 'Para pagamentos via PIX e cartão, a chave é liberada em até 5 minutos. Para boleto, pode levar até 2 dias úteis após o pagamento.', 'compra', 2, TRUE),
+('Quais formas de pagamento são aceitas?', 'Aceitamos cartão de crédito (todas as bandeiras), PIX, boleto bancário e PayPal.', 'pagamento', 1, TRUE),
+('O pagamento é seguro?', 'Sim, utilizamos sistema de pagamento criptografado e não armazenamos dados do seu cartão em nossos servidores.', 'pagamento', 2, TRUE),
+('As chaves funcionam em qualquer região?', 'Cada chave possui uma região específica. Verifique a compatibilidade da região antes da compra. Chaves Globais funcionam em todas as regiões.', 'chaves', 1, TRUE),
+('O que fazer se a chave não funcionar?', Entre em contato conosco através do sistema de suporte informando o número do pedido e a chave que não funcionou. Resolveremos em até 24h.', 'chaves', 2, TRUE),
+('Posso reembolsar um jogo?', 'Sim, oferecemos reembolso em até 7 dias após a compra, desde que a chave não tenha sido utilizada.', 'jogos', 1, TRUE),
+('Como altero minha senha?', 'Vá em "Minha Conta" > "Alterar Senha" ou use a opção "Esqueci minha senha" na página de login.', 'conta', 1, TRUE),
+('Posso transferir um jogo para outra conta?', 'Não, as chaves são vinculadas à conta onde foram compradas e não podem ser transferidas.', 'conta', 2, TRUE),
+('O site é confiável?', 'Sim, somos uma loja oficial com anos no mercado e milhares de clientes satisfeitos. Todos os nossos produtos são originais.', 'compra', 3, TRUE);
 
--- Jogo exemplo
-INSERT INTO jogos (nome, descricao, desenvolvedora, distribuidora, data_lancamento, classificacao_indicativa, em_destaque) VALUES
-('Cyberpunk 2077', 'Um RPG de ação e aventura em mundo aberto...', 'CD Projekt Red', 'CD Projekt', '2020-12-10', '18+', TRUE);
+-- Inserir jogos de exemplo
+INSERT INTO jogos (nome, descricao, desenvolvedora, distribuidora, data_lancamento, classificacao_indicativa, em_destaque, tags) VALUES
+('Cyberpunk 2077', 'Um RPG de ação e aventura em mundo aberto ambientado em Night City, uma metrópole obcecada por poder, glamour e modificações corporais.', 'CD Projekt Red', 'CD Projekt', '2020-12-10', '18+', TRUE, '["RPG", "Ação", "Mundo Aberto", "Futurista"]'),
+('The Witcher 3: Wild Hunt', 'RPG de mundo aberto de fantasia cheio de escolhas consequentes e missões impactantes.', 'CD Projekt Red', 'CD Projekt', '2015-05-19', '18+', TRUE, '["RPG", "Fantasia", "Mundo Aberto", "Aventura"]'),
+('FIFA 23', 'O mais completo jogo de futebol com os maiores times e ligas do mundo.', 'EA Sports', 'Electronic Arts', '2022-09-30', 'L', FALSE, '["Esportes", "Futebol", "Multijogador"]'),
+('Counter-Strike 2', 'Clássico jogo de tiro em primeira pessoa com modo competitivo online.', 'Valve', 'Valve', '2023-09-27', '18+', TRUE, '["Tiro", "Multijogador", "Competitivo"]');
 
--- Preços por plataforma
+-- Inserir preços por plataforma
 INSERT INTO jogos_plataformas (jogo_id, plataforma_id, preco_base, preco_promocional, em_promocao, estoque) VALUES
-(1, 1, 199.90, 149.90, TRUE, 50),
-(1, 2, 249.90, NULL, FALSE, 30),
-(1, 4, 229.90, 179.90, TRUE, 25);
+-- Cyberpunk 2077
+(1, 1, 199.90, 149.90, TRUE, 50),   -- PC com promoção
+(1, 2, 249.90, NULL, FALSE, 30),    -- PS4 sem promoção
+(1, 3, 299.90, 249.90, TRUE, 25),   -- PS5 com promoção
+(1, 4, 229.90, 179.90, TRUE, 20),   -- Xbox One com promoção
 
--- Chaves digitais
+-- The Witcher 3
+(2, 1, 79.90, 39.90, TRUE, 100),
+(2, 2, 99.90, 59.90, TRUE, 60),
+(2, 3, 119.90, 79.90, TRUE, 40),
+
+-- FIFA 23
+(3, 1, 249.90, 199.90, TRUE, 80),
+(3, 2, 299.90, NULL, FALSE, 50),
+(3, 4, 299.90, 249.90, TRUE, 45),
+
+-- Counter-Strike 2
+(4, 1, 0.00, 0.00, FALSE, 999);     -- Free to play
+
+-- Inserir chaves digitais de exemplo
 INSERT INTO chaves_digitais (jogo_id, plataforma_id, regiao_id, chave) VALUES
-(1, 1, 1, 'ABCDE-12345-FGHIJ-67890'),
-(1, 1, 2, 'KLMNO-54321-PQRST-09876');
+-- Cyberpunk 2077 - PC
+(1, 1, 1, 'CP77-GLOBAL-12345-67890-ABCDE'),
+(1, 1, 1, 'CP77-GLOBAL-54321-09876-FGHIJ'),
+(1, 1, 2, 'CP77-LATAM-11111-22222-KLMNO'),
+(1, 1, 2, 'CP77-LATAM-33333-44444-PQRST'),
+
+-- The Witcher 3 - PC
+(2, 1, 1, 'WITCHER3-GLOBAL-55555-66666'),
+(2, 1, 1, 'WITCHER3-GLOBAL-77777-88888'),
+
+-- FIFA 23 - PC
+(3, 1, 2, 'FIFA23-LATAM-99999-00000'),
+(3, 1, 2, 'FIFA23-LATAM-11111-22222');
+
+-- Inserir cupons de desconto exemplo
+INSERT INTO cupons_desconto (codigo, desconto_percentual, desconto_valor, data_validade, usos_maximos, ativo) VALUES
+('PRIMEIRACOMPRA', 15.00, NULL, '2024-12-31', 1000, TRUE),
+('PROMO10', 10.00, NULL, '2024-06-30', 500, TRUE),
+('LANCAMENTO', 5.00, NULL, '2024-03-31', 200, TRUE);
+
+-- Mensagem de sucesso
+SELECT 'Banco de dados PGS Store criado com sucesso!' as status;
