@@ -10,7 +10,6 @@ CREATE TABLE usuarios (
     senha VARCHAR(255) NOT NULL,
     tipo ENUM('cliente','admin') DEFAULT 'cliente',
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    ultimo_login TIMESTAMP NULL,
     ativo BOOLEAN DEFAULT TRUE
 );
 
@@ -30,12 +29,18 @@ CREATE TABLE regioes (
     bandeira VARCHAR(100)
 );
 
--- Tabela de categorias de jogos
+-- Tabela de categorias
 CREATE TABLE categorias (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
-    icone VARCHAR(100),
-    cor VARCHAR(7) DEFAULT '#6B7280'
+    descricao TEXT
+);
+
+-- Tabela de distribuidoras
+CREATE TABLE distribuidoras (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    logo VARCHAR(255)
 );
 
 -- Tabela de jogos
@@ -44,21 +49,20 @@ CREATE TABLE jogos (
     nome VARCHAR(100) NOT NULL,
     descricao TEXT,
     desenvolvedora VARCHAR(100),
-    distribuidora VARCHAR(100),
+    distribuidora_id INT,
     data_lancamento DATE,
     classificacao_indicativa VARCHAR(10),
     capa_imagem VARCHAR(255),
     trailer_url VARCHAR(255),
-    screenshots JSON,
     requisitos_minimos TEXT,
     requisitos_recomendados TEXT,
-    tags JSON,
-    ativo BOOLEAN DEFAULT TRUE,
     em_destaque BOOLEAN DEFAULT FALSE,
-    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ativo BOOLEAN DEFAULT TRUE,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (distribuidora_id) REFERENCES distribuidoras(id)
 );
 
--- Tabela de jogos_plataformas
+-- Tabela de jogos_plataformas (preços por plataforma)
 CREATE TABLE jogos_plataformas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     jogo_id INT,
@@ -66,8 +70,6 @@ CREATE TABLE jogos_plataformas (
     preco_base DECIMAL(10,2) NOT NULL,
     preco_promocional DECIMAL(10,2),
     em_promocao BOOLEAN DEFAULT FALSE,
-    data_inicio_promocao DATE NULL,
-    data_fim_promocao DATE NULL,
     estoque INT DEFAULT 0,
     FOREIGN KEY (jogo_id) REFERENCES jogos(id),
     FOREIGN KEY (plataforma_id) REFERENCES plataformas(id)
@@ -81,9 +83,6 @@ CREATE TABLE chaves_digitais (
     regiao_id INT,
     chave VARCHAR(255) UNIQUE NOT NULL,
     utilizada BOOLEAN DEFAULT FALSE,
-    data_compra TIMESTAMP NULL,
-    pedido_id INT NULL,
-    data_ativacao TIMESTAMP NULL,
     data_adicao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (jogo_id) REFERENCES jogos(id),
     FOREIGN KEY (plataforma_id) REFERENCES plataformas(id),
@@ -95,16 +94,10 @@ CREATE TABLE pedidos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cliente_id INT,
     total DECIMAL(10,2) NOT NULL,
-    subtotal DECIMAL(10,2) NOT NULL,
-    desconto DECIMAL(10,2) DEFAULT 0,
-    status ENUM('pendente','pago','processando','concluido','cancelado') DEFAULT 'pendente',
-    metodo_pagamento ENUM('cartao','pix','boleto','paypal'),
+    status ENUM('pendente','pago','concluido','cancelado') DEFAULT 'pendente',
+    metodo_pagamento ENUM('cartao','pix','boleto'),
     data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     data_pagamento TIMESTAMP NULL,
-    data_conclusao TIMESTAMP NULL,
-    codigo_transacao VARCHAR(100),
-    codigo_pix TEXT,
-    codigo_boleto VARCHAR(100),
     FOREIGN KEY (cliente_id) REFERENCES usuarios(id)
 );
 
@@ -116,28 +109,13 @@ CREATE TABLE itens_pedido (
     plataforma_id INT,
     regiao_id INT,
     chave_digital_id INT,
-    quantidade INT DEFAULT 1,
     preco_unitario DECIMAL(10,2) NOT NULL,
     chave_utilizada BOOLEAN DEFAULT FALSE,
-    data_utilizacao TIMESTAMP NULL,
     FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
     FOREIGN KEY (jogo_id) REFERENCES jogos(id),
     FOREIGN KEY (plataforma_id) REFERENCES plataformas(id),
     FOREIGN KEY (regiao_id) REFERENCES regioes(id),
     FOREIGN KEY (chave_digital_id) REFERENCES chaves_digitais(id)
-);
-
--- Tabela de cupons de desconto
-CREATE TABLE cupons_desconto (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    codigo VARCHAR(50) UNIQUE NOT NULL,
-    desconto_percentual DECIMAL(5,2),
-    desconto_valor DECIMAL(10,2),
-    data_validade DATE,
-    usos_maximos INT,
-    usos_atuais INT DEFAULT 0,
-    ativo BOOLEAN DEFAULT TRUE,
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabela de avaliações
@@ -148,7 +126,6 @@ CREATE TABLE avaliacoes (
     nota INT CHECK (nota >= 1 AND nota <= 5),
     comentario TEXT,
     data_avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    aprovada BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (jogo_id) REFERENCES jogos(id),
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
@@ -165,9 +142,7 @@ CREATE TABLE tickets_suporte (
     data_abertura TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     data_ultima_resposta TIMESTAMP NULL,
     data_fechamento TIMESTAMP NULL,
-    admin_responsavel INT NULL,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-    FOREIGN KEY (admin_responsavel) REFERENCES usuarios(id)
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
 -- Tabela de mensagens do suporte
@@ -176,7 +151,6 @@ CREATE TABLE mensagens_suporte (
     ticket_id INT,
     usuario_id INT,
     mensagem TEXT NOT NULL,
-    anexo VARCHAR(255) NULL,
     data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     eh_admin BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (ticket_id) REFERENCES tickets_suporte(id),
@@ -193,108 +167,98 @@ CREATE TABLE faq (
     ativo BOOLEAN DEFAULT TRUE
 );
 
--- Índices para melhor performance
+-- Índices para performance
 CREATE INDEX idx_jogos_destaque ON jogos(em_destaque, ativo);
-CREATE INDEX idx_jogos_plataformas_promocao ON jogos_plataformas(em_promocao, data_fim_promocao);
+CREATE INDEX idx_jogos_plataformas_preco ON jogos_plataformas(preco_base, em_promocao);
 CREATE INDEX idx_chaves_utilizadas ON chaves_digitais(utilizada, jogo_id, plataforma_id);
 CREATE INDEX idx_pedidos_status ON pedidos(status, data_pedido);
-CREATE INDEX idx_tickets_status ON tickets_suporte(status, prioridade, data_abertura);
-CREATE INDEX idx_faq_categoria ON faq(categoria, ordem, ativo);
+CREATE INDEX idx_tickets_status ON tickets_suporte(status, data_abertura);
 
 -- Dados iniciais
-INSERT INTO plataformas (nome, icone, ativa) VALUES 
-('PC', 'pc.png', TRUE),
-('PlayStation 4', 'ps4.png', TRUE),
-('PlayStation 5', 'ps5.png', TRUE),
-('Xbox One', 'xbox-one.png', TRUE),
-('Xbox Series X/S', 'xbox-series.png', TRUE),
-('Nintendo Switch', 'switch.png', TRUE);
+INSERT INTO plataformas (nome, icone) VALUES 
+('PC', 'pc.png'),
+('PlayStation 4', 'ps4.png'),
+('PlayStation 5', 'ps5.png'),
+('Xbox One', 'xbox-one.png'),
+('Xbox Series X/S', 'xbox-series.png'),
+('Nintendo Switch', 'switch.png');
 
 INSERT INTO regioes (nome, codigo, bandeira) VALUES 
 ('Global', 'GLOBAL', 'global.png'),
 ('América Latina', 'LATAM', 'latam.png'),
 ('Europa', 'EU', 'europe.png'),
 ('Estados Unidos', 'US', 'usa.png'),
-('Brasil', 'BR', 'brazil.png'),
-('Asia', 'ASIA', 'asia.png');
+('Brasil', 'BR', 'brazil.png');
 
-INSERT INTO categorias (nome, icone, cor) VALUES 
-('Ação', 'sword.png', '#EF4444'),
-('Aventura', 'compass.png', '#10B981'),
-('RPG', 'dragon.png', '#8B5CF6'),
-('Estratégia', 'chess.png', '#F59E0B'),
-('Esportes', 'soccer.png', '#06B6D4'),
-('Corrida', 'racing-car.png', '#DC2626'),
-('Tiro', 'gun.png', '#6B7280'),
-('Indie', 'indie.png', '#EC4899'),
-('Simulação', 'simulation.png', '#059669'),
-('Luta', 'boxing.png', '#EA580C');
+INSERT INTO categorias (nome, descricao) VALUES 
+('Ação', 'Jogos de ação e aventura'),
+('Aventura', 'Explore mundos fantásticos'),
+('RPG', 'Jogos de role-playing'),
+('Estratégia', 'Jogos de estratégia e tática'),
+('Esportes', 'Simuladores esportivos'),
+('Tiro', 'Jogos de tiro em primeira pessoa'),
+('Indie', 'Jogos independentes'),
+('Simulação', 'Jogos de simulação realista');
+
+INSERT INTO distribuidoras (nome, logo) VALUES 
+('CD Projekt Red', 'cdprojekt.png'),
+('Electronic Arts', 'ea.png'),
+('Valve', 'valve.png'),
+('FromSoftware', 'fromsoftware.png'),
+('Rockstar Games', 'rockstar.png'),
+('Nintendo', 'nintendo.png'),
+('Microsoft', 'microsoft.png'),
+('Ubisoft', 'ubisoft.png');
 
 INSERT INTO usuarios (nome, email, senha, tipo, ativo) VALUES 
-('Administrador PGS', 'admin@pgsstore.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', TRUE);
-
--- Inserir FAQ inicial
-INSERT INTO faq (pergunta, resposta, categoria, ordem, ativo) VALUES 
-('Como recebo minhas chaves de jogos?', 'As chaves são entregues instantaneamente após a confirmação do pagamento. Você pode acessá-las em "Minha Biblioteca" na sua conta.', 'compra', 1, TRUE),
-('Quanto tempo leva para a chave ficar disponível?', 'Para pagamentos via PIX e cartão, a chave é liberada em até 5 minutos. Para boleto, pode levar até 2 dias úteis após o pagamento.', 'compra', 2, TRUE),
-('Quais formas de pagamento são aceitas?', 'Aceitamos cartão de crédito (todas as bandeiras), PIX, boleto bancário e PayPal.', 'pagamento', 1, TRUE),
-('O pagamento é seguro?', 'Sim, utilizamos sistema de pagamento criptografado e não armazenamos dados do seu cartão em nossos servidores.', 'pagamento', 2, TRUE),
-('As chaves funcionam em qualquer região?', 'Cada chave possui uma região específica. Verifique a compatibilidade da região antes da compra. Chaves Globais funcionam em todas as regiões.', 'chaves', 1, TRUE),
-('O que fazer se a chave não funcionar?', Entre em contato conosco através do sistema de suporte informando o número do pedido e a chave que não funcionou. Resolveremos em até 24h.', 'chaves', 2, TRUE),
-('Posso reembolsar um jogo?', 'Sim, oferecemos reembolso em até 7 dias após a compra, desde que a chave não tenha sido utilizada.', 'jogos', 1, TRUE),
-('Como altero minha senha?', 'Vá em "Minha Conta" > "Alterar Senha" ou use a opção "Esqueci minha senha" na página de login.', 'conta', 1, TRUE),
-('Posso transferir um jogo para outra conta?', 'Não, as chaves são vinculadas à conta onde foram compradas e não podem ser transferidas.', 'conta', 2, TRUE),
-('O site é confiável?', 'Sim, somos uma loja oficial com anos no mercado e milhares de clientes satisfeitos. Todos os nossos produtos são originais.', 'compra', 3, TRUE);
+('Administrador', 'admin@pgsstore.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', TRUE),
+('João Silva', 'cliente@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cliente', TRUE);
 
 -- Inserir jogos de exemplo
-INSERT INTO jogos (nome, descricao, desenvolvedora, distribuidora, data_lancamento, classificacao_indicativa, em_destaque, tags) VALUES
-('Cyberpunk 2077', 'Um RPG de ação e aventura em mundo aberto ambientado em Night City, uma metrópole obcecada por poder, glamour e modificações corporais.', 'CD Projekt Red', 'CD Projekt', '2020-12-10', '18+', TRUE, '["RPG", "Ação", "Mundo Aberto", "Futurista"]'),
-('The Witcher 3: Wild Hunt', 'RPG de mundo aberto de fantasia cheio de escolhas consequentes e missões impactantes.', 'CD Projekt Red', 'CD Projekt', '2015-05-19', '18+', TRUE, '["RPG", "Fantasia", "Mundo Aberto", "Aventura"]'),
-('FIFA 23', 'O mais completo jogo de futebol com os maiores times e ligas do mundo.', 'EA Sports', 'Electronic Arts', '2022-09-30', 'L', FALSE, '["Esportes", "Futebol", "Multijogador"]'),
-('Counter-Strike 2', 'Clássico jogo de tiro em primeira pessoa com modo competitivo online.', 'Valve', 'Valve', '2023-09-27', '18+', TRUE, '["Tiro", "Multijogador", "Competitivo"]');
+INSERT INTO jogos (nome, descricao, desenvolvedora, distribuidora_id, data_lancamento, classificacao_indicativa, capa_imagem, trailer_url, requisitos_minimos, requisitos_recomendados, em_destaque) VALUES
+('Cyberpunk 2077', 'RPG de ação em mundo aberto no futurista Night City', 'CD Projekt Red', 1, '2020-12-10', '18+', 'cyberpunk.jpg', 'https://youtube.com/cyberpunk', 'Windows 7, Intel i5, 8GB RAM, GTX 780', 'Windows 10, Intel i7, 16GB RAM, RTX 2060', TRUE),
+('The Witcher 3: Wild Hunt', 'RPG de fantasia com mundo aberto e histórias épicas', 'CD Projekt Red', 1, '2015-05-19', '18+', 'witcher3.jpg', 'https://youtube.com/witcher3', 'Windows 7, Intel i5, 6GB RAM, GTX 660', 'Windows 10, Intel i7, 8GB RAM, GTX 770', TRUE),
+('Elden Ring', 'RPG de ação em mundo aberto com combate desafiador', 'FromSoftware', 4, '2022-02-25', '16+', 'eldenring.jpg', 'https://youtube.com/eldenring', 'Windows 10, Intel i5, 12GB RAM, GTX 1060', 'Windows 10, Intel i7, 16GB RAM, RTX 2070', TRUE),
+('Counter-Strike 2', 'Jogo de tiro tático multiplayer', 'Valve', 3, '2023-09-27', '18+', 'cs2.jpg', 'https://youtube.com/cs2', 'Windows 10, 4GB RAM, DirectX 11', 'Windows 10, 8GB RAM, GTX 1060', TRUE);
 
 -- Inserir preços por plataforma
 INSERT INTO jogos_plataformas (jogo_id, plataforma_id, preco_base, preco_promocional, em_promocao, estoque) VALUES
 -- Cyberpunk 2077
-(1, 1, 199.90, 149.90, TRUE, 50),   -- PC com promoção
-(1, 2, 249.90, NULL, FALSE, 30),    -- PS4 sem promoção
-(1, 3, 299.90, 249.90, TRUE, 25),   -- PS5 com promoção
-(1, 4, 229.90, 179.90, TRUE, 20),   -- Xbox One com promoção
+(1, 1, 199.90, 149.90, TRUE, 50),   -- PC
+(1, 3, 299.90, 249.90, TRUE, 25),   -- PS5
+(1, 5, 279.90, 229.90, TRUE, 20),   -- Xbox Series
 
 -- The Witcher 3
-(2, 1, 79.90, 39.90, TRUE, 100),
-(2, 2, 99.90, 59.90, TRUE, 60),
-(2, 3, 119.90, 79.90, TRUE, 40),
+(2, 1, 79.90, 39.90, TRUE, 100),    -- PC
+(2, 2, 99.90, 59.90, TRUE, 60),     -- PS4
+(2, 6, 119.90, 79.90, TRUE, 40),    -- Switch
 
--- FIFA 23
-(3, 1, 249.90, 199.90, TRUE, 80),
-(3, 2, 299.90, NULL, FALSE, 50),
-(3, 4, 299.90, 249.90, TRUE, 45),
+-- Elden Ring
+(3, 1, 249.90, 199.90, TRUE, 30),   -- PC
+(3, 3, 349.90, 299.90, TRUE, 25),   -- PS5
 
 -- Counter-Strike 2
-(4, 1, 0.00, 0.00, FALSE, 999);     -- Free to play
+(4, 1, 0.00, 0.00, FALSE, 999);     -- PC (Free)
 
--- Inserir chaves digitais de exemplo
+-- Inserir chaves digitais
 INSERT INTO chaves_digitais (jogo_id, plataforma_id, regiao_id, chave) VALUES
--- Cyberpunk 2077 - PC
-(1, 1, 1, 'CP77-GLOBAL-12345-67890-ABCDE'),
-(1, 1, 1, 'CP77-GLOBAL-54321-09876-FGHIJ'),
-(1, 1, 2, 'CP77-LATAM-11111-22222-KLMNO'),
-(1, 1, 2, 'CP77-LATAM-33333-44444-PQRST'),
+(1, 1, 1, 'CP77-GLOBAL-12345-67890'), (1, 1, 2, 'CP77-LATAM-11111-22222'),
+(2, 1, 1, 'WITCHER3-GLOBAL-55555'), (2, 1, 2, 'WITCHER3-LATAM-77777'),
+(3, 1, 1, 'ELDEN-RING-99999'), (3, 1, 2, 'ELDEN-RING-11111'),
+(4, 1, 1, 'CS2-FREE-GLOBAL-55555');
 
--- The Witcher 3 - PC
-(2, 1, 1, 'WITCHER3-GLOBAL-55555-66666'),
-(2, 1, 1, 'WITCHER3-GLOBAL-77777-88888'),
+-- Inserir FAQ
+INSERT INTO faq (pergunta, resposta, categoria, ordem) VALUES 
+('Como recebo minhas chaves?', 'As chaves são entregues automaticamente após a confirmação do pagamento. Acesse em "Minha Biblioteca".', 'compra', 1),
+('Quanto tempo leva para receber a chave?', 'Para PIX e cartão: até 5 minutos. Boleto: até 2 dias úteis.', 'compra', 2),
+('Quais formas de pagamento?', 'Cartão de crédito, PIX e boleto bancário.', 'pagamento', 1),
+('As chaves funcionam em qualquer região?', 'Cada chave tem uma região específica. Chaves Globais funcionam em todo o mundo.', 'chaves', 1),
+('Posso reembolsar?', 'Sim, em até 7 dias se a chave não foi usada.', 'jogos', 1);
 
--- FIFA 23 - PC
-(3, 1, 2, 'FIFA23-LATAM-99999-00000'),
-(3, 1, 2, 'FIFA23-LATAM-11111-22222');
+-- Inserir perguntas prontas para tickets
+INSERT INTO faq (pergunta, resposta, categoria, ordem) VALUES 
+('Minha chave não funciona', 'Verifique se a região da chave é compatível com sua conta. Se persistir, abra um ticket informando o número do pedido.', 'chaves', 3),
+('Não recebi minha chave', 'Aguarde o tempo de processamento. Se passou do prazo, verifique sua biblioteca e spam do email.', 'compra', 3),
+('Problema com pagamento', 'Verifique os dados do cartão ou tente outra forma de pagamento. Se foi debitado, aguarde 1h e verifique novamente.', 'pagamento', 2);
 
--- Inserir cupons de desconto exemplo
-INSERT INTO cupons_desconto (codigo, desconto_percentual, desconto_valor, data_validade, usos_maximos, ativo) VALUES
-('PRIMEIRACOMPRA', 15.00, NULL, '2024-12-31', 1000, TRUE),
-('PROMO10', 10.00, NULL, '2024-06-30', 500, TRUE),
-('LANCAMENTO', 5.00, NULL, '2024-03-31', 200, TRUE);
-
--- Mensagem de sucesso
 SELECT 'Banco de dados PGS Store criado com sucesso!' as status;
