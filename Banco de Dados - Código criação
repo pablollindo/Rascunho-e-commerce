@@ -1,6 +1,6 @@
 -- Criar banco de dados
-CREATE DATABASE perifericos_store;
-USE perifericos_store;
+CREATE DATABASE pgs_perifericos;
+USE pgs_perifericos;
 
 -- Tabela de usuários
 CREATE TABLE usuarios (
@@ -142,7 +142,7 @@ INSERT INTO categorias (nome, descricao) VALUES
 ('Webcams', 'Webcams para streaming e reuniões');
 
 INSERT INTO usuarios (nome, email, senha, tipo) VALUES 
-('Administrador', 'admin@perifericosstore.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin'),
+('Administrador', 'admin@pgsperifericos.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin'),
 ('João Silva', 'cliente@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cliente');
 
 INSERT INTO produtos (categoria_id, nome, descricao, preco, preco_promocional, estoque, imagem, em_destaque, em_promocao) VALUES
@@ -177,4 +177,4 @@ INSERT INTO mensagens_suporte (ticket_id, usuario_id, mensagem, eh_admin) VALUES
 (1, 1, 'Prezado cliente, verificamos seu pedido e identificamos um atraso na transportadora. Estamos acompanhando.', TRUE),
 (2, 2, 'Meu headset HyperX parou de funcionar do nada. Como faço para acionar a garantia?', FALSE);
 
-SELECT 'Banco de dados Periféricos Store criado com sucesso!' as status;
+SELECT 'Banco de dados PGS Periféricos criado com sucesso!' as status;
