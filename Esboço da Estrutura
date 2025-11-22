@@ -8,7 +8,8 @@ loja_jogos_digitais/
 │   │   ├── CATÁLOGO COM FILTRO POR PLATAFORMA
 │   │   ├── BARRA DE PESQUISA DE JOGOS
 │   │   ├── CATEGORIAS (AÇÃO, AVENTURA, RPG, ETC)
-│   │   └── JOGOS MAIS VENDIDOS
+│   │   ├── JOGOS MAIS VENDIDOS
+│   │   └── LINK PARA SUPORTE NO RODAPÉ
 │   │
 │   ├── 📄 jogo.php
 │   │   ├── CAPA DO JOGO E TRAILER
@@ -18,7 +19,8 @@ loja_jogos_digitais/
 │   │   ├── REQUISITOS DO SISTEMA (PARA PC)
 │   │   ├── AVALIAÇÕES E COMENTÁRIOS
 │   │   ├── PREÇO E PROMOÇÕES
-│   │   └── BOTÃO "COMPRAR AGORA"
+│   │   ├── BOTÃO "COMPRAR AGORA"
+│   │   └── LINK "PROBLEMAS COM O JOGO?" → SUPORTE
 │   │
 │   ├── 📄 carrinho.php
 │   │   ├── LISTA DE JOGOS NO CARRINHO
@@ -26,7 +28,8 @@ loja_jogos_digitais/
 │   │   ├── CÁLCULO DE TOTAL
 │   │   ├── CUPONS DE DESCONTO
 │   │   ├── BOTÃO "CONTINUAR COMPRANDO"
-│   │   └── BOTÃO "FINALIZAR COMPRA"
+│   │   ├── BOTÃO "FINALIZAR COMPRA"
+│   │   └── LINK "PRECISA DE AJUDA?" → FAQ
 │   │
 │   ├── 📄 finalizar_compra.php
 │   │   ├── ETAPA 1: LOGIN/CADASTRO
@@ -35,13 +38,15 @@ loja_jogos_digitais/
 │   │   ├── RESUMO DOS JOGOS COMPRADOS
 │   │   ├── CHAVES DIGITAIS GERADAS
 │   │   ├── HISTÓRICO DE COMPRAS
-│   │   └── DOWNLOAD DAS CHAVES
+│   │   ├── DOWNLOAD DAS CHAVES
+│   │   └── LINK "PROBLEMAS NO PAGAMENTO?" → SUPORTE
 │   │
 │   ├── 📄 login.php
 │   │   ├── FORMULÁRIO DE LOGIN
 │   │   ├── FORMULÁRIO DE CADASTRO
 │   │   ├── RECUPERAÇÃO DE SENHA
-│   │   └── VALIDAÇÃO DE EMAIL
+│   │   ├── VALIDAÇÃO DE EMAIL
+│   │   └── LINK "PROBLEMAS PARA ENTRAR?" → SUPORTE
 │   │
 │   ├── 📄 minha_conta.php
 │   │   ├── DADOS PESSOAIS
@@ -49,25 +54,62 @@ loja_jogos_digitais/
 │   │   ├── BIBLIOTECA DE JOGOS
 │   │   ├── CHAVES DIGITAIS ADQUIRIDAS
 │   │   ├── DOWNLOAD DE CHAVES
-│   │   └── AVALIAÇÕES FEITAS
+│   │   ├── AVALIAÇÕES FEITAS
+│   │   └── SEÇÃO "MEUS TICKETS DE SUPORTE"
 │   │
-│   └── 📄 biblioteca.php
-│       ├── LISTA DE JOGOS COMPRADOS
-│       ├── CHAVES DIGITAIS
-│       ├── DATA DE COMPRA
-│       ├── STATUS DA CHAVE (UTILIZADA/NÃO UTILIZADA)
-│       └── BOTÃO PARA COPIAR CHAVE
+│   ├── 📄 biblioteca.php
+│   │   ├── LISTA DE JOGOS COMPRADOS
+│   │   ├── CHAVES DIGITAIS
+│   │   ├── DATA DE COMPRA
+│   │   ├── STATUS DA CHAVE (UTILIZADA/NÃO UTILIZADA)
+│   │   ├── BOTÃO PARA COPIAR CHAVE
+│   │   └── BOTÃO "PROBLEMAS COM A CHAVE?" → SUPORTE
+│   │
+│   ├── 📄 suporte.php              ✅ NOVO - CONECTADO
+│   │   ├── FORMULÁRIO DE ABERTURA DE TICKET
+│   │   ├── CATEGORIAS: COMPRA, JOGOS, LOGIN, CHAVES, SUGESTÃO
+│   │   ├── VINCULAÇÃO AUTOMÁTICA AO USUÁRIO LOGADO
+│   │   ├── UPLOAD DE ANEXOS (OPCIONAL)
+│   │   ├── REDIRECIONAMENTO PARA meus_tickets.php
+│   │   └── LINK PARA FAQ ANTES DE ABRIR TICKET
+│   │
+│   ├── 📄 meus_tickets.php         ✅ NOVO - CONECTADO
+│   │   ├── LISTA DE TICKETS DO USUÁRIO
+│   │   ├── STATUS: ABERTO, EM ANDAMENTO, RESPONDIDO, FECHADO
+│   │   ├── PRIORIDADE: BAIXA, MÉDIA, ALTA, URGENTE
+│   │   ├── VISUALIZAR DETALHES DO TICKET
+│   │   ├── RESPONDER AO TICKET (SE ABERTO)
+│   │   ├── HISTÓRICO DE MENSAGENS
+│   │   └── BOTÃO "ABRIR NOVO TICKET"
+│   │
+│   ├── 📄 faq.php                  ✅ NOVO - CONECTADO
+│   │   ├── CATEGORIAS: COMPRA, JOGOS, CONTA, CHAVES, PAGAMENTO
+│   │   ├── SISTEMA DE ACCORDION (PERGUNTAS/RESPOSTAS)
+│   │   ├── BARRA DE BUSCA NO FAQ
+│   │   ├── PERGUNTAS MAIS FREQUENTES EM DESTAQUE
+│   │   ├── LINK "NÃO ENCONTROU RESPOSTA?" → SUPORTE
+│   │   └── ESTATÍSTICAS DE ACESSO (OPCIONAL)
+│   │
+│   └── 📄 promocoes.php            ✅ NOVO - CONECTADO
+│       ├── LISTA DE TODAS AS PROMOÇÕES ATIVAS
+│       ├── FILTRO POR % DE DESCONTO
+│       ├── TIMER PARA PROMOÇÕES RELÂMPAGO
+│       ├── ORDENAÇÃO POR MAIOR DESCONTO
+│       ├── INTEGRAÇÃO COM jogos_plataformas
+│       └── LINK DIRETO PARA PÁGINA DO JOGO
 │
 ├── ⚙️ PAINEL ADMINISTRATIVO
 │   │
 │   ├── 📄 admin.php
-│   │   ├── DASHBOARD COM VENDAS
+│   │   ├── DASHBOARD COM VENDAS (ÚLTIMOS 7 DIAS)
 │   │   ├── ESTATÍSTICAS DE VENDAS POR PLATAFORMA
 │   │   ├── CONTROLE DE ESTOQUE DE CHAVES
 │   │   ├── GERENCIAMENTO DE JOGOS
 │   │   ├── GERENCIAMENTO DE CATEGORIAS
 │   │   ├── GERENCIAMENTO DE PLATAFORMAS
-│   │   └── RELATÓRIOS FINANCEIROS
+│   │   ├── RELATÓRIOS FINANCEIROS
+│   │   ├── WIDGET "TICKETS PENDENTES" → admin_suporte.php
+│   │   └── WIDGET "PERGUNTAS FAQ" → admin_faq.php
 │   │
 │   ├── 📄 admin_jogos.php
 │   │   ├── CADASTRAR NOVO JOGO
@@ -75,21 +117,53 @@ loja_jogos_digitais/
 │   │   ├── UPLOAD DE IMAGENS
 │   │   ├── GERENCIAR PREÇOS E PROMOÇÕES
 │   │   ├── VINCULAR PLATAFORMAS
-│   │   └── ADICIONAR CHAVES AO ESTOQUE
+│   │   ├── ADICIONAR CHAVES AO ESTOQUE
+│   │   └── VINCULAÇÃO COM TABELAS: jogos, jogos_plataformas, chaves_digitais
 │   │
 │   ├── 📄 admin_chaves.php
 │   │   ├── ADICIONAR LOTES DE CHAVES
 │   │   ├── CONTROLE DE ESTOQUE POR JOGO/PLATAFORMA/REGIÃO
 │   │   ├── RELATÓRIO DE CHAVES VENDIDAS
 │   │   ├── RELATÓRIO DE CHAVES DISPONÍVEIS
-│   │   └── GERAR RELATÓRIOS DE VENDAS
+│   │   ├── GERAR RELATÓRIOS DE VENDAS
+│   │   └── VINCULAÇÃO COM: chaves_digitais, jogos, plataformas, regioes
 │   │
-│   └── 📄 admin_pedidos.php
-│       ├── LISTA DE TODOS OS PEDIDOS
-│       ├── DETALHES DOS PEDIDOS
-│       ├── CHAVES VENDIDAS EM CADA PEDIDO
-│       ├── FILTROS POR DATA E STATUS
-│       └── RELATÓRIO DE VENDAS
+│   ├── 📄 admin_pedidos.php
+│   │   ├── LISTA DE TODOS OS PEDIDOS
+│   │   ├── DETALHES DOS PEDIDOS
+│   │   ├── CHAVES VENDIDAS EM CADA PEDIDO
+│   │   ├── FILTROS POR DATA E STATUS
+│   │   ├── RELATÓRIO DE VENDAS
+│   │   └── VINCULAÇÃO COM: pedidos, itens_pedido, usuarios
+│   │
+│   ├── 📄 admin_suporte.php        ✅ NOVO - CONECTADO
+│   │   ├── LISTA DE TICKETS PENDENTES
+│   │   ├── FILTROS POR CATEGORIA, STATUS, PRIORIDADE
+│   │   ├── ATRIBUIR TICKET PARA ADMIN ESPECÍFICO
+│   │   ├── RESPONDER TICKETS (SISTEMA DE MENSAGENS)
+│   │   ├── ALTERAR STATUS DO TICKET
+│   │   ├── HISTÓRICO COMPLETO DE ATENDIMENTO
+│   │   ├── MÉTRICAS DE SLA (TEMPO DE RESPOSTA)
+│   │   └── VINCULAÇÃO COM: tickets_suporte, mensagens_suporte, usuarios
+│   │
+│   ├── 📄 admin_faq.php            ✅ NOVO - CONECTADO
+│   │   ├── LISTA DE PERGUNTAS FAQ
+│   │   ├── ADICIONAR NOVA PERGUNTA/RESPOSTA
+│   │   ├── EDITAR CONTEÚDO EXISTENTE
+│   │   ├── REORDENAR ORDEM DE EXIBIÇÃO
+│   │   ├── ATIVAR/DESATIVAR PERGUNTAS
+│   │   ├── GERENCIAR CATEGORIAS
+│   │   ├── ESTATÍSTICAS DE ACESSO
+│   │   └── VINCULAÇÃO COM TABELA: faq
+│   │
+│   └── 📄 admin_relatorios.php     ✅ NOVO - CONECTADO
+│       ├── RELATÓRIO DE VENDAS DETALHADO
+│       ├── ESTATÍSTICAS DE USUÁRIOS (NOVOS/ATIVOS)
+│       ├── VENDAS POR PLATAFORMA/CATEGORIA
+│       ├── TICKETS POR CATEGORIA/TEMPO DE RESPOSTA
+│       ├── JOGOS MAIS VENDIDOS
+│       ├── EXPORTAR DADOS (CSV/PDF)
+│       └── VINCULAÇÃO COM TODAS AS TABELAS PRINCIPAIS
 │
 ├── 🔧 ARQUIVOS DE SUPORTE
 │   │
@@ -99,27 +173,44 @@ loja_jogos_digitais/
 │   │   ├── FUNÇÕES DE AUTENTICAÇÃO
 │   │   ├── FUNÇÕES DO CARRINHO
 │   │   ├── FUNÇÕES DE CHAVES DIGITAIS
-│   │   └── FUNÇÕES DE PAGAMENTO
+│   │   ├── FUNÇÕES DE PAGAMENTO
+│   │   ├── CONFIGURAÇÕES DE SUPORTE
+│   │   └── CONFIGURAÇÕES DE EMAIL
 │   │
 │   ├── 📄 cabecalho.php
 │   │   ├── LOGO E MENU PRINCIPAL
 │   │   ├── BARRA DE PESQUISA
 │   │   ├── MENU DE PLATAFORMAS
 │   │   ├── ÍCONE DO CARRINHO
-│   │   └── MENU DO USUÁRIO
+│   │   ├── MENU DO USUÁRIO
+│   │   └── LINK "SUPORTE" NO MENU
 │   │
 │   ├── 📄 rodape.php
 │   │   ├── INFORMAÇÕES DA LOJA
-│   │   ├── LINKS ÚTEIS
+│   │   ├── LINKS ÚTEIS (INCLUINDO SUPORTE/FAQ)
 │   │   ├── REDES SOCIAIS
-│   │   └── SCRIPTS JAVASCRIPT
+│   │   ├── SCRIPTS JAVASCRIPT
+│   │   └── LINKS PARA SUPORTE E FAQ
 │   │
-│   └── 📄 funcoes.php
-│       ├── GERADOR DE CHAVES DIGITAIS
-│       ├── VALIDADOR DE CHAVES
-│       ├── FUNÇÕES DE ESTOQUE
-│       ├── FUNÇÕES DE PAGAMENTO
-│       └── FUNÇÕES DE RELATÓRIOS
+│   ├── 📄 funcoes.php              ⚠️ ATUALIZADO
+│   │   ├── GERADOR DE CHAVES DIGITAIS
+│   │   ├── VALIDADOR DE CHAVES
+│   │   ├── FUNÇÕES DE ESTOQUE
+│   │   ├── FUNÇÕES DE PAGAMENTO
+│   │   ├── FUNÇÕES DE RELATÓRIOS
+│   │   ├── FUNÇÕES DE SUPORTE (CRIAR TICKET, RESPONDER TICKET)
+│   │   ├── FUNÇÕES DE FAQ (BUSCAR, FILTRAR)
+│   │   ├── FUNÇÕES DE EMAIL (ENVIAR NOTIFICAÇÕES)
+│   │   └── FUNÇÕES DE ESTATÍSTICAS
+│   │
+│   └── 📄 email.php                ✅ NOVO - CONECTADO
+│       ├── CONFIGURAÇÃO SMTP
+│       ├── TEMPLATE: NOTIFICAÇÃO DE NOVO TICKET
+│       ├── TEMPLATE: RESPOSTA AO TICKET
+│       ├── TEMPLATE: CONFIRMAÇÃO DE COMPRA
+│       ├── TEMPLATE: RECUPERAÇÃO DE SENHA
+│       ├── TEMPLATE: CHAVE DIGITAL
+│       └── FUNÇÕES DE ENVIO DE EMAIL
 │
 ├── 🎨 RECURSOS E ESTILOS
 │   │
@@ -127,21 +218,43 @@ loja_jogos_digitais/
 │   │   ├── 📁 css/
 │   │   │   ├── 📄 estilo.css
 │   │   │   ├── 📄 responsivo.css
-│   │   │   └── 📄 admin.css
+│   │   │   ├── 📄 admin.css
+│   │   │   └── 📄 suporte.css       ✅ NOVO
 │   │   │
 │   │   ├── 📁 js/
 │   │   │   ├── 📄 carrinho.js
 │   │   │   ├── 📄 chaves.js
-│   │   │   └── 📄 pagamento.js
+│   │   │   ├── 📄 pagamento.js
+│   │   │   ├── 📄 suporte.js        ✅ NOVO
+│   │   │   ├── 📄 faq.js            ✅ NOVO
+│   │   │   └── 📄 admin_suporte.js  ✅ NOVO
 │   │   │
 │   │   └── 📁 imagens/
 │   │       ├── 📁 jogos/
 │   │       ├── 📁 plataformas/
-│   │       └── 📁 banners/
+│   │       ├── 📁 banners/
+│   │       ├── 📁 bandeiras/        ✅ NOVO
+│   │       └── 📁 icones/           ✅ NOVO
 │   │
 │   └── 📁 uploads/
-│       └── 📁 capas_jogos/
+│       ├── 📁 capas_jogos/
+│       ├── 📁 tickets/              ✅ NOVO
+│       └── 📁 anexos/               ✅ NOVO
 │
 └── 🗃️ BANCO DE DADOS
     │
     └── 📄 banco_dados.sql
+        ├── TABELA: usuarios
+        ├── TABELA: plataformas
+        ├── TABELA: regioes
+        ├── TABELA: categorias
+        ├── TABELA: jogos
+        ├── TABELA: jogos_plataformas
+        ├── TABELA: chaves_digitais
+        ├── TABELA: pedidos
+        ├── TABELA: itens_pedido
+        ├── TABELA: cupons_desconto
+        ├── TABELA: avaliacoes
+        ├── TABELA: tickets_suporte      ✅ CONECTADO
+        ├── TABELA: mensagens_suporte    ✅ CONECTADO
+        └── TABELA: faq                  ✅ CONECTADO
