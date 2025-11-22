@@ -15,6 +15,7 @@ pgs_perifericos/
 ├── 📄 suporte.php
 ├── 📄 meus_tickets.php
 ├── 📄 faq.php
+├── 📄 avaliacoes.php                 # NOVO: Página de avaliações
 │
 ├── 📁 admin/
 │   ├── 📄 admin.php
@@ -25,7 +26,8 @@ pgs_perifericos/
 │   ├── 📄 admin_pedidos.php
 │   ├── 📄 admin_cupons.php
 │   ├── 📄 admin_suporte.php
-│   └── 📄 admin_faq.php
+│   ├── 📄 admin_faq.php
+│   └── 📄 admin_avaliacoes.php        # NOVO: Moderar avaliações
 │
 ├── 📁 includes/
 │   ├── 📄 config.php
@@ -39,6 +41,7 @@ pgs_perifericos/
 │   ├── 📄 processa_suporte.php
 │   ├── 📄 processa_pagamento.php
 │   ├── 📄 processa_funcionario.php
+│   ├── 📄 processa_avaliacao.php      # NOVO: Processar avaliações
 │   └── 📄 logout.php
 │
 ├── 📁 assets/
@@ -48,7 +51,8 @@ pgs_perifericos/
 │   │   ├── 📄 admin.css
 │   │   ├── 📄 formularios.css
 │   │   ├── 📄 suporte.css
-│   │   └── 📄 carrinho.css
+│   │   ├── 📄 carrinho.css
+│   │   └── 📄 avaliacoes.css          # NOVO: Estilos para avaliações
 │   │
 │   ├── 📁 js/
 │   │   ├── 📄 principal.js
@@ -56,7 +60,8 @@ pgs_perifericos/
 │   │   ├── 📄 pagamento.js
 │   │   ├── 📄 validacao.js
 │   │   ├── 📄 mascaras.js
-│   │   └── 📄 suporte.js
+│   │   ├── 📄 suporte.js
+│   │   └── 📄 avaliacoes.js           # NOVO: Sistema de estrelas
 │   │
 │   └── 📁 imagens/
 │       ├── 📁 produtos/
@@ -80,6 +85,8 @@ pgs_perifericos/
 │       │   ├── 📄 pesquisa.png
 │       │   ├── 📄 funcionario.png
 │       │   ├── 📄 admin.png
+│       │   ├── 📄 estrela-cheia.png    # NOVO: Ícone estrela
+│       │   ├── 📄 estrela-vazia.png    # NOVO: Ícone estrela
 │       │   ├── 📄 mouse.png
 │       │   ├── 📄 teclado.png
 │       │   ├── 📄 headphone.png
