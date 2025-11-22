@@ -258,3 +258,5 @@ loja_jogos_digitais/
         ├── TABELA: tickets_suporte      ✅ CONECTADO
         ├── TABELA: mensagens_suporte    ✅ CONECTADO
         └── TABELA: faq                  ✅ CONECTADO
+
+•	Arquivo README.txt com credenciais e instruções básicas.
