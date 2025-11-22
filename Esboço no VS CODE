@@ -1,7 +1,7 @@
-pgs_store/
+pgs_perifericos/
 │
 ├── 📄 index.php
-├── 📄 README.txt
+├── 📄 LEIAME.txt
 │
 ├── 📄 inicio.php
 ├── 📄 produto.php
@@ -21,6 +21,7 @@ pgs_store/
 │   ├── 📄 admin_categorias.php
 │   ├── 📄 admin_produtos.php
 │   ├── 📄 admin_pedidos.php
+│   ├── 📄 admin_cupons.php
 │   ├── 📄 admin_suporte.php
 │   ├── 📄 admin_faq.php
 │   └── 📄 admin_relatorios.php
@@ -43,7 +44,7 @@ pgs_store/
 │   │   └── 📄 suporte.css
 │   │
 │   ├── 📁 js/
-│   │   ├── 📄 main.js
+│   │   ├── 📄 principal.js
 │   │   ├── 📄 carrinho.js
 │   │   ├── 📄 pagamento.js
 │   │   ├── 📄 produtos.js
@@ -67,14 +68,14 @@ pgs_store/
 │       │
 │       ├── 📁 icones/
 │       │   ├── 📄 favicon.ico
-│       │   ├── 📄 star.png
-│       │   ├── 📄 cart.png
-│       │   ├── 📄 user.png
-│       │   ├── 📄 search.png
+│       │   ├── 📄 estrela.png
+│       │   ├── 📄 carrinho.png
+│       │   ├── 📄 usuario.png
+│       │   ├── 📄 pesquisa.png
 │       │   ├── 📄 mouse.png
-│       │   ├── 📄 keyboard.png
+│       │   ├── 📄 teclado.png
 │       │   ├── 📄 headphone.png
-│       │   └── 📄 monitor-icon.png
+│       │   └── 📄 monitor-icone.png
 │       │
 │       └── 📄 logo.png
 │
@@ -82,5 +83,5 @@ pgs_store/
 │   ├── 📁 imagens_produtos/
 │   └── 📁 anexos_suporte/
 │
-└── 📁 database/
+└── 📁 banco_dados/
     └── 📄 banco_dados.sql
