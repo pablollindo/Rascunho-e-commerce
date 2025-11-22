@@ -4,10 +4,12 @@ pgs_perifericos/
 ├── 📄 LEIAME.txt
 │
 ├── 📄 inicio.php
+├── 📄 produtos.php
 ├── 📄 produto.php
 ├── 📄 carrinho.php
 ├── 📄 finalizar_compra.php
 ├── 📄 login.php
+├── 📄 cadastro.php
 ├── 📄 minha_conta.php
 ├── 📄 meus_pedidos.php
 ├── 📄 suporte.php
@@ -18,6 +20,7 @@ pgs_perifericos/
 ├── 📁 admin/
 │   ├── 📄 admin.php
 │   ├── 📄 admin_usuarios.php
+│   ├── 📄 admin_funcionarios.php
 │   ├── 📄 admin_categorias.php
 │   ├── 📄 admin_produtos.php
 │   ├── 📄 admin_pedidos.php
@@ -32,8 +35,10 @@ pgs_perifericos/
 │   ├── 📄 rodape.php
 │   ├── 📄 funcoes.php
 │   ├── 📄 processa_login.php
+│   ├── 📄 processa_cadastro.php
 │   ├── 📄 processa_pedido.php
 │   ├── 📄 processa_suporte.php
+│   ├── 📄 processa_funcionario.php
 │   └── 📄 logout.php
 │
 ├── 📁 assets/
@@ -41,7 +46,8 @@ pgs_perifericos/
 │   │   ├── 📄 estilo.css
 │   │   ├── 📄 responsivo.css
 │   │   ├── 📄 admin.css
-│   │   └── 📄 suporte.css
+│   │   ├── 📄 suporte.css
+│   │   └── 📄 formularios.css
 │   │
 │   ├── 📁 js/
 │   │   ├── 📄 principal.js
@@ -49,7 +55,9 @@ pgs_perifericos/
 │   │   ├── 📄 pagamento.js
 │   │   ├── 📄 produtos.js
 │   │   ├── 📄 suporte.js
-│   │   └── 📄 faq.js
+│   │   ├── 📄 faq.js
+│   │   ├── 📄 cadastro.js
+│   │   └── 📄 validacao.js
 │   │
 │   └── 📁 imagens/
 │       ├── 📁 produtos/
@@ -72,6 +80,8 @@ pgs_perifericos/
 │       │   ├── 📄 carrinho.png
 │       │   ├── 📄 usuario.png
 │       │   ├── 📄 pesquisa.png
+│       │   ├── 📄 funcionario.png
+│       │   ├── 📄 admin.png
 │       │   ├── 📄 mouse.png
 │       │   ├── 📄 teclado.png
 │       │   ├── 📄 headphone.png
@@ -81,6 +91,8 @@ pgs_perifericos/
 │
 ├── 📁 uploads/
 │   ├── 📁 imagens_produtos/
+│   ├── 📁 avatares_usuarios/
+│   ├── 📁 documentos_funcionarios/
 │   └── 📁 anexos_suporte/
 │
 └── 📁 banco_dados/
