@@ -1,29 +1,26 @@
 pgs_store/
 │
 ├── 📄 index.php
-├── 📄 .htaccess
 ├── 📄 README.txt
 │
-├── 🌐 cliente/
-│   ├── 📄 inicio.php
-│   ├── 📄 jogo.php
-│   ├── 📄 carrinho.php
-│   ├── 📄 finalizar_compra.php
-│   ├── 📄 login.php
-│   ├── 📄 minha_conta.php
-│   ├── 📄 biblioteca.php
-│   ├── 📄 suporte.php
-│   ├── 📄 meus_tickets.php
-│   ├── 📄 faq.php
-│   └── 📄 promocoes.php
+├── 📄 inicio.php
+├── 📄 jogo.php
+├── 📄 carrinho.php
+├── 📄 finalizar_compra.php
+├── 📄 login.php
+├── 📄 minha_conta.php
+├── 📄 biblioteca.php
+├── 📄 suporte.php
+├── 📄 meus_tickets.php
+├── 📄 faq.php
+├── 📄 promocoes.php
 │
-├── ⚙️ admin/
+├── 📁 admin/
 │   ├── 📄 admin.php
 │   ├── 📄 admin_usuarios.php
 │   ├── 📄 admin_plataformas.php
 │   ├── 📄 admin_regioes.php
 │   ├── 📄 admin_categorias.php
-│   ├── 📄 admin_distribuidoras.php
 │   ├── 📄 admin_jogos.php
 │   ├── 📄 admin_chaves.php
 │   ├── 📄 admin_pedidos.php
@@ -31,7 +28,7 @@ pgs_store/
 │   ├── 📄 admin_faq.php
 │   └── 📄 admin_relatorios.php
 │
-├── 🔧 sistema/
+├── 📁 includes/
 │   ├── 📄 config.php
 │   ├── 📄 cabecalho.php
 │   ├── 📄 rodape.php
@@ -41,7 +38,7 @@ pgs_store/
 │   ├── 📄 processa_suporte.php
 │   └── 📄 logout.php
 │
-├── 🎨 assets/
+├── 📁 assets/
 │   ├── 📁 css/
 │   │   ├── 📄 estilo.css
 │   │   ├── 📄 responsivo.css
@@ -58,17 +55,47 @@ pgs_store/
 │   │
 │   └── 📁 imagens/
 │       ├── 📁 jogos/
+│       │   ├── 📄 cyberpunk.jpg
+│       │   ├── 📄 witcher3.jpg
+│       │   ├── 📄 eldenring.jpg
+│       │   ├── 📄 fifa23.jpg
+│       │   ├── 📄 cs2.jpg
+│       │   ├── 📄 stardew.jpg
+│       │   └── 📄 reddead2.jpg
+│       │
 │       ├── 📁 plataformas/
-│       ├── 📁 distribuidoras/
-│       ├── 📁 bandeiras/
+│       │   ├── 📄 pc.png
+│       │   ├── 📄 ps4.png
+│       │   ├── 📄 ps5.png
+│       │   ├── 📄 xbox-one.png
+│       │   ├── 📄 xbox-series.png
+│       │   └── 📄 switch.png
+│       │
 │       ├── 📁 banners/
+│       │   ├── 📄 banner1.jpg
+│       │   ├── 📄 banner2.jpg
+│       │   └── 📄 banner3.jpg
+│       │
+│       ├── 📁 bandeiras/
+│       │   ├── 📄 global.png
+│       │   ├── 📄 latam.png
+│       │   ├── 📄 europe.png
+│       │   ├── 📄 usa.png
+│       │   └── 📄 brazil.png
+│       │
 │       ├── 📁 icones/
+│       │   ├── 📄 favicon.ico
+│       │   ├── 📄 star.png
+│       │   ├── 📄 cart.png
+│       │   ├── 📄 user.png
+│       │   └── 📄 search.png
+│       │
 │       └── 📄 logo.png
 │
 ├── 📁 uploads/
 │   ├── 📁 capas_jogos/
 │   └── 📁 anexos_suporte/
 │
-└── 🗃️ database/
+└── 📁 database/
     ├── 📄 banco_dados.sql
     └── 📄 dados_iniciais.sql
