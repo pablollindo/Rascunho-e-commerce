@@ -1,22 +1,51 @@
--- Criar banco de dados
+-- Banco de dados atualizado com tabelas para clientes e funcionários
 CREATE DATABASE pgs_perifericos;
 USE pgs_perifericos;
 
--- Tabela de usuários
+-- Tabela de usuários (clientes)
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL,
     tipo ENUM('cliente','admin') DEFAULT 'cliente',
-    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    cpf VARCHAR(14) UNIQUE,
+    telefone VARCHAR(15),
+    data_nascimento DATE,
+    endereco_cep VARCHAR(9),
+    endereco_rua VARCHAR(200),
+    endereco_numero VARCHAR(10),
+    endereco_complemento VARCHAR(100),
+    endereco_bairro VARCHAR(100),
+    endereco_cidade VARCHAR(100),
+    endereco_estado VARCHAR(2),
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ativo BOOLEAN DEFAULT TRUE
+);
+
+-- Tabela de funcionários
+CREATE TABLE funcionarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT UNIQUE,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    cargo ENUM('gerente','vendedor','suporte','estoque') NOT NULL,
+    departamento VARCHAR(50),
+    salario DECIMAL(10,2),
+    data_admissao DATE NOT NULL,
+    data_demissao DATE NULL,
+    ativo BOOLEAN DEFAULT TRUE,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
 -- Tabela de categorias
 CREATE TABLE categorias (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
-    descricao TEXT
+    descricao TEXT,
+    ativo BOOLEAN DEFAULT TRUE
 );
 
 -- Tabela de produtos
@@ -131,6 +160,8 @@ CREATE INDEX idx_produtos_destaque ON produtos(em_destaque, ativo);
 CREATE INDEX idx_produtos_promocao ON produtos(em_promocao, ativo);
 CREATE INDEX idx_pedidos_status ON pedidos(status, data_pedido);
 CREATE INDEX idx_tickets_status ON tickets_suporte(status, data_abertura);
+CREATE INDEX idx_usuarios_email ON usuarios(email);
+CREATE INDEX idx_funcionarios_email ON funcionarios(email);
 
 -- Dados iniciais
 INSERT INTO categorias (nome, descricao) VALUES 
@@ -141,9 +172,16 @@ INSERT INTO categorias (nome, descricao) VALUES
 ('Mousepads', 'Mousepads speed e control'),
 ('Webcams', 'Webcams para streaming e reuniões');
 
-INSERT INTO usuarios (nome, email, senha, tipo) VALUES 
-('Administrador', 'admin@pgsperifericos.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin'),
-('João Silva', 'cliente@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cliente');
+-- Senha: password (hash bcrypt)
+INSERT INTO usuarios (nome, email, senha, tipo, cpf, telefone, data_nascimento) VALUES 
+('Administrador', 'admin@pgsperifericos.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', '123.456.789-00', '(11) 99999-9999', '1980-01-01'),
+('João Silva', 'cliente@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cliente', '987.654.321-00', '(11) 98888-8888', '1990-05-15');
+
+-- Funcionários iniciais
+INSERT INTO funcionarios (nome, email, senha, cargo, departamento, salario, data_admissao) VALUES
+('Maria Santos', 'maria@pgsperifericos.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'gerente', 'Vendas', 5000.00, '2023-01-15'),
+('Pedro Oliveira', 'pedro@pgsperifericos.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'vendedor', 'Vendas', 3000.00, '2023-03-20'),
+('Ana Costa', 'ana@pgsperifericos.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'suporte', 'Atendimento', 2800.00, '2023-02-10');
 
 INSERT INTO produtos (categoria_id, nome, descricao, preco, preco_promocional, estoque, imagem, em_destaque, em_promocao) VALUES
 (1, 'Teclado Mecânico RGB Redragon', 'Teclado mecânico gaming com iluminação RGB, switches Outemu Blue', 299.90, 249.90, 50, 'teclado-mecanico.jpg', TRUE, TRUE),
