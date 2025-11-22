@@ -1,5 +1,5 @@
--- Banco de dados atualizado com tabela de marcas
-CREATE DATABASE pgs_perifericos;
+-- Criar banco de dados
+CREATE DATABASE IF NOT EXISTS pgs_perifericos;
 USE pgs_perifericos;
 
 -- Tabela de usuários (clientes)
@@ -48,35 +48,64 @@ CREATE TABLE categorias (
     ativo BOOLEAN DEFAULT TRUE
 );
 
--- NOVA TABELA: Marcas dos produtos
+-- Tabela de marcas
 CREATE TABLE marcas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     descricao TEXT,
     site_url VARCHAR(255),
     logo VARCHAR(255),
-    ativo BOOLEAN DEFAULT TRUE
+    ativo BOOLEAN DEFAULT TRUE,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de produtos (ATUALIZADA com marca_id)
+-- Tabela de produtos
 CREATE TABLE produtos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     categoria_id INT,
-    marca_id INT, -- NOVO CAMPO
+    marca_id INT,
     nome VARCHAR(100) NOT NULL,
     descricao TEXT,
+    especificacoes TEXT,
     preco DECIMAL(10,2) NOT NULL,
     preco_promocional DECIMAL(10,2),
     estoque INT DEFAULT 0,
     imagem VARCHAR(255),
-    especificacoes TEXT, -- NOVO CAMPO para specs técnicas
     garantia_meses INT DEFAULT 12,
     ativo BOOLEAN DEFAULT TRUE,
     em_destaque BOOLEAN DEFAULT FALSE,
     em_promocao BOOLEAN DEFAULT FALSE,
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (categoria_id) REFERENCES categorias(id),
-    FOREIGN KEY (marca_id) REFERENCES marcas(id) -- NOVA FOREIGN KEY
+    FOREIGN KEY (marca_id) REFERENCES marcas(id)
+);
+
+-- Tabela de endereços dos clientes
+CREATE TABLE enderecos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    titulo VARCHAR(50) NOT NULL,
+    cep VARCHAR(9) NOT NULL,
+    logradouro VARCHAR(200) NOT NULL,
+    numero VARCHAR(10) NOT NULL,
+    complemento VARCHAR(100),
+    bairro VARCHAR(100) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    estado VARCHAR(2) NOT NULL,
+    principal BOOLEAN DEFAULT FALSE,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+-- Tabela de wishlist
+CREATE TABLE wishlist (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    produto_id INT NOT NULL,
+    data_adicao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (produto_id) REFERENCES produtos(id),
+    UNIQUE KEY unique_wishlist (usuario_id, produto_id)
 );
 
 -- Tabela de pedidos
@@ -91,6 +120,7 @@ CREATE TABLE pedidos (
     data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     data_pagamento TIMESTAMP NULL,
     data_envio TIMESTAMP NULL,
+    endereco_entrega TEXT,
     FOREIGN KEY (cliente_id) REFERENCES usuarios(id)
 );
 
@@ -126,6 +156,7 @@ CREATE TABLE avaliacoes (
     nota INT CHECK (nota >= 1 AND nota <= 5),
     comentario TEXT,
     data_avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    aprovado BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (produto_id) REFERENCES produtos(id),
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
@@ -178,6 +209,11 @@ CREATE INDEX idx_usuarios_email ON usuarios(email);
 CREATE INDEX idx_funcionarios_email ON funcionarios(email);
 CREATE INDEX idx_produtos_marca ON produtos(marca_id);
 CREATE INDEX idx_produtos_categoria ON produtos(categoria_id);
+CREATE INDEX idx_pedidos_cliente ON pedidos(cliente_id);
+CREATE INDEX idx_itens_pedido_produto ON itens_pedido(produto_id);
+CREATE INDEX idx_avaliacoes_produto ON avaliacoes(produto_id);
+CREATE INDEX idx_enderecos_usuario ON enderecos(usuario_id);
+CREATE INDEX idx_wishlist_usuario ON wishlist(usuario_id);
 
 -- Dados iniciais
 INSERT INTO categorias (nome, descricao) VALUES 
@@ -203,7 +239,8 @@ INSERT INTO marcas (nome, descricao, site_url) VALUES
 -- Senha: password (hash bcrypt)
 INSERT INTO usuarios (nome, email, senha, tipo, cpf, telefone, data_nascimento) VALUES 
 ('Administrador', 'admin@pgsperifericos.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', '123.456.789-00', '(11) 99999-9999', '1980-01-01'),
-('João Silva', 'cliente@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cliente', '987.654.321-00', '(11) 98888-8888', '1990-05-15');
+('João Silva', 'cliente@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cliente', '987.654.321-00', '(11) 98888-8888', '1990-05-15'),
+('Maria Oliveira', 'maria.oliveira@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cliente', '111.222.333-44', '(11) 97777-7777', '1992-08-20');
 
 -- Funcionários iniciais
 INSERT INTO funcionarios (nome, email, senha, cargo, departamento, salario, data_admissao) VALUES
@@ -211,23 +248,58 @@ INSERT INTO funcionarios (nome, email, senha, cargo, departamento, salario, data
 ('Pedro Oliveira', 'pedro@pgsperifericos.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'vendedor', 'Vendas', 3000.00, '2023-03-20'),
 ('Ana Costa', 'ana@pgsperifericos.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'suporte', 'Atendimento', 2800.00, '2023-02-10');
 
--- Produtos atualizados com marcas e especificações
+-- Produtos com marcas e especificações
 INSERT INTO produtos (categoria_id, marca_id, nome, descricao, especificacoes, preco, preco_promocional, estoque, imagem, garantia_meses, em_destaque, em_promocao) VALUES
 (1, 1, 'Teclado Mecânico RGB Kumara', 'Teclado mecânico gaming com iluminação RGB, switches Outemu Blue', 'Switches: Outemu Blue | Layout: ABNT2 | Iluminação: RGB | Conexão: USB | Peso: 1.2kg', 299.90, 249.90, 50, 'teclado-redragon-kumara.jpg', 12, TRUE, TRUE),
-(2, 2, 'Mouse Gamer G502 HERO', 'Mouse gaming com sensor HERO 25K DPI, 11 botões programáveis', 'Sensor: HERO 25K DPI | Botões: 11 programáveis | Peso: 121g | Iluminação: RGB | Polling Rate: 1000Hz', 349.90, NULL, 30, 'mouse-logitech-g502.jpg', 24, TRUE, FALSE),
+(2, 2, 'Mouse Gamer G502 HERO', 'Mouse gaming com sensor HERO 25K DPI, 11 botões programáveis', 'Sensor: HERO 25K DPI | Botões: 11 programáveis | Peso: 121g | Iluminação: RGB | Polling Rate: 1000Hz', 349.90, 299.90, 30, 'mouse-logitech-g502.jpg', 24, TRUE, TRUE),
 (3, 3, 'Headset Cloud II', 'Headset gamer com som surround virtual 7.1, microfone removível', 'Driver: 53mm | Impedância: 60Ω | Sensibilidade: 98±3dB | Microfone: Removível com cancelamento de ruído', 399.90, 349.90, 25, 'headset-hyperx-cloud2.jpg', 12, TRUE, TRUE),
-(4, 4, 'Monitor Gamer 24" S2421H', 'Monitor gaming 24 polegadas, 144Hz, 1ms, FreeSync', 'Tela: 24" IPS | Resolução: 1920x1080 | Taxa de atualização: 144Hz | Tempo de resposta: 1ms | FreeSync', 899.90, 799.90, 15, 'monitor-dell-24.jpg', 36, FALSE, TRUE),
-(1, 2, 'Teclado Membrana K120', 'Teclado de membrana silencioso, design slim, multimídia', 'Tipo: Membrana | Layout: ABNT2 | Teclas multimídia | Design à prova de respingos | Conexão: USB', 129.90, NULL, 80, 'teclado-logitech-k120.jpg', 12, FALSE, FALSE),
+(4, 4, 'Monitor Gamer 24" S2421H', 'Monitor gaming 24 polegadas, 144Hz, 1ms, FreeSync', 'Tela: 24" IPS | Resolução: 1920x1080 | Taxa de atualização: 144Hz | Tempo de resposta: 1ms | FreeSync', 899.90, 799.90, 15, 'monitor-dell-24.jpg', 36, TRUE, TRUE),
+(1, 2, 'Teclado Membrana K120', 'Teclado de membrana silencioso, design slim, multimídia', 'Tipo: Membrana | Layout: ABNT2 | Teclas multimídia | Design à prova de respingos | Conexão: USB', 129.90, 99.90, 80, 'teclado-logitech-k120.jpg', 12, FALSE, TRUE),
 (2, 4, 'Mouse Sem Fio WM126', 'Mouse óptico sem fio, 1600 DPI, bateria de longa duração', 'Sensor: Óptico 1600 DPI | Conexão: USB 2.4GHz | Bateria: 12 meses | Peso: 85g | 3 botões', 79.90, 59.90, 100, 'mouse-dell-wm126.jpg', 12, FALSE, TRUE),
 (3, 5, 'Headset Kraken X', 'Headset gamer ultraleve com iluminação RGB, 7.1 surround', 'Peso: 250g | Driver: 40mm | Som: 7.1 Surround | Iluminação: RGB | Microfone: Cardioide', 299.90, 249.90, 40, 'headset-razer-kraken.jpg', 12, TRUE, TRUE),
-(5, 6, 'Mousepad MM300', 'Mousepad speed extendido para gaming, antiderrapante', 'Tamanho: 930x300mm | Espessura: 4mm | Superfície: Speed | Base: Antiderrapante | Material: Borracha', 89.90, 69.90, 75, 'mousepad-corsair-mm300.jpg', 6, FALSE, TRUE);
+(5, 6, 'Mousepad MM300', 'Mousepad speed extendido para gaming, antiderrapante', 'Tamanho: 930x300mm | Espessura: 4mm | Superfície: Speed | Base: Antiderrapante | Material: Borracha', 89.90, 69.90, 75, 'mousepad-corsair-mm300.jpg', 6, FALSE, TRUE),
+(6, 2, 'Webcam C922 Pro', 'Webcam Full HD para streaming e reuniões, 1080p 30fps', 'Resolução: 1080p 30fps / 720p 60fps | Microfone: Estéreo | Campo de visão: 78° | Conexão: USB', 349.90, 299.90, 20, 'webcam-logitech-c922.jpg', 12, TRUE, TRUE),
+(7, 5, 'Microfone Seiren X', 'Microfone USB para streaming, captura vocal cristalina', 'Tipo: Condensador | Frequência: 20Hz-20kHz | Padrão: Captura cardioide | Conexão: USB | LED: RGB', 449.90, 399.90, 15, 'microfone-razer-seiren.jpg', 12, TRUE, TRUE);
 
+-- Endereços de exemplo
+INSERT INTO enderecos (usuario_id, titulo, cep, logradouro, numero, complemento, bairro, cidade, estado, principal) VALUES
+(2, 'Casa', '01234-567', 'Rua das Flores', '123', 'Apto 45', 'Jardim Paulista', 'São Paulo', 'SP', TRUE),
+(2, 'Trabalho', '04567-890', 'Avenida Paulista', '1000', 'Sala 501', 'Bela Vista', 'São Paulo', 'SP', FALSE),
+(3, 'Casa', '02345-678', 'Rua Augusta', '500', '', 'Consolação', 'São Paulo', 'SP', TRUE);
+
+-- Wishlist de exemplo
+INSERT INTO wishlist (usuario_id, produto_id) VALUES
+(2, 3),
+(2, 7),
+(3, 1),
+(3, 5);
+
+-- Cupons de desconto
 INSERT INTO cupons_desconto (codigo, desconto_percentual, data_validade, usos_maximos, ativo) VALUES
 ('PRIMEIRACOMPRA', 15.00, '2024-12-31', 1000, TRUE),
 ('PROMO10', 10.00, '2024-06-30', 500, TRUE),
 ('FRETEGRATIS', NULL, '2024-03-31', 200, TRUE),
-('LANCAMENTO', 5.00, '2024-04-30', 300, TRUE);
+('LANCAMENTO', 5.00, '2024-04-30', 300, TRUE),
+('GAMER20', 20.00, '2024-05-31', 100, TRUE);
 
+-- Pedidos de exemplo
+INSERT INTO pedidos (cliente_id, total, subtotal, desconto, status, metodo_pagamento, endereco_entrega) VALUES
+(2, 649.80, 649.80, 0, 'entregue', 'cartao', 'Rua das Flores, 123 - Jardim Paulista, São Paulo - SP'),
+(3, 349.90, 349.90, 0, 'processando', 'pix', 'Rua Augusta, 500 - Consolação, São Paulo - SP');
+
+-- Itens dos pedidos
+INSERT INTO itens_pedido (pedido_id, produto_id, quantidade, preco_unitario) VALUES
+(1, 1, 1, 249.90),
+(1, 3, 1, 399.90),
+(2, 2, 1, 349.90);
+
+-- Avaliações de exemplo
+INSERT INTO avaliacoes (produto_id, usuario_id, nota, comentario, aprovado) VALUES
+(1, 2, 5, 'Teclado excelente! Switch blue muito gostoso de digitar. RGB lindo!', TRUE),
+(3, 2, 4, 'Headset muito confortável, som excelente. Só o microfone que poderia ser melhor.', TRUE),
+(2, 3, 5, 'Mouse perfeito para jogos FPS, sensor muito preciso!', TRUE);
+
+-- FAQ
 INSERT INTO faq (pergunta, resposta, categoria, ordem) VALUES 
 ('Como faço para rastrear meu pedido?', 'Após a confirmação do pagamento, você receberá um código de rastreamento por email. Acesse "Meus Pedidos" para acompanhar.', 'entrega', 1),
 ('Qual o prazo de entrega?', 'O prazo varia de 3 a 10 dias úteis dependendo da sua localização. Para capitais, geralmente é mais rápido.', 'entrega', 2),
@@ -235,15 +307,21 @@ INSERT INTO faq (pergunta, resposta, categoria, ordem) VALUES
 ('Quais formas de pagamento são aceitas?', 'Aceitamos cartão de crédito (até 12x), PIX (5% off) e boleto bancário.', 'pagamento', 1),
 ('O site é seguro para compras?', 'Sim, utilizamos certificado SSL e não armazenamos dados do seu cartão em nossos servidores.', 'compra', 1),
 ('Como funciona a garantia dos produtos?', 'Todos os produtos possuem garantia do fabricante, que varia de 3 a 12 meses. Consulte a nota fiscal.', 'garantia', 1),
-('Preciso criar conta para comprar?', 'Não, você pode comprar como visitante, mas criar conta facilita o acompanhamento dos pedidos.', 'compra', 2);
+('Preciso criar conta para comprar?', 'Não, você pode comprar como visitante, mas criar conta facilita o acompanhamento dos pedidos.', 'compra', 2),
+('Como uso um cupom de desconto?', 'Adicione os produtos ao carrinho e na etapa de finalização insira o código do cupom no campo indicado.', 'compra', 3);
 
+-- Tickets de suporte
 INSERT INTO tickets_suporte (usuario_id, assunto, categoria, descricao, status, prioridade) VALUES
-(2, 'Produto não chegou', 'entrega', 'Comprei um teclado há 15 dias e ainda não recebi. O código de rastreamento não atualiza.', 'aberto', 'alta'),
-(2, 'Problema com garantia', 'garantia', 'Meu headset parou de funcionar após 2 meses de uso. Gostaria de acionar a garantia.', 'em_andamento', 'media');
+(2, 'Produto não chegou', 'entrega', 'Comprei um teclado há 15 dias e ainda não recebi. O código de rastreamento não atualiza.', 'fechado', 'alta'),
+(2, 'Problema com garantia', 'garantia', 'Meu headset parou de funcionar após 2 meses de uso. Gostaria de acionar a garantia.', 'em_andamento', 'media'),
+(3, 'Dúvida sobre entrega', 'entrega', 'Gostaria de saber se entregam aos sábados no meu endereço.', 'aberto', 'baixa');
 
+-- Mensagens do suporte
 INSERT INTO mensagens_suporte (ticket_id, usuario_id, mensagem, eh_admin) VALUES
-(1, 2, 'Olá, comprei um teclado e ainda não recebi. Podem verificar?', FALSE),
+(1, 2, 'Olá, comprei um teclado há 15 dias e ainda não recebi. Podem verificar?', FALSE),
 (1, 1, 'Prezado cliente, verificamos seu pedido e identificamos um atraso na transportadora. Estamos acompanhando.', TRUE),
-(2, 2, 'Meu headset HyperX parou de funcionar do nada. Como faço para acionar a garantia?', FALSE);
+(1, 2, 'Obrigado pelo retorno! Aguardo novidades.', FALSE),
+(2, 2, 'Meu headset HyperX parou de funcionar do nada. Como faço para acionar a garantia?', FALSE),
+(3, 3, 'Gostaria de saber se fazem entregas aos sábados no centro de São Paulo.', FALSE);
 
 SELECT 'Banco de dados PGS Periféricos criado com sucesso!' as status;
