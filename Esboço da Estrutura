@@ -1,0 +1,147 @@
+loja_jogos_digitais/
+│
+├── 🌐 ÁREA DO CLIENTE
+│   │
+│   ├── 📄 inicio.php
+│   │   ├── BANNER PRINCIPAL COM LANÇAMENTOS
+│   │   ├── VITRINE DE JOGOS EM PROMOÇÃO
+│   │   ├── CATÁLOGO COM FILTRO POR PLATAFORMA
+│   │   ├── BARRA DE PESQUISA DE JOGOS
+│   │   ├── CATEGORIAS (AÇÃO, AVENTURA, RPG, ETC)
+│   │   └── JOGOS MAIS VENDIDOS
+│   │
+│   ├── 📄 jogo.php
+│   │   ├── CAPA DO JOGO E TRAILER
+│   │   ├── DESCRIÇÃO DETALHADA E SINOPSE
+│   │   ├── PLATAFORMAS DISPONÍVEIS (PC, PS4, XBOX, NINTENDO)
+│   │   ├── REGIÕES DA CHAVE (GLOBAL, LATAM, EUA, ETC)
+│   │   ├── REQUISITOS DO SISTEMA (PARA PC)
+│   │   ├── AVALIAÇÕES E COMENTÁRIOS
+│   │   ├── PREÇO E PROMOÇÕES
+│   │   └── BOTÃO "COMPRAR AGORA"
+│   │
+│   ├── 📄 carrinho.php
+│   │   ├── LISTA DE JOGOS NO CARRINHO
+│   │   ├── PLATAFORMA E REGIÃO SELECIONADAS
+│   │   ├── CÁLCULO DE TOTAL
+│   │   ├── CUPONS DE DESCONTO
+│   │   ├── BOTÃO "CONTINUAR COMPRANDO"
+│   │   └── BOTÃO "FINALIZAR COMPRA"
+│   │
+│   ├── 📄 finalizar_compra.php
+│   │   ├── ETAPA 1: LOGIN/CADASTRO
+│   │   ├── ETAPA 2: ESCOLHER FORMA DE PAGAMENTO
+│   │   ├── ETAPA 3: CONFIRMAR COMPRA
+│   │   ├── RESUMO DOS JOGOS COMPRADOS
+│   │   ├── CHAVES DIGITAIS GERADAS
+│   │   ├── HISTÓRICO DE COMPRAS
+│   │   └── DOWNLOAD DAS CHAVES
+│   │
+│   ├── 📄 login.php
+│   │   ├── FORMULÁRIO DE LOGIN
+│   │   ├── FORMULÁRIO DE CADASTRO
+│   │   ├── RECUPERAÇÃO DE SENHA
+│   │   └── VALIDAÇÃO DE EMAIL
+│   │
+│   ├── 📄 minha_conta.php
+│   │   ├── DADOS PESSOAIS
+│   │   ├── HISTÓRICO DE COMPRAS
+│   │   ├── BIBLIOTECA DE JOGOS
+│   │   ├── CHAVES DIGITAIS ADQUIRIDAS
+│   │   ├── DOWNLOAD DE CHAVES
+│   │   └── AVALIAÇÕES FEITAS
+│   │
+│   └── 📄 biblioteca.php
+│       ├── LISTA DE JOGOS COMPRADOS
+│       ├── CHAVES DIGITAIS
+│       ├── DATA DE COMPRA
+│       ├── STATUS DA CHAVE (UTILIZADA/NÃO UTILIZADA)
+│       └── BOTÃO PARA COPIAR CHAVE
+│
+├── ⚙️ PAINEL ADMINISTRATIVO
+│   │
+│   ├── 📄 admin.php
+│   │   ├── DASHBOARD COM VENDAS
+│   │   ├── ESTATÍSTICAS DE VENDAS POR PLATAFORMA
+│   │   ├── CONTROLE DE ESTOQUE DE CHAVES
+│   │   ├── GERENCIAMENTO DE JOGOS
+│   │   ├── GERENCIAMENTO DE CATEGORIAS
+│   │   ├── GERENCIAMENTO DE PLATAFORMAS
+│   │   └── RELATÓRIOS FINANCEIROS
+│   │
+│   ├── 📄 admin_jogos.php
+│   │   ├── CADASTRAR NOVO JOGO
+│   │   ├── EDITAR JOGOS EXISTENTES
+│   │   ├── UPLOAD DE IMAGENS
+│   │   ├── GERENCIAR PREÇOS E PROMOÇÕES
+│   │   ├── VINCULAR PLATAFORMAS
+│   │   └── ADICIONAR CHAVES AO ESTOQUE
+│   │
+│   ├── 📄 admin_chaves.php
+│   │   ├── ADICIONAR LOTES DE CHAVES
+│   │   ├── CONTROLE DE ESTOQUE POR JOGO/PLATAFORMA/REGIÃO
+│   │   ├── RELATÓRIO DE CHAVES VENDIDAS
+│   │   ├── RELATÓRIO DE CHAVES DISPONÍVEIS
+│   │   └── GERAR RELATÓRIOS DE VENDAS
+│   │
+│   └── 📄 admin_pedidos.php
+│       ├── LISTA DE TODOS OS PEDIDOS
+│       ├── DETALHES DOS PEDIDOS
+│       ├── CHAVES VENDIDAS EM CADA PEDIDO
+│       ├── FILTROS POR DATA E STATUS
+│       └── RELATÓRIO DE VENDAS
+│
+├── 🔧 ARQUIVOS DE SUPORTE
+│   │
+│   ├── 📄 config.php
+│   │   ├── CONEXÃO COM BANCO DE DADOS
+│   │   ├── CONFIGURAÇÕES DE SESSÃO
+│   │   ├── FUNÇÕES DE AUTENTICAÇÃO
+│   │   ├── FUNÇÕES DO CARRINHO
+│   │   ├── FUNÇÕES DE CHAVES DIGITAIS
+│   │   └── FUNÇÕES DE PAGAMENTO
+│   │
+│   ├── 📄 cabecalho.php
+│   │   ├── LOGO E MENU PRINCIPAL
+│   │   ├── BARRA DE PESQUISA
+│   │   ├── MENU DE PLATAFORMAS
+│   │   ├── ÍCONE DO CARRINHO
+│   │   └── MENU DO USUÁRIO
+│   │
+│   ├── 📄 rodape.php
+│   │   ├── INFORMAÇÕES DA LOJA
+│   │   ├── LINKS ÚTEIS
+│   │   ├── REDES SOCIAIS
+│   │   └── SCRIPTS JAVASCRIPT
+│   │
+│   └── 📄 funcoes.php
+│       ├── GERADOR DE CHAVES DIGITAIS
+│       ├── VALIDADOR DE CHAVES
+│       ├── FUNÇÕES DE ESTOQUE
+│       ├── FUNÇÕES DE PAGAMENTO
+│       └── FUNÇÕES DE RELATÓRIOS
+│
+├── 🎨 RECURSOS E ESTILOS
+│   │
+│   ├── 📁 assets/
+│   │   ├── 📁 css/
+│   │   │   ├── 📄 estilo.css
+│   │   │   ├── 📄 responsivo.css
+│   │   │   └── 📄 admin.css
+│   │   │
+│   │   ├── 📁 js/
+│   │   │   ├── 📄 carrinho.js
+│   │   │   ├── 📄 chaves.js
+│   │   │   └── 📄 pagamento.js
+│   │   │
+│   │   └── 📁 imagens/
+│   │       ├── 📁 jogos/
+│   │       ├── 📁 plataformas/
+│   │       └── 📁 banners/
+│   │
+│   └── 📁 uploads/
+│       └── 📁 capas_jogos/
+│
+└── 🗃️ BANCO DE DADOS
+    │
+    └── 📄 banco_dados.sql
