@@ -1,5 +1,5 @@
 pgs_perifericos/
-│📁 main/
+│
 ├── 📄 index.php
 ├── 📄 LEIAME.txt
 │
@@ -15,7 +15,6 @@ pgs_perifericos/
 ├── 📄 suporte.php
 ├── 📄 meus_tickets.php
 ├── 📄 faq.php
-├── 📄 promocoes.php
 │
 ├── 📁 admin/
 │   ├── 📄 admin.php
@@ -26,10 +25,7 @@ pgs_perifericos/
 │   ├── 📄 admin_pedidos.php
 │   ├── 📄 admin_cupons.php
 │   ├── 📄 admin_suporte.php
-│   ├── 📄 admin_faq.php
-│   ├── 📄 admin_relatorios.php
-│   ├── 📄 admin_marcas.php              # NOVO: Gerenciar marcas
-│   └── 📄 admin_avaliacoes.php          # NOVO: Gerenciar avaliações
+│   └── 📄 admin_faq.php
 │
 ├── 📁 includes/
 │   ├── 📄 config.php
@@ -39,35 +35,28 @@ pgs_perifericos/
 │   ├── 📄 processa_login.php
 │   ├── 📄 processa_cadastro.php
 │   ├── 📄 processa_pedido.php
+│   ├── 📄 processa_carrinho.php
 │   ├── 📄 processa_suporte.php
+│   ├── 📄 processa_pagamento.php
 │   ├── 📄 processa_funcionario.php
-│   ├── 📄 logout.php
-│   ├── 📄 processa_marca.php            # NOVO: Processar marcas
-│   ├── 📄 processa_carrinho.php         # NOVO: Processar carrinho
-│   ├── 📄 processa_avaliacao.php        # NOVO: Processar avaliações
-│   └── 📄 processa_pagamento.php        # NOVO: Processar pagamento
+│   └── 📄 logout.php
 │
 ├── 📁 assets/
 │   ├── 📁 css/
 │   │   ├── 📄 estilo.css
 │   │   ├── 📄 responsivo.css
 │   │   ├── 📄 admin.css
-│   │   ├── 📄 suporte.css
 │   │   ├── 📄 formularios.css
-│   │   ├── 📄 produtos.css              # NOVO: Estilos específicos produtos
-│   │   └── 📄 carrinho.css              # NOVO: Estilos carrinho
+│   │   ├── 📄 suporte.css
+│   │   └── 📄 carrinho.css
 │   │
 │   ├── 📁 js/
 │   │   ├── 📄 principal.js
 │   │   ├── 📄 carrinho.js
 │   │   ├── 📄 pagamento.js
-│   │   ├── 📄 produtos.js
-│   │   ├── 📄 suporte.js
-│   │   ├── 📄 faq.js
-│   │   ├── 📄 cadastro.js
 │   │   ├── 📄 validacao.js
-│   │   ├── 📄 mascaras.js               # NOVO: Máscaras para formulários
-│   │   └── 📄 avaliacoes.js             # NOVO: Sistema de avaliações
+│   │   ├── 📄 mascaras.js
+│   │   └── 📄 suporte.js
 │   │
 │   └── 📁 imagens/
 │       ├── 📁 produtos/
@@ -86,7 +75,6 @@ pgs_perifericos/
 │       │
 │       ├── 📁 icones/
 │       │   ├── 📄 favicon.ico
-│       │   ├── 📄 estrela.png
 │       │   ├── 📄 carrinho.png
 │       │   ├── 📄 usuario.png
 │       │   ├── 📄 pesquisa.png
@@ -97,31 +85,12 @@ pgs_perifericos/
 │       │   ├── 📄 headphone.png
 │       │   └── 📄 monitor-icone.png
 │       │
-│       ├── 📁 marcas/                    # NOVO: Logos das marcas
-│       │   ├── 📄 redragon-logo.png
-│       │   ├── 📄 logitech-logo.png
-│       │   ├── 📄 hyperx-logo.png
-│       │   ├── 📄 dell-logo.png
-│       │   ├── 📄 razer-logo.png
-│       │   ├── 📄 corsair-logo.png
-│       │   ├── 📄 steelseries-logo.png
-│       │   └── 📄 asus-logo.png
-│       │
 │       └── 📄 logo.png
 │
 ├── 📁 uploads/
 │   ├── 📁 imagens_produtos/
 │   ├── 📁 avatares_usuarios/
-│   ├── 📁 documentos_funcionarios/
-│   ├── 📁 anexos_suporte/
-│   ├── 📁 logos_marcas/                  # NOVO: Logos das marcas
-│   └── 📁 comprovantes/                  # NOVO: Comprovantes de pagamento
+│   └── 📁 anexos_suporte/
 │
-├── 📁 banco_dados/
-│   └── 📄 banco_dados.sql
-│
-└── 📁 api/                               # NOVO: Endpoints para AJAX
-    ├── 📄 carrinho.php
-    ├── 📄 produtos.php
-    ├── 📄 avaliacoes.php
-    └── 📄 cep.php
+└── 📁 banco_dados/
+    └── 📄 banco_dados.sql
