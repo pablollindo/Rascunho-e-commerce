@@ -15,7 +15,7 @@ pgs_perifericos/
 ├── 📄 suporte.php
 ├── 📄 meus_tickets.php
 ├── 📄 faq.php
-├── 📄 avaliacoes.php                 # NOVO: Página de avaliações
+├── 📄 avaliacoes.php
 │
 ├── 📁 admin/
 │   ├── 📄 admin.php
@@ -27,8 +27,8 @@ pgs_perifericos/
 │   ├── 📄 admin_cupons.php
 │   ├── 📄 admin_suporte.php
 │   ├── 📄 admin_faq.php
-    ├── 📄 admin_relatorios.php
-│   └── 📄 admin_avaliacoes.php        # NOVO: Moderar avaliações
+│   ├── 📄 admin_avaliacoes.php
+│   └── 📄 admin_marcas.php             # NOVO: Gerenciar marcas
 │
 ├── 📁 includes/
 │   ├── 📄 config.php
@@ -42,8 +42,8 @@ pgs_perifericos/
 │   ├── 📄 processa_suporte.php
 │   ├── 📄 processa_pagamento.php
 │   ├── 📄 processa_funcionario.php
-│   ├── 📄 processa_avaliacao.php      # NOVO: Processar avaliações
-│   └── 📄 logout.php
+│   ├── 📄 processa_avaliacao.php
+│   └── 📄 processa_marca.php          # NOVO: Processar marcas
 │
 ├── 📁 assets/
 │   ├── 📁 css/
@@ -53,7 +53,7 @@ pgs_perifericos/
 │   │   ├── 📄 formularios.css
 │   │   ├── 📄 suporte.css
 │   │   ├── 📄 carrinho.css
-│   │   └── 📄 avaliacoes.css          # NOVO: Estilos para avaliações
+│   │   └── 📄 avaliacoes.css
 │   │
 │   ├── 📁 js/
 │   │   ├── 📄 principal.js
@@ -62,7 +62,7 @@ pgs_perifericos/
 │   │   ├── 📄 validacao.js
 │   │   ├── 📄 mascaras.js
 │   │   ├── 📄 suporte.js
-│   │   └── 📄 avaliacoes.js           # NOVO: Sistema de estrelas
+│   │   └── 📄 avaliacoes.js
 │   │
 │   └── 📁 imagens/
 │       ├── 📁 produtos/
@@ -86,19 +86,30 @@ pgs_perifericos/
 │       │   ├── 📄 pesquisa.png
 │       │   ├── 📄 funcionario.png
 │       │   ├── 📄 admin.png
-│       │   ├── 📄 estrela-cheia.png    # NOVO: Ícone estrela
-│       │   ├── 📄 estrela-vazia.png    # NOVO: Ícone estrela
+│       │   ├── 📄 estrela-cheia.png
+│       │   ├── 📄 estrela-vazia.png
 │       │   ├── 📄 mouse.png
 │       │   ├── 📄 teclado.png
 │       │   ├── 📄 headphone.png
 │       │   └── 📄 monitor-icone.png
+│       │
+│       ├── 📁 marcas/                  # NOVO: Logos das marcas
+│       │   ├── 📄 redragon-logo.png
+│       │   ├── 📄 logitech-logo.png
+│       │   ├── 📄 hyperx-logo.png
+│       │   ├── 📄 dell-logo.png
+│       │   ├── 📄 razer-logo.png
+│       │   ├── 📄 corsair-logo.png
+│       │   ├── 📄 steelseries-logo.png
+│       │   └── 📄 asus-logo.png
 │       │
 │       └── 📄 logo.png
 │
 ├── 📁 uploads/
 │   ├── 📁 imagens_produtos/
 │   ├── 📁 avatares_usuarios/
-│   └── 📁 anexos_suporte/
+│   ├── 📁 anexos_suporte/
+│   └── 📁 logos_marcas/                # NOVO: Upload de logos
 │
 └── 📁 banco_dados/
     └── 📄 banco_dados.sql
