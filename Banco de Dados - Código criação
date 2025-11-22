@@ -1,6 +1,6 @@
 -- Criar banco de dados
-CREATE DATABASE loja_jogos_digitais;
-USE loja_jogos_digitais;
+CREATE DATABASE pgs_store;
+USE pgs_store;
 
 -- Tabela de usuários
 CREATE TABLE usuarios (
@@ -9,27 +9,33 @@ CREATE TABLE usuarios (
     email VARCHAR(100) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL,
     tipo ENUM('cliente','admin') DEFAULT 'cliente',
-    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ultimo_login TIMESTAMP NULL,
+    ativo BOOLEAN DEFAULT TRUE
 );
 
 -- Tabela de plataformas
 CREATE TABLE plataformas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
-    icone VARCHAR(100)
+    icone VARCHAR(100),
+    ativa BOOLEAN DEFAULT TRUE
 );
 
 -- Tabela de regiões
 CREATE TABLE regioes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
-    codigo VARCHAR(10)
+    codigo VARCHAR(10),
+    bandeira VARCHAR(100)
 );
 
 -- Tabela de categorias de jogos
 CREATE TABLE categorias (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL
+    nome VARCHAR(50) NOT NULL,
+    icone VARCHAR(100),
+    cor VARCHAR(7) DEFAULT '#6B7280'
 );
 
 -- Tabela de jogos
@@ -43,13 +49,16 @@ CREATE TABLE jogos (
     classificacao_indicativa VARCHAR(10),
     capa_imagem VARCHAR(255),
     trailer_url VARCHAR(255),
+    screenshots JSON,
     requisitos_minimos TEXT,
     requisitos_recomendados TEXT,
+    tags JSON,
     ativo BOOLEAN DEFAULT TRUE,
+    em_destaque BOOLEAN DEFAULT FALSE,
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de jogos_plataformas (relação muitos-para-muitos)
+-- Tabela de jogos_plataformas
 CREATE TABLE jogos_plataformas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     jogo_id INT,
@@ -57,6 +66,9 @@ CREATE TABLE jogos_plataformas (
     preco_base DECIMAL(10,2) NOT NULL,
     preco_promocional DECIMAL(10,2),
     em_promocao BOOLEAN DEFAULT FALSE,
+    data_inicio_promocao DATE NULL,
+    data_fim_promocao DATE NULL,
+    estoque INT DEFAULT 0,
     FOREIGN KEY (jogo_id) REFERENCES jogos(id),
     FOREIGN KEY (plataforma_id) REFERENCES plataformas(id)
 );
@@ -83,12 +95,16 @@ CREATE TABLE pedidos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cliente_id INT,
     total DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+    desconto DECIMAL(10,2) DEFAULT 0,
     status ENUM('pendente','pago','processando','concluido','cancelado') DEFAULT 'pendente',
     metodo_pagamento ENUM('cartao','pix','boleto','paypal'),
     data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     data_pagamento TIMESTAMP NULL,
     data_conclusao TIMESTAMP NULL,
     codigo_transacao VARCHAR(100),
+    codigo_pix TEXT,
+    codigo_boleto VARCHAR(100),
     FOREIGN KEY (cliente_id) REFERENCES usuarios(id)
 );
 
@@ -120,7 +136,8 @@ CREATE TABLE cupons_desconto (
     data_validade DATE,
     usos_maximos INT,
     usos_atuais INT DEFAULT 0,
-    ativo BOOLEAN DEFAULT TRUE
+    ativo BOOLEAN DEFAULT TRUE,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabela de avaliações
@@ -131,8 +148,49 @@ CREATE TABLE avaliacoes (
     nota INT CHECK (nota >= 1 AND nota <= 5),
     comentario TEXT,
     data_avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    aprovada BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (jogo_id) REFERENCES jogos(id),
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+-- NOVA TABELA: Suporte/Tickets
+CREATE TABLE tickets_suporte (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT,
+    assunto VARCHAR(200) NOT NULL,
+    categoria ENUM('compra','jogos','login','chaves','sugestao','outros') NOT NULL,
+    descricao TEXT NOT NULL,
+    status ENUM('aberto','em_andamento','respondido','fechado') DEFAULT 'aberto',
+    prioridade ENUM('baixa','media','alta','urgente') DEFAULT 'media',
+    data_abertura TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_ultima_resposta TIMESTAMP NULL,
+    data_fechamento TIMESTAMP NULL,
+    admin_responsavel INT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (admin_responsavel) REFERENCES usuarios(id)
+);
+
+-- Tabela de mensagens do suporte
+CREATE TABLE mensagens_suporte (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ticket_id INT,
+    usuario_id INT,
+    mensagem TEXT NOT NULL,
+    anexo VARCHAR(255) NULL,
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    eh_admin BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (ticket_id) REFERENCES tickets_suporte(id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+-- Tabela de FAQ
+CREATE TABLE faq (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pergunta VARCHAR(255) NOT NULL,
+    resposta TEXT NOT NULL,
+    categoria ENUM('compra','jogos','conta','chaves','pagamento') NOT NULL,
+    ordem INT DEFAULT 0,
+    ativo BOOLEAN DEFAULT TRUE
 );
 
 -- Dados iniciais
@@ -144,32 +202,46 @@ INSERT INTO plataformas (nome, icone) VALUES
 ('Xbox Series X/S', 'xbox-series.png'),
 ('Nintendo Switch', 'switch.png');
 
-INSERT INTO regioes (nome, codigo) VALUES 
-('Global', 'GLOBAL'),
-('América Latina', 'LATAM'),
-('Europa', 'EU'),
-('Estados Unidos', 'US'),
-('Brasil', 'BR'),
-('Asia', 'ASIA');
+INSERT INTO regioes (nome, codigo, bandeira) VALUES 
+('Global', 'GLOBAL', 'global.png'),
+('América Latina', 'LATAM', 'latam.png'),
+('Europa', 'EU', 'europe.png'),
+('Estados Unidos', 'US', 'usa.png'),
+('Brasil', 'BR', 'brazil.png'),
+('Asia', 'ASIA', 'asia.png');
 
-INSERT INTO categorias (nome) VALUES 
-('Ação'), ('Aventura'), ('RPG'), ('Estratégia'), ('Esportes'), 
-('Corrida'), ('Tiro'), ('Indie'), ('Simulação'), ('Luta');
+INSERT INTO categorias (nome, icone, cor) VALUES 
+('Ação', 'sword.png', '#EF4444'),
+('Aventura', 'compass.png', '#10B981'),
+('RPG', 'dragon.png', '#8B5CF6'),
+('Estratégia', 'chess.png', '#F59E0B'),
+('Esportes', 'soccer.png', '#06B6D4'),
+('Corrida', 'racing-car.png', '#DC2626'),
+('Tiro', 'gun.png', '#6B7280'),
+('Indie', 'indie.png', '#EC4899'),
+('Simulação', 'simulation.png', '#059669'),
+('Luta', 'boxing.png', '#EA580C');
 
 INSERT INTO usuarios (nome, email, senha, tipo) VALUES 
-('Administrador', 'admin@loja.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+('Administrador PGS', 'admin@pgsstore.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
 
--- Exemplo de jogo
-INSERT INTO jogos (nome, descricao, desenvolvedora, distribuidora, data_lancamento, classificacao_indicativa) VALUES
-('Cyberpunk 2077', 'Um RPG de ação e aventura em mundo aberto...', 'CD Projekt Red', 'CD Projekt', '2020-12-10', '18+');
+-- FAQ inicial
+INSERT INTO faq (pergunta, resposta, categoria, ordem) VALUES 
+('Como recebo minhas chaves de jogos?', 'As chaves são entregues instantaneamente após a confirmação do pagamento. Você pode acessá-las em "Minha Biblioteca".', 'compra', 1),
+('Quais formas de pagamento são aceitas?', 'Aceitamos cartão de crédito, PIX, boleto bancário e PayPal.', 'pagamento', 2),
+('As chaves funcionam em qualquer região?', 'Cada chave possui uma região específica. Verifique a compatibilidade antes da compra.', 'chaves', 3);
 
--- Exemplo de preços por plataforma
-INSERT INTO jogos_plataformas (jogo_id, plataforma_id, preco_base, preco_promocional, em_promocao) VALUES
-(1, 1, 199.90, 149.90, TRUE),  -- PC com promoção
-(1, 2, 249.90, NULL, FALSE),   -- PS4 sem promoção
-(1, 4, 229.90, 179.90, TRUE);  -- Xbox One com promoção
+-- Jogo exemplo
+INSERT INTO jogos (nome, descricao, desenvolvedora, distribuidora, data_lancamento, classificacao_indicativa, em_destaque) VALUES
+('Cyberpunk 2077', 'Um RPG de ação e aventura em mundo aberto...', 'CD Projekt Red', 'CD Projekt', '2020-12-10', '18+', TRUE);
 
--- Exemplo de chaves digitais
+-- Preços por plataforma
+INSERT INTO jogos_plataformas (jogo_id, plataforma_id, preco_base, preco_promocional, em_promocao, estoque) VALUES
+(1, 1, 199.90, 149.90, TRUE, 50),
+(1, 2, 249.90, NULL, FALSE, 30),
+(1, 4, 229.90, 179.90, TRUE, 25);
+
+-- Chaves digitais
 INSERT INTO chaves_digitais (jogo_id, plataforma_id, regiao_id, chave) VALUES
 (1, 1, 1, 'ABCDE-12345-FGHIJ-67890'),
 (1, 1, 2, 'KLMNO-54321-PQRST-09876');
