@@ -1,223 +1,119 @@
-loja_jogos_digitais/
+pgs_store/
 │
 ├── 🎨 DESIGN SYSTEM PGS STORE
 │   │
-│   ├── 🎯 TEMA VISUAL EXCLUSIVO
-│   │   ├── PALETA DE CORES PGS: {
-│   │   │   primary: "#7C3AED" (Roxo PGS - principal),
-│   │   │   secondary: "#0891B2" (Azul ciano - tecnologia),
-│   │   │   accent: "#059669" (Verde sucesso),
-│   │   │   warning: "#EA580C" (Laranja energia),
-│   │   │   danger: "#DC2626" (Vermelho alerta),
-│   │   │   dark: "#111827" (Preto azulado - fundo),
-│   │   │   card-dark: "#1F2937" (Cards escuros),
-│   │   │   light: "#374151" (Elementos claros),
-│   │   │   text-primary: "#F9FAFB" (Texto principal),
-│   │   │   text-secondary: "#D1D5DB" (Texto secundário)
+│   ├── 🎯 TEMA VISUAL
+│   │   ├── PALETA DE CORES: {
+│   │   │   primary: "#7C3AED",
+│   │   │   secondary: "#0891B2", 
+│   │   │   success: "#059669",
+│   │   │   warning: "#EA580C",
+│   │   │   danger: "#DC2626",
+│   │   │   dark: "#111827",
+│   │   │   card-dark: "#1F2937",
+│   │   │   light: "#374151",
+│   │   │   text-primary: "#F9FAFB",
+│   │   │   text-secondary: "#D1D5DB"
 │   │   │ }
 │   │   │
-│   │   ├── TIPOGRAFIA PGS: {
-│   │   │   logo: "Orbitron, sans-serif" (futurista - PGS),
-│   │   │   headings: "Rajdhani, sans-serif" (tecnológica),
-│   │   │   body: "Inter, sans-serif" (limpa e moderna),
-│   │   │   code: "JetBrains Mono, monospace" (chaves digitais)
+│   │   ├── TIPOGRAFIA: {
+│   │   │   logo: "Orbitron, sans-serif",
+│   │   │   headings: "Rajdhani, sans-serif",
+│   │   │   body: "Inter, sans-serif", 
+│   │   │   code: "JetBrains Mono, monospace"
 │   │   │ }
 │   │   │
-│   │   └── EFEITOS PGS: {
+│   │   └── COMPONENTES: {
 │   │   │   glow: "0 0 15px rgba(124, 58, 237, 0.4)",
 │   │   │   shadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-│   │   │   hover-transform: "transform: translateY(-3px) scale(1.02)",
-│   │   │   gradient-bg: "linear-gradient(135deg, #111827 0%, #312E81 100%)"
+│   │   │   hover: "transform: translateY(-3px) scale(1.02)",
+│   │   │   gradient: "linear-gradient(135deg, #111827 0%, #312E81 100%)"
 │   │   │ }
 │   │
-│   ├── 🧭 HEADER PGS STORE
-│   │   ├── LOGO: "PGS STORE" + 🎮 ícone
-│   │   ├── MENU PRINCIPAL: {
-│   │   │   "Início", "Promoções", "Lançamentos", "Categorias", "Suporte"
-│   │   │ }
-│   │   ├── DROPDOWN PLATAFORMAS: {
-│   │   │   "PC 🖥️", "PlayStation 🎯", "Xbox 🔥", "Nintendo 🍄"
-│   │   │ }
-│   │   ├── BARRA DE PESQUISA AVANÇADA: {
-│   │   │   placeholder: "Buscar jogos, categorias...",
-│   │   │   autocomplete com sugestões,
-│   │   │   filtro rápido por plataforma
-│   │   │ }
-│   │   ├── CARRINHO INTELIGENTE: {
-│   │   │   ícone com badge animado,
-│   │   │   dropdown com resumo dos itens,
-│   │   │   botão rápido para checkout
-│   │   │ }
-│   │   └── MENU USUÁRIO: {
-│   │   │   "Minha Conta", "Minha Biblioteca", "Meus Pedidos", "Sair"
-│   │   │ }
+│   ├── 🧭 HEADER
+│   │   ├── LOGO: "PGS STORE" + 🎮
+│   │   ├── MENU: ["Início", "Promoções", "Lançamentos", "Categorias", "Suporte"]
+│   │   ├── PLATAFORMAS: ["PC 🖥️", "PlayStation 🎯", "Xbox 🔥", "Nintendo 🍄"]
+│   │   ├── BUSCA: "Buscar jogos, categorias..."
+│   │   ├── CARRINHO: Ícone + badge
+│   │   └── USUÁRIO: ["Minha Conta", "Biblioteca", "Pedidos", "Sair"]
 │   │
-│   ├── 🏠 HOMEPAGE PGS
-│   │   ├── HERO SECTION: {
-│   │   │   Carousel com jogos em destaque,
-│   │   │   Call-to-action grande "Ver Oferta",
-│   │   │   Contador regressivo para promoções
-│   │   │ }
-│   │   ├── SEÇÃO "PROMOÇÕES RELÂMPAGO": {
-│   │   │   Cards com badge "-XX%" destacado,
-│   │   │   Timer individual para cada promoção,
-│   │   │   Preço original riscado + preço promocional
-│   │   │ }
-│   │   ├── SEÇÃO "LANÇAMENTOS": {
-│   │   │   Badge "NOVO" com glow effect,
-│   │   │   Data de lançamento em destaque,
-│   │   │   Ícones das plataformas disponíveis
-│   │   │ }
-│   │   ├── SEÇÃO "CATEGORIAS POPULARES": {
-│   │   │   Ação ⚔️, Aventura 🗺️, RPG 🎭, Esportes ⚽,
-│   │   │   Estratégia 🧠, Terror 👻, Corrida 🏎️
-│   │   │ }
-│   │   └── FILTROS AVANÇADOS: {
-│   │   │   Plataforma (ícones com checkboxes),
-│   │   │   Faixa de preço (slider com valores),
-│   │   │   Categorias (tags selecionáveis),
-│   │   │   Avaliação (sistema de estrelas)
-│   │   │ }
+│   ├── 🏠 HOMEPAGE (inicio.php)
+│   │   ├── HERO: Carousel + CTA "Ver Oferta"
+│   │   ├── PROMOÇÕES: Cards com timer
+│   │   ├── LANÇAMENTOS: Badge "NOVO"
+│   │   ├── CATEGORIAS: Grid com ícones
+│   │   └── FILTROS: Plataforma, Preço, Categoria, Avaliação
 │   │
-│   ├── 🎮 PÁGINA DO JOGO
-│   │   ├── GALERIA INTERATIVA: {
-│   │   │   Imagem principal em alta resolução,
-│   │   │   Thumbnails para screenshots,
-│   │   │   Modal com trailer do jogo
-│   │   │ }
-│   │   ├── INFORMAÇÕES DETALHADAS: {
-│   │   │   Título + desenvolvedora/distribuidora,
-│   │   │   Avaliação com estrelas + número de reviews,
-│   │   │   Tags: Single-player, Multiplayer, Co-op
-│   │   │ }
-│   │   ├── SELEÇÃO DE PLATAFORMA/REGIÃO: {
-│   │   │   Cards com ícones e preços,
-│   │   │   Indicador de região (bandeiras),
-│   │   │   Disponibilidade em tempo real
-│   │   │ }
-│   │   ├── ABA "REQUISITOS DO SISTEMA": {
-│   │   │   Mínimos vs Recomendados,
-│   │   │   Lista organizada: SO, CPU, GPU, RAM, Armazenamento
-│   │   │ }
-│   │   ├── SEÇÃO "AVALIAÇÕES": {
-│   │   │   Nota geral destacada,
-│   │   │   Barras de progresso por estrela,
-│   │   │   Comentários com foto e data
-│   │   │ }
-│   │   └── AÇÃO DE COMPRA: {
-│   │   │   Botão primário grande "COMPRAR AGORA",
-│   │   │   Botão secundário "Adicionar ao Carrinho",
-│   │   │   Selos: "Chave Instantânea", "Suporte 24h"
-│   │   │ }
+│   ├── 🎮 PÁGINA DO JOGO (jogo.php)
+│   │   ├── GALERIA: Imagens + trailer
+│   │   ├── INFOS: Título, dev, avaliação
+│   │   ├── PLATAFORMAS: Cards com preços
+│   │   ├── REQUISITOS: Mínimos/Recomendados
+│   │   ├── AVALIAÇÕES: Estrelas + comentários
+│   │   └── COMPRA: "COMPRAR AGORA" + "Carrinho"
 │   │
-│   ├── 🛒 CARRINHO DE COMPRAS
-│   │   ├── LISTA DE JOGOS: {
-│   │   │   Imagem + título + plataforma,
-│   │   │   Controles de quantidade (+/-),
-│   │   │   Preço unitário e subtotal,
-│   │   │   Botão remover com confirmação
-│   │   │ }
-│   │   ├── CUPOM DE DESCONTO: {
-│   │   │   Input com validação em tempo real,
-│   │   │   Feedback visual (sucesso/erro),
-│   │   │   Desconto aplicado em verde
-│   │   │ }
-│   │   ├── RESUMO DO PEDIDO: {
-│   │   │   Subtotal, Desconto, Total,
-│   │   │   Métodos de pagamento aceitos,
-│   │   │   Botão "FINALIZAR COMPRA" destacado
-│   │   │ }
-│   │   └── RECOMENDAÇÕES: {
-│   │   │   "Jogos relacionados aos do seu carrinho",
-│   │   │   Cards com preços promocionais
-│   │   │ }
+│   ├── 🛒 CARRINHO (carrinho.php)
+│   │   ├── ITENS: Lista com controles
+│   │   ├── CUPOM: Input + aplicar
+│   │   ├── RESUMO: Subtotal, desconto, total
+│   │   └── AÇÃO: "FINALIZAR COMPRA"
 │   │
-│   ├── 💳 CHECKOUT SEGURO
-│   │   ├── ETAPA 1: LOGIN/CADASTRO: {
-│   │   │   Formulário rápido lateral,
-│   │   │   Opção "Continuar como visitante"
-│   │   │ }
-│   │   ├── ETAPA 2: PAGAMENTO: {
-│   │   │   Cartão de crédito (formulário seguro),
-│   │   │   PIX (QR Code automático),
-│   │   │   Boleto (código de barras)
-│   │   │ }
-│   │   ├── ETAPA 3: CONFIRMAÇÃO: {
-│   │   │   Resumo completo do pedido,
-│   │   │   Chaves digitais geradas,
-│   │   │   Botão "CONFIRMAR PAGAMENTO"
-│   │   │ }
-│   │   └── ETAPA 4: SUCESSO: {
-│   │   │   Número do pedido,
-│   │   │   Chaves para copiar,
-│   │   │   Link para a biblioteca
-│   │   │ }
+│   ├── 💳 CHECKOUT (finalizar_compra.php)
+│   │   ├── ETAPA 1: Login/Cadastro
+│   │   ├── ETAPA 2: Pagamento (Cartão/PIX/Boleto)
+│   │   ├── ETAPA 3: Confirmação
+│   │   └── ETAPA 4: Sucesso + Chaves
 │   │
-│   ├── 📞 SUPORTE AO CLIENTE
-│   │   ├── FORMULÁRIO DE CONTATO: {
-│   │   │   Categoria do problema (dropdown),
-│   │   │   Assunto e descrição detalhada,
-│   │   │   Anexo de imagens (opcional)
-│   │   │ }
-│   │   ├── CATEGORIAS DE SUPORTE: {
-│   │   │   "Problemas com Compra",
-│   │   │   "Dúvidas sobre Jogos", 
-│   │   │   "Problemas de Login",
-│   │   │   "Chaves Digitais",
-│   │   │   "Sugestões e Críticas"
-│   │   │ }
-│   │   ├── FAQ INTERATIVO: {
-│   │   │   Perguntas frequentes com accordion,
-│   │   │   Busca no FAQ,
-│   │   │   Categorias organizadas
-│   │   │ }
-│   │   └── STATUS DO TICKET: {
-│   │   │   Número do ticket,
-│   │   │   Status (Aberto, Em Andamento, Resolvido),
-│   │   │   Histórico de respostas
-│   │   │ }
+│   ├── 📞 SUPORTE (suporte.php + meus_tickets.php)
+│   │   ├── FORMULÁRIO: Categoria, assunto, descrição
+│   │   ├── TICKETS: Lista com status/prioridade
+│   │   ├── MENSAGENS: Histórico de conversa
+│   │   └── FAQ: Accordion + busca
 │   │
-│   └── 👤 ÁREA DO CLIENTE
-│       ├── MINHA CONTA: {
-│       │   "Dados Pessoais", "Alterar Senha",
-│       │   "Endereços", "Preferências"
-│       │ }
-│       ├── MINHA BIBLIOTECA: {
-│       │   Lista de jogos comprados,
-│       │   Chaves digitais com botão copiar,
-│       │   Status da chave (Utilizada/Não utilizada)
-│       │ }
-│       ├── MEUS PEDIDOS: {
-│       │   Histórico de compras,
-│       │   Detalhes de cada pedido,
-│       │   Fatura e dados de pagamento
-│       │ }
-│       └── MINHAS AVALIAÇÕES: {
-│       │   Jogos avaliados,
-│       │   Possibilidade de editar avaliações
-│       │ }
+│   ├── 👤 ÁREA DO CLIENTE
+│   │   ├── CONTA: Dados pessoais
+│   │   ├── BIBLIOTECA: Jogos + chaves
+│   │   ├── PEDIDOS: Histórico
+│   │   └── AVALIAÇÕES: Comentários feitos
+│   │
+│   └── ⚙️ PAINEL ADMIN
+│       ├── DASHBOARD: Vendas, estoque, tickets
+│       ├── CRUD: Usuários, Jogos, Chaves, Cupons
+│       ├── SUPORTE: Tickets, FAQ
+│       └── RELATÓRIOS: Vendas, usuários, métricas
 │
-├── ⚙️ PAINEL ADMINISTRATIVO PGS
+├── 🔗 CONEXÕES DO SISTEMA
 │   │
-│   ├── DASHBOARD PRINCIPAL: {
-│   │   "Vendas do Dia", "Jogos Mais Vendidos",
-│   │   "Ticket Médio", "Estatísticas por Plataforma"
-│   │ }
-│   ├── GERENCIAMENTO DE JOGOS: {
-│   │   "Adicionar Novo Jogo", "Editar Existente",
-│   │   "Gerenciar Preços", "Upload de Imagens"
-│   │ }
-│   ├── CONTROLE DE CHAVES: {
-│   │   "Adicionar Lotes", "Estoque por Jogo",
-│   │   "Relatório de Vendas", "Chaves Utilizadas"
-│   │ }
-│   ├── GERENCIAMENTO DE PEDIDOS: {
-│   │   "Todos os Pedidos", "Filtros Avançados",
-│   │   "Alterar Status", "Detalhes Completo"
-│   │ }
-│   └── SUPORTE AO CLIENTE: {
-│       "Tickets Abertos", "Responder Tickets",
-│       "Histórico de Atendimento", "Métricas de SLA"
-│     }
+│   ├── SUPORTE → TODAS AS PÁGINAS: {
+│   │   "Problemas com...?" → suporte.php
+│   │   }
+│   │
+│   ├── FAQ → SUPORTE: {
+│   │   "Não encontrou resposta?" → abrir ticket
+│   │   }
+│   │
+│   ├── ADMIN → CRUD COMPLETO: {
+│   │   admin_usuarios.php → CRUD usuários
+│   │   admin_plataformas.php → CRUD plataformas  
+│   │   admin_regioes.php → CRUD regiões
+│   │   admin_categorias.php → CRUD categorias
+│   │   admin_jogos.php → CRUD jogos
+│   │   admin_chaves.php → CRUD chaves
+│   │   admin_cupons.php → CRUD cupons
+│   │   admin_suporte.php → CRUD tickets
+│   │   admin_faq.php → CRUD FAQ
+│   │   }
+│   │
+│   └── BANCO → SISTEMA: {
+│   │   Todas as tabelas conectadas
+│   │   Índices para performance
+│   │   Dados iniciais incluídos
+│   │   }
 │
-└── 🗃️ BANCO DE DADOS ATUALIZADO PGS
+└── ✅ STATUS DO PROJETO
+    │
+    ├── ARQUIVOS: 100% DEFINIDOS
+    ├── BANCO: 100% COMPLETO
+    ├── DESIGN: 100% ESPECIFICADO
+    └── FUNCIONALIDADES: 100% MAPEADAS
