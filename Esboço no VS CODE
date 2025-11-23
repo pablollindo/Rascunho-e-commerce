@@ -8,7 +8,6 @@ pgs_perifericos/
 ├── 📄  lista_desejos.php
 ├── 📄 inicio.php
 ├── 📄 produtos.php
-├── 📄 produto.php
 ├── 📄 carrinho.php
 ├── 📄 finalizar_compra.php
 ├── 📄 ver_ticket.php
