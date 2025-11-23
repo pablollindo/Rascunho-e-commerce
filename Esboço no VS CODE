@@ -119,3 +119,4 @@ pgs_perifericos/
     └── 📄 banco_dados.sql
 
 --todas as pastas são separadas, exceto a de assets e css que são juntas.
+-- nos produtos precisam ter um botão de lista de desejos ou um icone para adicionar.
