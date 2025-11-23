@@ -56,6 +56,7 @@ pgs_perifericos/
 │   │   ├── 📄 suporte.css
 │   │   ├── 📄 carrinho.css
 │   │   └── 📄 avaliacoes.css
+│   │   └── 📄 wishlist.css
 │   │
 │   ├── 📁 js/
 │   │   ├── 📄 principal.js
