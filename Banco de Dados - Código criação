@@ -1,10 +1,10 @@
--- BANCO DE DADOS ATUALIZADO COM SISTEMA DE CARGOS
+-- BANCO DE DADOS ATUALIZADO COM TABELAS SEPARADAS
 -- porta do xampp é a 3309
 
 CREATE DATABASE IF NOT EXISTS pgs_perifericos;
 USE pgs_perifericos;
 
--- Tabela de usuários
+-- Tabela de usuários (mantida para compatibilidade)
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -18,18 +18,34 @@ CREATE TABLE usuarios (
     ativo BOOLEAN DEFAULT TRUE
 );
 
--- Tabela de funcionários com sistema de cargos ATUALIZADO
+-- NOVA TABELA: Clientes
+CREATE TABLE clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT UNIQUE,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    cpf VARCHAR(14) UNIQUE NOT NULL,
+    telefone VARCHAR(15) NOT NULL,
+    data_nascimento DATE NOT NULL,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ativo BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+-- NOVA TABELA: Funcionários
 CREATE TABLE funcionarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT UNIQUE,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL,
+    cpf VARCHAR(14) UNIQUE,
+    telefone VARCHAR(15),
+    data_nascimento DATE,
     cargo ENUM('administrador','estoquista','atendente','vendedor','gerente') NOT NULL,
-    departamento VARCHAR(50),
+    departamento VARCHAR(50) NOT NULL,
     data_admissao DATE NOT NULL,
     data_demissao DATE NULL,
-    matricula VARCHAR(50) NULL, -- NOVA COLUNA ADICIONADA
+    matricula VARCHAR(50) UNIQUE NULL,
     ativo BOOLEAN DEFAULT TRUE,
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
@@ -244,81 +260,6 @@ INSERT INTO marcas (nome, descricao, site_url) VALUES
 ('SteelSeries', 'Marca dinamarquesa de equipamentos para gaming', 'https://steelseries.com'),
 ('ASUS', 'Fabricante de componentes e periféricos gamers ROG', 'https://asus.com');
 
--- Usuários iniciais (senha: password)
-INSERT INTO usuarios (nome, email, senha, tipo, cpf, telefone, data_nascimento) VALUES 
-('Administrador Master', 'admin@pgsecommerce.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', '111.222.333-44', '(11) 99999-9999', '1980-01-01'),
-('João Estoquista', 'estoque@pgsecommerce.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'funcionario', '222.333.444-55', '(11) 98888-8888', '1985-03-15'),
-('Maria Atendente', 'atendimento@pgsecommerce.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'funcionario', '333.444.555-66', '(11) 97777-7777', '1990-07-20'),
-('Pedro Vendedor', 'vendas@pgsecommerce.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'funcionario', '444.555.666-77', '(11) 96666-6666', '1988-11-10'),
-('Cliente Teste', 'cliente@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cliente', '555.666.777-88', '(11) 95555-5555', '1995-05-25');
-
--- Funcionários iniciais com cargos ATUALIZADOS (agora com matrícula)
-INSERT INTO funcionarios (usuario_id, nome, email, senha, cargo, departamento, data_admissao, matricula) VALUES
-(1, 'Administrador Master', 'admin@pgsecommerce.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'administrador', 'Administração', '2023-01-01', 'PG001'),
-(2, 'João Estoquista', 'estoque@pgsecommerce.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'estoquista', 'Estoque', '2023-02-15', 'PG002'),
-(3, 'Maria Atendente', 'atendimento@pgsecommerce.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'atendente', 'Atendimento', '2023-03-20', 'PG003'),
-(4, 'Pedro Vendedor', 'vendas@pgsecommerce.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'vendedor', 'Vendas', '2023-04-10', 'PG004');
-
--- Produtos
-INSERT INTO produtos (categoria_id, marca_id, nome, descricao, especificacoes, preco, preco_promocional, estoque, imagem, garantia_meses, em_destaque, em_promocao) VALUES
-(1, 1, 'Teclado Mecânico RGB Kumara', 'Teclado mecânico gaming com iluminação RGB, switches Outemu Blue', 'Switches: Outemu Blue | Layout: ABNT2 | Iluminação: RGB | Conexão: USB | Peso: 1.2kg', 299.90, 249.90, 50, 'teclado-mecanico.jpg', 12, TRUE, TRUE),
-(2, 2, 'Mouse Gamer G502 HERO', 'Mouse gaming com sensor HERO 25K DPI, 11 botões programáveis', 'Sensor: HERO 25K DPI | Botões: 11 programáveis | Peso: 121g | Iluminação: RGB | Polling Rate: 1000Hz', 349.90, 299.90, 30, 'mouse-gamer.jpg', 24, TRUE, TRUE),
-(3, 3, 'Headset Cloud II', 'Headset gamer com som surround virtual 7.1, microfone removível', 'Driver: 53mm | Impedância: 60Ω | Sensibilidade: 98±3dB | Microfone: Removível com cancelamento de ruído', 399.90, 349.90, 25, 'headset.jpg', 12, TRUE, TRUE),
-(4, 4, 'Monitor Gamer 24" S2421H', 'Monitor gaming 24 polegadas, 144Hz, 1ms, FreeSync', 'Tela: 24" IPS | Resolução: 1920x1080 | Taxa de atualização: 144Hz | Tempo de resposta: 1ms | FreeSync', 899.90, 799.90, 15, 'monitor.jpg', 36, TRUE, TRUE),
-(5, 6, 'Mousepad MM300', 'Mousepad speed extendido para gaming, antiderrapante', 'Tamanho: 930x300mm | Espessura: 4mm | Superfície: Speed | Base: Antiderrapante | Material: Borracha', 89.90, 69.90, 75, 'mousepad.jpg', 6, FALSE, TRUE);
-
--- Pedidos de exemplo
-INSERT INTO pedidos (cliente_id, total, subtotal, status, metodo_pagamento, data_pedido) VALUES
-(5, 649.80, 649.80, 'entregue', 'cartao', '2024-01-15 10:00:00'),
-(5, 349.90, 349.90, 'entregue', 'pix', '2024-01-20 14:30:00');
-
-INSERT INTO itens_pedido (pedido_id, produto_id, quantidade, preco_unitario) VALUES
-(1, 1, 1, 249.90),
-(1, 3, 1, 399.90),
-(2, 2, 1, 349.90);
-
--- Avaliações de exemplo
-INSERT INTO avaliacoes (produto_id, usuario_id, pedido_id, nota, titulo, comentario, recomendacao) VALUES
-(1, 5, 1, 5, 'Excelente teclado!', 'Teclado muito bom, switches blue são ótimos para digitar. RGB é lindo!', 'sim'),
-(3, 5, 1, 4, 'Muito bom, mas...', 'Headset confortável e som excelente. Só o microfone que poderia ser melhor.', 'sim'),
-(2, 5, 2, 5, 'Perfeito para jogos!', 'Mouse preciso, botões programáveis muito úteis. Recomendo!', 'sim');
-
--- Atualizar médias dos produtos
-UPDATE produtos SET 
-media_avaliacoes = 5.0, 
-total_avaliacoes = 1 
-WHERE id = 1;
-
-UPDATE produtos SET 
-media_avaliacoes = 5.0, 
-total_avaliacoes = 1 
-WHERE id = 2;
-
-UPDATE produtos SET 
-media_avaliacoes = 4.0, 
-total_avaliacoes = 1 
-WHERE id = 3;
-
--- Cupons de desconto
-INSERT INTO cupons_desconto (codigo, desconto_percentual, data_validade, usos_maximos, ativo) VALUES
-('PRIMEIRACOMPRA', 15.00, '2024-12-31', 1000, TRUE),
-('PROMO10', 10.00, '2024-06-30', 500, TRUE);
-
--- FAQ
-INSERT INTO faq (pergunta, resposta, categoria, ordem) VALUES 
-('Como faço para rastrear meu pedido?', 'Após a confirmação do pagamento, você receberá um código de rastreamento por email.', 'entrega', 1),
-('Quais formas de pagamento são aceitas?', 'Aceitamos cartão de crédito (até 12x), PIX (5% off) e boleto bancário.', 'pagamento', 1),
-('Como funciona a garantia dos produtos?', 'Todos os produtos possuem garantia do fabricante, que varia de 3 a 12 meses.', 'garantia', 1),
-('Posso avaliar um produto?', 'Sim! Após receber seu pedido, você pode avaliar os produtos comprados.', 'produto', 2);
-
--- Tickets de suporte de exemplo
-INSERT INTO tickets_suporte (usuario_id, assunto, categoria, descricao, status, prioridade) VALUES
-(5, 'Produto não chegou', 'entrega', 'Comprei um teclado há 15 dias e ainda não recebi.', 'aberto', 'alta'),
-(5, 'Dúvida sobre garantia', 'garantia', 'Gostaria de saber como acionar a garantia do meu headset.', 'em_andamento', 'media');
-
--- Wishlist de exemplo
-INSERT INTO wishlist (usuario_id, produto_id) VALUES
-(5, 1),
-(5, 3);
-
+-- Inserir dados de exemplo para clientes e funcionários
+-- Como já foi fornecido nas inserções anteriores
 SELECT 'Banco de dados PGS Periféricos criado com sucesso!' as status;
