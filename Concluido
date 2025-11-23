@@ -4,7 +4,7 @@ O que já foi feito:
 ✅ Criado a estrutura toda dentro do VS CODE.
 ✅ Tela de cadastro de funcionário e cliente já estão funcionando (incluindo login).
 ✅ Tela de carrinho já foi criada.
-✅ Tela de minha conta já foi configurada para cliente e funcionario com botões como: Dados Pessoais, Alterar Senha, Meus Endereços, Meus Pedidos, Meus Tickets e sair da conta.
+✅ Tela de minha conta já foi configurada para cliente e funcionario com botões como: Dados Pessoais, Alterar Senha, Meus Endereços, Meus Pedidos, Meus Ticket, sair da conta, menos o Painel Admin que falta ser feito.
 ✅ Criado a página inicial do site.
 ✅ Criado a página de ticket, que da para ver informações dele (não da para editar).
 ✅ Página de endereço, da para editar, adicionar um novo, excluir (você não pode excluir o seu unico endereço cadastrado).
