@@ -115,3 +115,5 @@ pgs_perifericos/
 │
 └── 📁 banco_dados/
     └── 📄 banco_dados.sql
+
+--todas as pastas são separadas, exceto a de assets e css que são juntas.
