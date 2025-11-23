@@ -61,6 +61,8 @@ pgs_perifericos/
 │   │   ├── 📄 pagamento.js
 │   │   ├── 📄 validacao.js
 │   │   ├── 📄 mascaras.js
+│   │   ├── 📄 login.js
+│   │   ├── 📄 cadastro.js
 │   │   ├── 📄 suporte.js
 │   │   └── 📄 avaliacoes.js
 │   │
