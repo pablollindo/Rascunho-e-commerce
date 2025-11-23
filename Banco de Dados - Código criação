@@ -305,4 +305,12 @@ INSERT INTO produtos (categoria_id, marca_id, nome, descricao, especificacoes, p
 (5, 2, 'Mousepad Gamer Logitech G240', 'Mousepad de alto desempenho com superfície otimizada para sensores ópticos.', '340x280mm\nSuperfície de tecido\nBase de borracha\nFino e portátil', 79.90, 69.90, 25, 12, 1, 1, 1, NOW()),
 
 -- WEBCAMS (2 produtos)
-(6, 2, 'Webcam Logitech C920x HD Pro', 'Webcam Full HD 1080p com autofoco e microfone stereo integrado.', 'Full HD 1080p\n
+(6, 2, 'Webcam Logitech C920x HD Pro', 'Webcam Full HD 1080p com autofoco e microfone stereo integrado.', 'Full HD 1080p\nAutofoco\nMicrofone stereo\nCompatível com Skype, Zoom', 399.90, 349.90, 8, 24, 1, 1, 1, NOW()),
+(6, 1, 'Webcam Gamer Redragon Fobos GW800', 'Webcam gamer 1080p com microfone com redução de ruído e iluminação ajustável.', 'Full HD 1080p\nMicrofone com noise reduction\nIluminação ajustável\nClip universal', 199.90, 169.90, 12, 12, 1, 1, 1, NOW()),
+
+-- MICROFONES (2 produtos)
+(7, 3, 'Microfone HyperX QuadCast', 'Microfone condenser USB com quatro padrões polares e anti-vibração integrado.', 'Condenser USB\n4 padrões polares\nAnti-vibração\nLED personalizável', 699.90, 599.90, 5, 24, 1, 1, 1, NOW()),
+(7, 1, 'Microfone Gamer Redragon Blazar GM300', 'Microfone USB plug-and-play com padrão cardioide e controle de ganho.', 'Padrão cardioide\nControle de ganho\nBase ajustável\nPlug-and-play', 299.90, 249.90, 10, 12, 1, 1, 1, NOW());
+
+SELECT 'Produtos inseridos com sucesso!' as status;
+SELECT COUNT(*) as total_produtos FROM produtos;
