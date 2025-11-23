@@ -261,5 +261,22 @@ INSERT INTO marcas (nome, descricao, site_url) VALUES
 ('ASUS', 'Fabricante de componentes e periféricos gamers ROG', 'https://asus.com');
 
 -- Inserir dados de exemplo para clientes e funcionários
--- Como já foi fornecido nas inserções anteriores
+INSERT INTO usuarios (nome, email, senha, tipo, cpf, telefone, data_nascimento) VALUES 
+('Administrador Master', 'admin@pgsecommerce.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', '11122233344', '(11) 99999-9999', '1980-01-01'),
+('João Estoquista', 'estoque@pgsecommerce.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'funcionario', '22233344455', '(11) 98888-8888', '1985-03-15'),
+('Maria Atendente', 'atendimento@pgsecommerce.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'funcionario', '33344455566', '(11) 97777-7777', '1990-07-20'),
+('Pedro Vendedor', 'vendas@pgsecommerce.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'funcionario', '44455566677', '(11) 96666-6666', '1988-11-10'),
+('Cliente Teste', 'cliente@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cliente', '55566677788', '(11) 95555-5555', '1995-05-25');
+
+-- Inserir funcionários
+INSERT INTO funcionarios (usuario_id, nome, email, cpf, telefone, data_nascimento, cargo, departamento, data_admissao, matricula) VALUES
+(1, 'Administrador Master', 'admin@pgsecommerce.com', '11122233344', '(11) 99999-9999', '1980-01-01', 'administrador', 'Administração', '2023-01-01', 'PG001'),
+(2, 'João Estoquista', 'estoque@pgsecommerce.com', '22233344455', '(11) 98888-8888', '1985-03-15', 'estoquista', 'Estoque', '2023-02-15', 'PG002'),
+(3, 'Maria Atendente', 'atendimento@pgsecommerce.com', '33344455566', '(11) 97777-7777', '1990-07-20', 'atendente', 'Atendimento', '2023-03-20', 'PG003'),
+(4, 'Pedro Vendedor', 'vendas@pgsecommerce.com', '44455566677', '(11) 96666-6666', '1988-11-10', 'vendedor', 'Vendas', '2023-04-10', 'PG004');
+
+-- Inserir cliente
+INSERT INTO clientes (usuario_id, nome, email, cpf, telefone, data_nascimento) VALUES
+(5, 'Cliente Teste', 'cliente@email.com', '55566677788', '(11) 95555-5555', '1995-05-25');
+
 SELECT 'Banco de dados PGS Periféricos criado com sucesso!' as status;
