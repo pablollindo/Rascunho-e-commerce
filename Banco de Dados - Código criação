@@ -1,5 +1,5 @@
 -- BANCO DE DADOS ATUALIZADO COM SISTEMA DE CARGOS
---porta do xampp é a 3309
+-- porta do xampp é a 3309
 
 CREATE DATABASE IF NOT EXISTS pgs_perifericos;
 USE pgs_perifericos;
