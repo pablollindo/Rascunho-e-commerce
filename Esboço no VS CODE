@@ -1,7 +1,7 @@
 --estrutura dentro do VS CODE
 
 pgs_perifericos/
-│
+├── 📁 main/
 ├── 📄 indexx.php
 ├── 📄 LEIAME.txt
 │
