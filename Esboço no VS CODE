@@ -1,6 +1,6 @@
 --estrutura dentro do VS CODE
 -- o indexx é com 2 xx mesmo, preferência minha.
-
+ ver_ticket.php
 pgs_perifericos/
 ├──  main/
 ├── 📄 indexx.php
@@ -11,6 +11,7 @@ pgs_perifericos/
 ├── 📄 produto.php
 ├── 📄 carrinho.php
 ├── 📄 finalizar_compra.php
+├── 📄 ver_ticket.php
 ├── 📄 login.php
 ├── 📄 cadastro.php
 ├── 📄 minha_conta.php
