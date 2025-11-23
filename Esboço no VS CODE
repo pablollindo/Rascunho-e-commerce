@@ -36,6 +36,7 @@ pgs_perifericos/
 ├── 📁 includes/
 │   ├── 📄 config.php
 │   ├── 📄 cabecalho.php
+│   ├── 📄 cabecalho_simples.php
 │   ├── 📄 rodape.php
 │   ├── 📄 minha_conta.php
 │   ├── 📄 funcoes.php
