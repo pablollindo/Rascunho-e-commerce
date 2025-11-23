@@ -45,6 +45,7 @@ pgs_perifericos/
 │   ├── 📄 processa_pagamento.php
 │   ├── 📄 processa_funcionario.php
 │   ├── 📄 processa_avaliacao.php
+│   ├── 📄 processa_wishlist.php
 │   └── 📄 processa_marca.php          # NOVO: Processar marcas
 │
 ├── 📁 assets/
