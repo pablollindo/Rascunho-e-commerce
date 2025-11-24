@@ -12,3 +12,4 @@ O que já foi feito:
 ✅ Alguns arquivos da estrutura do VS CODE já foram codificados.
 ✅ Página de finalizar compra sincronizado com banco de dados.
 ✅ Página de carrinho também funcionando e sincronizado com o banco de dados.
+✅ Produtos da tela inicial, ao clicar no botão adicionar ao carrinho já vai para o carrinho e a contagem do carrinho altera.
