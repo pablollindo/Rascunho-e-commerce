@@ -10,3 +10,5 @@ O que já foi feito:
 ✅ Página de endereço, da para editar, adicionar um novo, excluir (você não pode excluir o seu unico endereço cadastrado).
 ✅ Criado a página inicial do site.
 ✅ Alguns arquivos da estrutura do VS CODE já foram codificados.
+✅ Página de finalizar compra sincronizado com banco de dados.
+✅ Página de carrinho também funcionando e sincronizado com o banco de dados.
