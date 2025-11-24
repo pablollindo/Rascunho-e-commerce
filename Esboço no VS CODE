@@ -53,17 +53,6 @@ pgs_perifericos/
 │   ├── 📄 processa_wishlist.php
 │   └── 📄 processa_marca.php          # NOVO: Processar marcas
 │
-├── 📁 assets/
-│   ├── 📁 css/
-│   │   ├── 📄 estilo.css
-│   │   ├── 📄 responsivo.css
-│   │   ├── 📄 admin.css
-│   │   ├── 📄 formularios.css
-│   │   ├── 📄 suporte.css
-│   │   ├── 📄 carrinho.css
-│   │   └── 📄 avaliacoes.css
-│   │   └── 📄 wishlist.css
-│   │
 │   ├── 📁 js/
 │   │   ├── 📄 principal.js
 │   │   ├── 📄 carrinho.js
@@ -74,6 +63,19 @@ pgs_perifericos/
 │   │   ├── 📄 cadastro.js
 │   │   ├── 📄 suporte.js
 │   │   └── 📄 avaliacoes.js
+│   │
+├── 📁 assets/
+│   ├── 📁 css/
+│   │   ├── 📄 estilo.css
+│   │   ├── 📄 responsivo.css
+│   │   ├── 📄 admin.css
+│   │   ├── 📄 formularios.css
+│   │   ├── 📄 suporte.css
+│   │   ├── 📄 carrinho.css
+│   │   └── 📄 avaliacoes.css
+│   │   └── 📄 wishlist.css
+
+ABAIXO É PASTAS SEPARADAS.
 │   │
 │   └── 📁 imagens/
 │       ├── 📁 produtos/
