@@ -127,6 +127,7 @@ ABAIXO É PASTAS SEPARADAS.
 └── 📁 banco_dados/
     └── 📄 banco_dados.sql
 
+-- neste projeto vamos usar mysqli não pdo.
 -- não saia criando código dos arquivos, eu já tenho alguns códigos na maioria dos arquivos, o que precisar fazer, me avise que eu te mando e mudamos eles se for preciso.
 -- todas as pastas são separadas, exceto a de assets e css que são juntas. As demais são separadas
 -- tente não apagar o que já tem, apenas acrescentar, se for apagar me convoque antes.
