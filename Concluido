@@ -14,3 +14,4 @@ O que já foi feito:
 ✅ Página de carrinho também funcionando e sincronizado com o banco de dados.
 ✅ Produtos da tela inicial, ao clicar no botão adicionar ao carrinho já vai para o carrinho e a contagem do carrinho altera.
 ✅ Página de produtos já está configurada e codificada.
+✅ Cabeçalho em todas as páginas já foram configurados e importados pelo arquivo de cabeçalho php e rodape php.
