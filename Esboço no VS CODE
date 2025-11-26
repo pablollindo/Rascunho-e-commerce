@@ -47,6 +47,7 @@ pgs_perifericos/
 │   ├── 📄 processa_cadastro.php
 │   ├── 📄 get_wishlist_count.php
 │   ├── 📄 processa_pedido.php
+│   ├── 📄 atualizar_quantidade.php
 │   ├── 📄 processa_carrinho.php
 │   ├── 📄 processa_suporte.php
 │   ├── 📄 processa_pagamento.php
