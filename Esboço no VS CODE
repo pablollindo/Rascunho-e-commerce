@@ -29,6 +29,7 @@ pgs_perifericos/
 │   ├── 📄 admin_produtos.php
 │   ├── 📄 admin_pedidos.php
 │   ├── 📄 admin_cupons.php
+│   ├── 📄 admin_categorias_marcas.php
 │   ├── 📄 admin_suporte.php
 │   ├── 📄 admin_faq.php
 │   ├── 📄 admin_avaliacoes.php
