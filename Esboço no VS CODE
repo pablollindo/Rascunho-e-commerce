@@ -27,6 +27,9 @@ pgs_perifericos/
 │   ├── 📄 admin_funcionarios.php
 │   ├── 📄 admin_categorias.php
 │   ├── 📄 admin_produtos.php
+│   ├── 📄 admin_relatorios.php
+│   ├── 📄 admin_estoque.php
+│   ├── 📄 admin_categorias_marcas.php
 │   ├── 📄 admin_pedidos.php
 │   ├── 📄 admin_cupons.php
 │   ├── 📄 admin_categorias_marcas.php
